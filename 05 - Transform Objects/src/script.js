@@ -2,7 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 
 // Canvas
-const canvas = document.querySelector('canvas.webgl')
+const canvas = document.querySelector('canvas.webgl');
 
 // Scene
 const scene = new THREE.Scene()
@@ -10,10 +10,16 @@ const scene = new THREE.Scene()
 /**
  * Objects
  */
-const geometry = new THREE.BoxGeometry(1, 1, 1)
+const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
-const mesh = new THREE.Mesh(geometry, material)
-scene.add(mesh)
+const mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
+mesh.position.set(1, -0.5, 0);
+
+// Aces helper
+const strokeLenght = 1;
+const axesHelper = new THREE.AxesHelper(strokeLenght);
+scene.add(axesHelper);
 
 /**
  * Sizes
@@ -27,7 +33,8 @@ const sizes = {
  * Camera
  */
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
-camera.position.z = 3
+camera.position.z = 5
+camera.position.y = 1
 scene.add(camera)
 
 /**

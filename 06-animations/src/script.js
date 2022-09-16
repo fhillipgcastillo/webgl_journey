@@ -1,5 +1,6 @@
 import './style.css'
 import * as THREE from 'three'
+import gasp from 'gsap';
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -35,12 +36,10 @@ const clock = new THREE.Clock();
 const tick = () => {
    const elapsedTime = clock.getElapsedTime();
 
-//    console.log("tick", elapsedTime);
    // udpate objects
-    mesh.rotation.y = Math.sin(elapsedTime);
-    mesh.rotation.x = Math.cos(elapsedTime);
-    // sin an cos work as waves that go up and down, or down and up
-
+   // Similar way as before
+    gasp.to(mesh.rotation, {duration: 1, delay: 0.1, y: Math.sin(elapsedTime)})
+    gasp.to(mesh.rotation, {duration: 1, delay: 0.1, x: Math.cos(elapsedTime)})
 
     // Render
     renderer.render(scene, camera)

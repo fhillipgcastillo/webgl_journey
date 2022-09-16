@@ -124,3 +124,7 @@ Avoid using getDelta, because it used to have errors or misbehaviors
 Libraries give us the advantage to create more advance animation
 A popular algorithm is `GSAP`.
 
+### How to install gsap
+```
+npm install --save gsap
+```

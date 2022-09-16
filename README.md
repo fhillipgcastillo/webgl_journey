@@ -128,3 +128,10 @@ A popular algorithm is `GSAP`.
 ```
 npm install --save gsap
 ```
+### Usage
+```
+import gasp from 'gasp';
+
+gasp.to(mesh.position, {duration: 1, delay: 1, x: 1})
+```
+

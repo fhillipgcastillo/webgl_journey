@@ -58,3 +58,20 @@ To be able to do this we need to do the `window.requestAnimationFrame(...)` whic
 
 Request animationFrame is in charge to call a function once on the next frame
 
+### Example of an animation defining a tick/loop/etc. 
+```
+const tick = () => {
+    // udpate objects
+    mesh.rotation.y += 0.0025;
+
+    // Render
+    renderer.render(scene, camera)
+    window.requestAnimationFrame(tick);
+};
+
+tick();
+
+```
+
+Note: This previously tick will vary depending of the computer franerate.
+To fix this we need to add a time metter to calculate a delta between each frame, so we can have a more similar results

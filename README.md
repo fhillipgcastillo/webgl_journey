@@ -210,3 +210,49 @@ import gasp from 'gasp';
 gasp.to(mesh.position, {duration: 1, delay: 1, x: 1})
 ```
 
+## Cameras
+### Camera
+Camera is an abstract class. Should not be used directly
+
+### Array Camera
+
+This is used to have like a splitted screen with different perspective or different cameras displayed
+
+### Stereo Camera
+Scelent for VRs and create paralax effect
+
+### cube camera
+Renders 6 cameras, facing differents directopm. Can render the surrounding for things like environment map, reflection or shadow map
+
+### Perspective Camera
+
+Render scene with perspective.
+
+To Create a perspective camera
+```javascript
+const camera3d = new THREE.PerspectiveCamera(fov, aspectRatio, nearRenderDistance, farRenderDistance);
+``` 
+**Note:** Rememer to add it to the scene with `scene.add(camera3d)` to vizualize it<br /><br />
+
+We can change it position as any other Object3D
+```javascript
+camera3d.position.set(2, 2, 2);
+```
+
+We can make it look a our mesh
+```javascript
+camera3d.lookAt(mesh.position);
+```
+Parameters
+* FOV - Vertical Field of View, specified as degrees
+* Aspect Ratio - Aspect ratio of the render size, which is done by deviding the width by the height of the canvas or render size
+* Near - Is the minimal distance the camera can handle/render/show on the screen - Min value is 0.0001
+* Far - IS the maximun distance the camera could render or vizualize an object to the scene - maximun value is `9999999`
+
+> Note:
+> 
+> Try avoiding a OpenGL glitch when using the minimal near value within the maximun far values, where the camera have issues to identify which object is closer or farer fromt he camera and glitch out how it will look like.
+
+### Orthographic Camera
+
+Render the scene without perspective, great for 2D. Object will apeare the same size no matter the distance from the camera

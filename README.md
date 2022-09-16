@@ -56,4 +56,5 @@ group.add(boxMesh1, circleMesh1, ...)
 Animation work as same as stop motion, but at high frame rates, let say 60fps and each one it render to the scene
 To be able to do this we need to do the `window.requestAnimationFrame(...)` which in threejs have it own method to do this.
 
+Request animationFrame is in charge to call a function once on the next frame
 

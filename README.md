@@ -21,3 +21,21 @@ Object3D position inherits from `Vector3` which have a bunch of property we can 
 
 ### Axes helper
 this helps us to set a positioning of a mesh better
+
+### Quatenion 
+is the solution for the rotation order issue
+
+Look a this
+we can make anything to look at anything
+lookAt method requires a vector3 which every object have as position property
+Fro example we can make our camera to look at an exact position:
+```
+camera.lookAt(new THREE.Vector3(0,0,4))
+```
+Or we can make it look at the mesh or any object we have created like so
+```
+camera.lookAt(mesh.position)
+```
+
+Scene graph
+We can group to alter all of them simultaneously

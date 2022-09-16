@@ -114,3 +114,8 @@ const tick = () => {
 tick();
 ```
 
+Using math cos and sin
+This behaves like wave, one work contrary to te other
+
+Note:
+Avoid using getDelta, because it used to have errors or misbehaviors

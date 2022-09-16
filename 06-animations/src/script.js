@@ -35,9 +35,13 @@ const clock = new THREE.Clock();
 const tick = () => {
    const elapsedTime = clock.getElapsedTime();
 
-   console.log("tick", elapsedTime);
+//    console.log("tick", elapsedTime);
    // udpate objects
-    mesh.rotation.y += 0.003  * elapsedTime;
+    mesh.rotation.y = Math.sin(elapsedTime);
+    mesh.rotation.x = Math.cos(elapsedTime);
+    // sin an cos work as waves that go up and down, or down and up
+
+
     // Render
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick);

@@ -119,3 +119,8 @@ This behaves like wave, one work contrary to te other
 
 Note:
 Avoid using getDelta, because it used to have errors or misbehaviors
+
+## Using a Library
+Libraries give us the advantage to create more advance animation
+A popular algorithm is `GSAP`.
+

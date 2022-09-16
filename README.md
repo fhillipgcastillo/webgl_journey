@@ -37,5 +37,18 @@ Or we can make it look at the mesh or any object we have created like so
 camera.lookAt(mesh.position)
 ```
 
-Scene graph
+### Scne graph
 We can group to alter all of them simultaneously
+
+We can add a group as simple as followed
+```
+const group = new THREE.Group();
+```
+
+we can add it normally to the scene, so then all the children we only need to add them to the group, and if that group was added to the scene, so all the childrem object will be also rendered
+
+TO add achildre to the group just use the `.add` method, same as we use on scene
+```
+group.add(boxMesh1, circleMesh1, ...)
+```
+

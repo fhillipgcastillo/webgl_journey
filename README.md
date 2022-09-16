@@ -72,6 +72,45 @@ const tick = () => {
 tick();
 
 ```
+## Tick/Loop issue & Solutions
 
 Note: This previously tick will vary depending of the computer franerate.
-To fix this we need to add a time metter to calculate a delta between each frame, so we can have a more similar results
+### To fix this we need to add a time metter to calculate a delta between each frame, so we can have a more similar results
+```
+
+let time = Date.now();
+
+// Animations
+const tick = () => {
+    //time
+    const currentTime = Date.now();
+    const deltaTime = currentTime - time;
+    time = currentTime;
+
+    // udpate objects
+    mesh.rotation.y += 0.0006  * deltaTime;
+    // Render
+    renderer.render(scene, camera)
+    window.requestAnimationFrame(tick);
+};
+
+tick();
+```
+### Using Clock
+Three have a clock method/class that hadles this, called `Clock`
+```
+const clock = new THREE.Clock()l
+
+const tick = () => {
+   const elapseTime = clock.getElapsedTime()
+
+    // udpate objects
+    mesh.rotation.y += 0.0006  * deltaTime;
+    // Render
+    renderer.render(scene, camera)
+    window.requestAnimationFrame(tick);
+};
+
+tick();
+```
+

@@ -24,7 +24,16 @@ const mesh = new THREE.Mesh(
 scene.add(mesh)
 
 // Camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
+const lelft = -1;
+const right = 1;
+const top = 1;
+const bottom = -1;
+const near = 0.1;
+const far = 15;
+const aspectRatio = sizes.width / sizes.height;
+
+const camera = new THREE.OrthographicCamera(lelft* aspectRatio, right * aspectRatio, top, bottom, near, far);
+
 camera.position.x = 2
 camera.position.y = 2
 camera.position.z = 2

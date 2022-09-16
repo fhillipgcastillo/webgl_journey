@@ -256,3 +256,32 @@ Parameters
 ### Orthographic Camera
 
 Render the scene without perspective, great for 2D. Object will apeare the same size no matter the distance from the camera
+
+#### Usage
+```javascript
+const lelft = -1;
+const right = 1;
+const top = 1;
+const bottom = -1;
+const near = 0.1;
+const far = 15;
+
+const camera = new THREE.OrthographicCamera(lelft, right, top, bottom, near, far);
+
+```
+
+#### **Notes:**
+> The canvas size will alter the look of the image, and it can distor the final image
+> Solution for the camera distorion is by calculating the canvas aspect ratio.
+
+Aspect ratio calculation
+```javascript
+const sizes = {
+    width: 800,
+    height: 600,
+};
+
+const aspectRatio = sizes.width / sizes.height;
+const camera = new THREE.OrthographicCamera(lelft* aspectRatio, right * aspectRatio, top, bottom, near, far);
+
+```

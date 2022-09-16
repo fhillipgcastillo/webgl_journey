@@ -52,3 +52,8 @@ TO add achildre to the group just use the `.add` method, same as we use on scene
 group.add(boxMesh1, circleMesh1, ...)
 ```
 
+## Animation
+Animation work as same as stop motion, but at high frame rates, let say 60fps and each one it render to the scene
+To be able to do this we need to do the `window.requestAnimationFrame(...)` which in threejs have it own method to do this.
+
+

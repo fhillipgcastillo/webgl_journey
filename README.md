@@ -1,3 +1,78 @@
+# ThreeJS Journy
+## 00 - Base ThreeJS
+for node instalation
+for web as cdn
+bundler/webpack and its configurations
+where to find the documentation, examples and tools to use with it
+
+**note:** Go through each `script.js` file and check the comments
+
+**To Do**
+- [x] Pending
+- [ ] Done
+- [ ] Create a full pending script list to review
+
+## Basic usage
+### node three package install
+```
+npm install three
+```
+
+### How to import it
+```javascript
+import * as THREE from 'three';
+```
+<br />
+<br />
+
+### How to create a Mesh (visual object)
+
+A mesh is kind of a visual object. Every three 'component' inherites from Object3D.
+
+**A mesh is componse of**:
+1. **Geometry:** Is the form of the mesh or object
+2. **Material:** Is the texture/color/external visually structure of the mesh
+    And hey both are required by the mesh
+<br />
+<br />
+
+<h4 style="font-size: 1.15em">Geometry</h4>
+
+A mesh neeeds to specify the form of it, threejs have a few primitives geometries or forms.
+
+Lets say we want a box
+```javascript
+const boxGeometry = new THREE.BoxGeometry()
+```
+
+A geometry can receive it dimenssions as arguments, for example:
+```javascript
+const boxGeometry = new THREE.BoxGeometry(1, 2, 1);
+```
+<br />
+<br />
+
+#### Material
+
+ThreeJS have a few Mesh materials that can be used depending on the context we need.
+
+
+Here are 2 examples of it
+```javascript
+const boxMaterial = new THREE.MeshBasicMaterial();
+```
+
+It also can receive a color
+```javascript
+const blueBoxMaterial = new THREE.MeshStandardMaterial(0xFFFF00);
+```
+
+### Mesh Creation
+```javascript
+const box = new THREE.Mesh(boxGeometry, boxMaterial);
+```
+
+
 ## 05 - Transforming an object
 To be able to animate an object, we need to know how to transforme it<br/>
 
@@ -29,11 +104,11 @@ Look a this
 we can make anything to look at anything
 lookAt method requires a vector3 which every object have as position property
 Fro example we can make our camera to look at an exact position:
-```
+```javascript
 camera.lookAt(new THREE.Vector3(0,0,4))
 ```
 Or we can make it look at the mesh or any object we have created like so
-```
+```javascript
 camera.lookAt(mesh.position)
 ```
 
@@ -41,14 +116,14 @@ camera.lookAt(mesh.position)
 We can group to alter all of them simultaneously
 
 We can add a group as simple as followed
-```
+```javascript
 const group = new THREE.Group();
 ```
 
 we can add it normally to the scene, so then all the children we only need to add them to the group, and if that group was added to the scene, so all the childrem object will be also rendered
 
 TO add achildre to the group just use the `.add` method, same as we use on scene
-```
+```javascript
 group.add(boxMesh1, circleMesh1, ...)
 ```
 
@@ -59,7 +134,7 @@ To be able to do this we need to do the `window.requestAnimationFrame(...)` whic
 Request animationFrame is in charge to call a function once on the next frame
 
 ### Example of an animation defining a tick/loop/etc. 
-```
+```javascript
 const tick = () => {
     // udpate objects
     mesh.rotation.y += 0.0025;
@@ -76,7 +151,7 @@ tick();
 
 Note: This previously tick will vary depending of the computer franerate.
 ### To fix this we need to add a time metter to calculate a delta between each frame, so we can have a more similar results
-```
+```javascript
 
 let time = Date.now();
 
@@ -98,7 +173,7 @@ tick();
 ```
 ### Using Clock
 Three have a clock method/class that hadles this, called `Clock`
-```
+```javascript
 const clock = new THREE.Clock()l
 
 const tick = () => {
@@ -125,11 +200,11 @@ Libraries give us the advantage to create more advance animation
 A popular algorithm is `GSAP`.
 
 ### How to install gsap
-```
+```bash
 npm install --save gsap
 ```
 ### Usage
-```
+```javascript
 import gasp from 'gasp';
 
 gasp.to(mesh.position, {duration: 1, delay: 1, x: 1})

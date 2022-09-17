@@ -65,8 +65,9 @@ const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
     // Update objects
-    camera.position.x = cursor.x * Math.PI * 4;
-    camera.position.y = -cursor.y * Math.PI * 4;
+    camera.position.x = Math.sin(cursor.x * Math.PI) * 4;
+    camera.position.y = cursor.y * Math.PI * 4;
+    camera.position.z = Math.cos(cursor.x * Math.PI) * 4;
     camera.lookAt(mesh.position);
 
     // Render

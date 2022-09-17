@@ -2,6 +2,20 @@ import './style.css'
 import * as THREE from 'three'
 
 /**
+ * Cursor
+ */
+const cursor = {
+    x: 0,
+    y: 0,
+};
+
+window.addEventListener("mousemove", (event) => {
+    cursor.x = event.clientX / sizes.width - 0.5;
+    cursor.y = event.clientY/ sizes.height - 0.5;
+    console.log(cursor);
+});
+
+/**
  * Base
  */
 // Canvas
@@ -16,27 +30,26 @@ const sizes = {
 // Scene
 const scene = new THREE.Scene()
 
+
+// Light
+const light = new THREE.DirectionalLight(0xffffff, 0.5);
+light.position.set(2, 5, 5);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+
+scene.add(light, ambientLight);
+
 // Object
 const mesh = new THREE.Mesh(
     new THREE.BoxGeometry(1, 1, 1, 5, 5, 5),
-    new THREE.MeshBasicMaterial({ color: 0xff0000 })
+    new THREE.MeshStandardMaterial({ color: 0xff0000 })
 )
 scene.add(mesh)
+light.lookAt(mesh)
 
 // Camera
-const lelft = -1;
-const right = 1;
-const top = 1;
-const bottom = -1;
-const near = 0.1;
-const far = 15;
-const aspectRatio = sizes.width / sizes.height;
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 
-const camera = new THREE.OrthographicCamera(lelft* aspectRatio, right * aspectRatio, top, bottom, near, far);
-
-camera.position.x = 2
-camera.position.y = 2
-camera.position.z = 2
+camera.position.z = 3;
 camera.lookAt(mesh.position)
 scene.add(camera)
 
@@ -49,12 +62,16 @@ renderer.setSize(sizes.width, sizes.height)
 // Animate
 const clock = new THREE.Clock()
 
-const tick = () =>
-{
+const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
     // Update objects
-    mesh.rotation.y = elapsedTime;
+    // mesh.rotation.y = elapsedTime;
+    // mesh.position.x = -cursor.x;
+    mesh.position.y = cursor.y;
+    mesh.rotation.y = -(Math.PI * cursor.x * 2);
+    mesh.rotation.x = -(Math.PI * cursor.y * 2);
+
 
     // Render
     renderer.render(scene, camera)

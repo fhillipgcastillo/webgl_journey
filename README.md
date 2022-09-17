@@ -285,3 +285,34 @@ const aspectRatio = sizes.width / sizes.height;
 const camera = new THREE.OrthographicCamera(lelft* aspectRatio, right * aspectRatio, top, bottom, near, far);
 
 ```
+
+## Camera control
+For testing, remove the animation of the camera (the rotation, let say)
+
+a way to track mouse control is by adding an window event listener and store what we need from thhere into a global variable and use that variable later. For example, on mouseMove, rotate or move the camera.
+
+```javascript
+const cursor = {
+    x: 0,
+    y: 0,
+};
+
+window.addEventListener("mousemove", (event) => {
+    cursor.x = event.clientX / sizes.width - 0.5;
+    cursor.y = event.clientY/ sizes.height - 0.5;
+    console.log(cursor);
+});
+
+//...
+const tick = () => {
+    const elapsedTime = clock.getElapsedTime()
+    
+    mesh.rotation.y = -(Math.PI * cursor.x * 2);
+    mesh.rotation.x = -(Math.PI * cursor.y * 2);
+
+    renderer.render(scene, camera)
+    window.requestAnimationFrame(tick)
+}
+
+tick()
+```

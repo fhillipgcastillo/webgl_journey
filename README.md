@@ -363,3 +363,18 @@ After udpate the controls, we need to make it update the visual state
 ```javascript
 controls.update();
 ```
+
+
+OrbitControl have something called Damping, which add some kind of aceleration and friction to the camera
+
+#### Enabling Damping
+```javascript
+controls.enableDamping = true;
+```
+
+An important note with Damping, is tha we need to update the the controls on each tick/loop cycle.
+
+Just add the following into the tick function or game animation cycle
+```javascript
+controls.update();
+```

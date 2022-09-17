@@ -66,6 +66,19 @@ renderer.setSize(sizes.width, sizes.height)
 // Animate
 const clock = new THREE.Clock()
 
+let controlsEnabled = true;
+const toggleEnableControls = (e) => {
+    controlsEnabled = !controlsEnabled;
+    controls.enabled = controlsEnabled;
+}
+
+// create button
+const button = window.document.createElement("button")
+button.innerText = "Toggle Controls";
+button.addEventListener("click", toggleEnableControls);
+button.style = "float: right;"
+window.document.body.appendChild(button);
+
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
@@ -78,5 +91,6 @@ const tick = () => {
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
 }
+
 
 tick()

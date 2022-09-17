@@ -11,8 +11,7 @@ const cursor = {
 
 window.addEventListener("mousemove", (event) => {
     cursor.x = event.clientX / sizes.width - 0.5;
-    cursor.y = event.clientY/ sizes.height - 0.5;
-    console.log(cursor);
+    cursor.y = event.clientY / sizes.height - 0.5;
 });
 
 /**
@@ -66,12 +65,9 @@ const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
     // Update objects
-    // mesh.rotation.y = elapsedTime;
-    // mesh.position.x = -cursor.x;
-    mesh.position.y = cursor.y;
-    mesh.rotation.y = -(Math.PI * cursor.x * 2);
-    mesh.rotation.x = -(Math.PI * cursor.y * 2);
-
+    camera.position.x = cursor.x * Math.PI * 4;
+    camera.position.y = -cursor.y * Math.PI * 4;
+    camera.lookAt(mesh.position);
 
     // Render
     renderer.render(scene, camera)

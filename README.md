@@ -316,3 +316,50 @@ const tick = () => {
 
 tick()
 ```
+
+### Builtin Controls
+#### Device Orientation Controls
+use the gyro to move the camera
+
+#### Fly control
+Like a flying camera, and can see all the axes and turn on all direction, up down left right
+
+#### Fist Person control
+Similar to Fly control but can only see horizontal, it can't see up or down
+
+### POinter lok control
+Hide the mouse control, but the mouse get inside, like games
+
+Trackball control
+infinite movement loops
+
+#### Transform control
+Let up move the object in the space by selecting its axes
+
+#### Drag Control
+It lets move object (no related to the camera)
+
+### Orbit Control 
+
+#### Import
+The OrbitControls are inside the jsm example folder, so we need to import it like so:
+```javascript
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+```
+
+### Create OrbitControls
+To create a control we need to create a new instance of it, and give it the target camera and the dom element, let say the canvas
+
+```javascript
+const controls = new OrbitControls(camera, canva);
+```
+
+We can also update its position using target as followed
+```javascript
+control.target.y = 3;
+```
+
+After udpate the controls, we need to make it update the visual state 
+```javascript
+controls.update();
+```

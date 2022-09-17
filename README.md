@@ -378,3 +378,6 @@ Just add the following into the tick function or game animation cycle
 ```javascript
 controls.update();
 ```
+
+## Fullscreen and Resizing
+

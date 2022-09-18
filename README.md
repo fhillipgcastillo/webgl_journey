@@ -455,3 +455,11 @@ window.addEventListener('dblclick', (e) => {
     }
 });
 ```
+
+## Geometries
+A geometry is compose of vertices, a vertice coordinates in spaces and faces . 
+Geometries are use to create meshes or marticles.
+Particles doesn't have faces
+
+For particles, each vertice (coordinate) and each one will be a particle
+

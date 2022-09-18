@@ -380,4 +380,39 @@ controls.update();
 ```
 
 ## Fullscreen and Resizing
+We'll be working with the viewport which refer to the canvas size and the page size
 
+Steps
+1. How to remove the blue outline fromt he screen
+    ```css
+    .webgl {
+        outline: none;
+        position: fixed;
+    }
+    ```
+2. To fit the canvas to the viewpoint we need to set the canvas sizes to the window inner width and inner height
+3. To handle the resize, we need to add an event on resize for the windows and reajust the sizes
+4. We also need to update the camera aspect ratio, 
+5. But to be able to reflect the changes on the screen we need to udpate the projection matrix, after changing the aspect ration and also update the rendered size
+
+Here is the results
+```javascript
+// step 1
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight,
+}
+// step 2 - addEventListener
+window.addEventListener('resize', (e) => {
+    // step 3 - update the sizes
+    sizes.width = window.innerWidth;
+    sizes.height = window.innerHeight;
+
+    // step 4 - Update the camera
+    camera.aspect = sizes.width / sizes.height;
+    camera.updateProjectionMatrix();
+
+    // step 5 - update renderer
+    renderer.setSize(sizes.width, sizes.height);
+});
+```

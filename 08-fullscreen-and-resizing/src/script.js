@@ -62,7 +62,13 @@ window.addEventListener('resize', (e) => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-
+window.addEventListener('dblclick', (e) => {
+    if(!document.fullscreenElement) {
+        canvas.requestFullscreen();
+    } else {
+       document.exitFullscreen();
+    }
+});
 /**
  * Animate
  */

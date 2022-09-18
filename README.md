@@ -441,3 +441,17 @@ To prevent/limite the limit of aspect ratio
 ```javascript
 
 ```
+
+## Fullscreen
+list to the do to list
+
+Adding full screen with double clieck event `dbclick` and requestin full screen `canvas.requestFullscreen();`.
+```javascript
+window.addEventListener('dblclick', (e) => {
+    if(!document.fullscreenElement) {
+        canvas.requestFullscreen();
+    } else {
+       document.exitFullscreen();
+    }
+});
+```

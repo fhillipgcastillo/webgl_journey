@@ -59,6 +59,7 @@ window.addEventListener('resize', (e) => {
 
     // // update renderer
     renderer.setSize(sizes.width, sizes.height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
 

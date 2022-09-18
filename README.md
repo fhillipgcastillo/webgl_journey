@@ -416,3 +416,28 @@ window.addEventListener('resize', (e) => {
     renderer.setSize(sizes.width, sizes.height);
 });
 ```
+
+## Pixel Ratio
+When we're seing steps or blurryness effect on the meshes and/or on te edges, we need to reajust the pixel ratio
+This happen when pixel ratio is greater than 1
+
+pixel ratio of 2, means 4 more pixel because it's rendering the 2 by 2 pixel ratio
+pixel ratio of 3, means 9 times more pixels
+
+
+Handle the pixel ratio
+
+We can use to get the actual window pixel ratio
+```javascript
+windows.devicePixelRatio
+```
+
+For usage, we need to se the new pixel ratio to the renderer by
+```javascript
+renderer.setPixelRatio(window.devicePixelRatio);
+```
+
+To prevent/limite the limit of aspect ratio
+```javascript
+
+```

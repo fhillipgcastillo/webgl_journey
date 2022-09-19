@@ -558,3 +558,84 @@ https://bruno-simon.com/#debug
 ```bash
 npm i --save dat.gui
 ```
+
+**Import and initialization**
+```javascript
+import * as dat from 'dat.gui';
+
+const gui = new dat.GUI();
+```
+
+**Types of elements a panel can have**
+* Range - for number with min and max value
+* color - colors of various formats
+* text - for simple texts
+* Checkbox - for booleans
+* Select - for a choid from a list of values
+* Button - to trigger a function
+* Folder - to ORganize the panel
+
+### How to add elments
+`gui.add(...)`
+
+**`.add` arguments**
+object
+objectProperty as string
+min (optional)
+max (optional)
+precision (optional)
+
+```javascript
+gui.add(mesh.position, 'x', -3, 3, 0.01);
+```
+
+**Another way to modify the min, max, and step**
+```javascript
+gui.add(mesh.position, 'y')
+    .min(3)
+    .max(2)
+    .step(0.01)
+```
+
+**To change the gui label**
+```javascript
+gui.add(...)
+    .name('elevation')
+```
+**Handling boolean**
+dat.gui auto detects the values type, so it just need to be added and it will handle it
+```javascript
+gui.add(mesh, 'visible');
+```
+
+**Handling colors**
+To add colors we need to use `gui.addColor` and to modify the ojects color we need to have some objects with the values somewhere because the color objects are not handling the same and can't be auto-recognized by dat.gui.
+
+```javascript
+const objectParameters = {
+    color: 0xff0000
+};
+gui.addColor(objectParameters, 'color')
+```
+
+But wee need to trigger something to change the material color everytime we change the color by the method `onChange` after the `addColor`
+```javascript
+gui.addColor(objectParameters, 'color')
+    .onChange((value) => {
+        material.color.set(value);
+        // or
+        material.color.set(objectParameters.color);
+    });
+```
+
+**Changing functions**
+Let say we want a button ro something to run an animation
+
+we need to add the function inside an object
+```javascript
+const parameters = {
+    spin: () => {}
+}
+
+gui.add(parameters, 'spin');
+```

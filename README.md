@@ -948,4 +948,4 @@ const material = new THREE.MeshStandardMaterial();
 material.metalness = 0.45;
 material.roughness = 0.65;
 ```
-
+### Re-add debug UI

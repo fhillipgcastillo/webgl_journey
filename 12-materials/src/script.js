@@ -1,6 +1,9 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import * as dat from 'dat.gui';
+
+const dgui = new dat.GUI();
 
 /**
  * Textures
@@ -62,6 +65,9 @@ const scene = new THREE.Scene()
 const material = new THREE.MeshStandardMaterial();
 material.metalness = 0.45;
 material.roughness = 0.65;
+
+dgui.add(material, "metalness").min(0).max(1).step(0.0001);
+dgui.add(material, "roughness").min(0).max(1).step(0.0001);
 
 // material.side = THREE.DoubleSide;
 

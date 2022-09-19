@@ -16,7 +16,7 @@ const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg')
 const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
 const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
 const matcapTexture = textureLoader.load('/textures/matcaps/1.png');
-const gradientTexture = textureLoader.load('/textures/gradients/3.jpg');
+const gradientTexture = textureLoader.load('/textures/gradients/5.jpg');
 
 
 /**
@@ -57,6 +57,7 @@ material.specular = new THREE.Color(0x1188ff);
 
 gradientTexture.minFilter = THREE.NearestFilter;
 gradientTexture.magFilter = THREE.NearestFilter;
+gradientTexture.generateMipmaps  = false;
 
 material.gradientMap = gradientTexture;
 

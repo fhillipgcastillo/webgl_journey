@@ -129,6 +129,7 @@ const guiParameters = {
     }
 }
 dgui.add(guiParameters, 'enablePlaneAO');
+dgui.add(material, 'aoMapIntensity').min(0).max(3).step(0.0001);
 
 
 /**

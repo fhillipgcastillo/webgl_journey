@@ -459,7 +459,99 @@ window.addEventListener('dblclick', (e) => {
 ## Geometries
 A geometry is compose of vertices, a vertice coordinates in spaces and faces . 
 Geometries are use to create meshes or marticles.
-Particles doesn't have faces
 
 For particles, each vertice (coordinate) and each one will be a particle
+Particles doesn't have faces
 
+### Built in geometries 
+* Box
+* Plan
+* Circle
+* Cone
+* Cilinder
+* Ring
+* Torus
+* TorusKnot
+* Dodecahedron
+* OCtahedron
+* Tetrahedrom
+* Icosahedrom
+* Sphere
+* Shape
+* Tube 
+* Extrude
+* Lathe 
+* Text
+
+Each one have Geometry at the end of the name, inside the ThreeJS
+We can create advace meshes by combining multiple geometries
+
+### Params
+* width: the size on the x axis
+* height: size on the y axis
+* dept: size on x axis
+* widthSegments: amount of subdivision in the x axis
+* heightSsegments: amount of subdivision in the x axis
+* deptSegments: amount of subdivision in the z axis
+
+Those subdivision will be devided ontriangles for each segment (subdivision)
+The way to see the segments, we need to enalbe wireframe on the mesh material
+
+```javascript
+const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2)
+const material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
+```
+
+### Crete our own geometry
+Suggestion, when a geometry is too complex, it's recomended to used a 3D software
+to do a custom geometry, just use the empty Geometry class
+
+the Video used an old implementation, so by research I found a great example:
+[https://codepen.io/pr-o/pen/GRWZmOr](https://codepen.io/pr-o/pen/GRWZmOr)
+
+```javascript
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 5;
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// Buffer geometry is the current base class for the Geometries
+const geometry = new THREE.BufferGeometry();
+
+// THis are the vertices that will make all the faces and coordinates of each point in space
+const vertices = new Float32Array([
+  // front
+  -1, -1, 1, 1, -1, 1, -1, 1,  1,
+  -1,  1, 1, 1, -1, 1,  1, 1,  1,
+  // back
+  1, -1, -1, -1, -1, -1,  1, 1, -1,
+  1,  1, -1, -1, -1, -1, -1, 1, -1,
+  // left
+  -1, -1, -1, -1, -1, 1, -1, 1, -1,
+  -1,  1, -1, -1, -1, 1, -1, 1,  1,
+  // right
+  1, -1, 1, 1, -1, -1, 1, 1,  1,
+  1,  1, 1, 1, -1, -1, 1, 1, -1,
+  // top
+  1,  1, -1, -1, 1, -1,  1, 1, 1,
+  1,  1,  1, -1, 1, -1, -1, 1, 1,
+  // bottom
+  1, -1,  1, -1, -1, 1,  1, -1, -1,
+  1, -1, -1, -1, -1, 1, -1, -1, -1,
+])
+
+// Here the attribute position is updated by the new BUffer attribute, have the vertices]
+// BufferAttribute( array : TypedArray, itemSize : Integer, normalized : Boolean )
+geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+
+const material = new THREE.MeshBasicMaterial({ color: 0x990000, wireframe: true});
+// Here we use the geometry normally for mesh
+const mesh = new THREE.Mesh(geometry, material);
+
+scene.add(mesh);
+
+```

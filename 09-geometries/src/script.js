@@ -12,25 +12,18 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-// Square
-// const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2)
-const vertices = new Float32Array([
-    0, 0, 0,
-    0, 1, 0,
-    1, 0, 0,
-]);
-
-// TO conver the Float Array vertices into an geometry we need to convert them into a BufferAttribute
-// it receives an array and the array index/ or count size of the subdivisions
-const attribute = new THREE.BufferAttribute(vertices, 3);
-
-//Now we need a geometry topass the attributes needed
+// Random triangles
 const geometry = new THREE.BufferGeometry();
+const amountOfTriangles = 50;
+const positionsArray = new Float32Array(amountOfTriangles * 3 * 3);
 
-// And then set the geometry attribute possition to give the geometry the form we defined on the vertices as followed
-const attributeName = 'position';
+for (let i = 0; i < amountOfTriangles * 3 * 3; i++) {
+    positionsArray[i] = (Math.random() - 0.5) * 4;  
+};
 
-geometry.setAttribute(attributeName, attribute);
+const positionAttribute = new THREE.BufferAttribute(positionsArray, 3);
+geometry.setAttribute('position', positionAttribute);
+
 
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
 const mesh = new THREE.Mesh(geometry, material)

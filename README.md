@@ -536,3 +536,7 @@ const mesh = new THREE.Mesh(geometry, material);
 
 scene.add(mesh);
 ```
+
+## Index
+It is used to improve the geometries performances by specifying the geometry vertex that is being shared by other and reused those. But that is a bit more complex and we have to handle all that.
+

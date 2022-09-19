@@ -12,63 +12,30 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-// Custom Marticles
-const vertex1 = new THREE.Vector3(0, 0, 0);
-const vertex2 = new THREE.Vector3(0, 1, 0);
-const vertex3 = new THREE.Vector3(1, 0, 0);
+// Square
+// const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2)
+const vertices = new Float32Array([
+    0, 0, 0,
+    0, 1, 0,
+    1, 0, 0,
+]);
 
-const vertices = [];
+// TO conver the Float Array vertices into an geometry we need to convert them into a BufferAttribute
+// it receives an array and the array index/ or count size of the subdivisions
+const attribute = new THREE.BufferAttribute(vertices, 3);
 
-for (let i = 0; i < 1000; i++) {
-    const x = 2000 * Math.random() - 1000;
-    const y = 2000 * Math.random() - 1000;
-    const z = 2000 * Math.random() - 1000;
+//Now we need a geometry topass the attributes needed
+const geometry = new THREE.BufferGeometry();
 
-    vertices.push(x, y, z);
-}
+// And then set the geometry attribute possition to give the geometry the form we defined on the vertices as followed
+const attributeName = 'position';
 
-const sprite = new THREE.TextureLoader().load( diskImage );
+geometry.setAttribute(attributeName, attribute);
 
-const customGeometry = new THREE.BufferGeometry();
-customGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-const customMaterial = new THREE.PointsMaterial( { size: 35, sizeAttenuation: true, map: sprite, alphaTest: 0.9, transparent: true, } );
-customMaterial.color.setHSL( 1.0, 0.3, 0.7 );
-
-const customMesh = new THREE.Points(customGeometry, customMaterial);
-
-scene.add(customMesh)
-
-
-const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2)
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
-
-// trying custom square
-const squareCG = new THREE.BufferGeometry();
-const squareVertices = new Float32Array([
-    -1, -1, 1, 1, -1, 1, -1, 1,  1,
-    -1,  1, 1, 1, -1, 1,  1, 1,  1,
-    1, -1, -1, -1, -1, -1,  1, 1, -1,
-    1,  1, -1, -1, -1, -1, -1, 1, -1,
-    -1, -1, -1, -1, -1, 1, -1, 1, -1,
-    -1,  1, -1, -1, -1, 1, -1, 1,  1,
-    1, -1, 1, 1, -1, -1, 1, 1,  1,
-    1,  1, 1, 1, -1, -1, 1, 1, -1,
-    1,  1, -1, -1, 1, -1,  1, 1, 1,
-    1,  1,  1, -1, 1, -1, -1, 1, 1,
-    1, -1,  1, -1, -1, 1,  1, -1, -1,
-    1, -1, -1, -1, -1, 1, -1, -1, -1,
-  ]);
-
-squareCG.setAttribute('position', new THREE.BufferAttribute(squareVertices, 3));
-const scgMaterial = new THREE.MeshBasicMaterial({color: "yellow", wireframe: true});
-const scgMesh = new THREE.Mesh(squareCG, scgMaterial);
-scgMesh.position.set(4, 0, 0);
-scene.add(scgMesh); 
-
-// Sizes
 const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
@@ -96,7 +63,6 @@ scene.add(camera)
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
-camera.lookAt(scgMesh.position);
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({

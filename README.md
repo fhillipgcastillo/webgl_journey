@@ -506,52 +506,33 @@ const material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true 
 Suggestion, when a geometry is too complex, it's recomended to used a 3D software
 to do a custom geometry, just use the empty Geometry class
 
-the Video used an old implementation, so by research I found a great example:
-[https://codepen.io/pr-o/pen/GRWZmOr](https://codepen.io/pr-o/pen/GRWZmOr)
+He have it session to create custom buffer geomeries :palm-face:
+## Custom Geometries with Buffer Geometry
+### Float 32 Array
+First to understand how to store buffer geometry data and it's not from THREEJS
+* They are handle as `Float32Array`
+* Float32Array are typed arrays, which only accept 1 type of values
+* Easy to handle by the computer
 
 ```javascript
-const scene = new THREE.Scene();
-
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.z = 5;
-
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
 // Buffer geometry is the current base class for the Geometries
 const geometry = new THREE.BufferGeometry();
 
 // THis are the vertices that will make all the faces and coordinates of each point in space
 const vertices = new Float32Array([
-  // front
-  -1, -1, 1, 1, -1, 1, -1, 1,  1,
-  -1,  1, 1, 1, -1, 1,  1, 1,  1,
-  // back
-  1, -1, -1, -1, -1, -1,  1, 1, -1,
-  1,  1, -1, -1, -1, -1, -1, 1, -1,
-  // left
-  -1, -1, -1, -1, -1, 1, -1, 1, -1,
-  -1,  1, -1, -1, -1, 1, -1, 1,  1,
-  // right
-  1, -1, 1, 1, -1, -1, 1, 1,  1,
-  1,  1, 1, 1, -1, -1, 1, 1, -1,
-  // top
-  1,  1, -1, -1, 1, -1,  1, 1, 1,
-  1,  1,  1, -1, 1, -1, -1, 1, 1,
-  // bottom
-  1, -1,  1, -1, -1, 1,  1, -1, -1,
-  1, -1, -1, -1, -1, 1, -1, -1, -1,
+ 0,0,0,
+ 0,1,0,
+ 1,0,0
 ])
 
 // Here the attribute position is updated by the new BUffer attribute, have the vertices]
 // BufferAttribute( array : TypedArray, itemSize : Integer, normalized : Boolean )
-geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+const attributeValue =  new THREE.BufferAttribute(vertices, 3);
+geometry.setAttribute('position', attributeValue);
 
 const material = new THREE.MeshBasicMaterial({ color: 0x990000, wireframe: true});
 // Here we use the geometry normally for mesh
 const mesh = new THREE.Mesh(geometry, material);
 
 scene.add(mesh);
-
 ```

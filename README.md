@@ -920,3 +920,20 @@ material.shiness = 100;
 material.specular = new THREE.Color(0x1188ff);
 ```
 
+**MeshToonMaterial**
+
+Have a cartoonish look and can use the `gradientMap` and use the `gradientTexture` material.
+
+```javascript
+const material = new THREE.MeshToonMaterial();
+```
+
+To add our custom mappings
+```javascript
+material.gradientMap = gradientTexture;
+```
+
+THis will lose the cartoonish effect used by the minMapping. So to fix this, we can use the minMapping filter for nearestFilter
+```javascript
+
+```

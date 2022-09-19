@@ -789,3 +789,36 @@ let's say we want to rotate the texture, and its doing it on the botton left cor
 texture.center.x = 1;
 texture.center.y = 1;
 ```
+## Filtering and mipmaping
+Mip mapping is a technique of creating half a smaller version of the texture until it's get `1x1`;
+It's automatically used by ThreeJS to improve GPU performance
+
+**minification filter**
+It go reducing the texture pixels as the object get smaller
+
+It can be handled by using the minFilter of the texture
+```javascript
+colorTexture.minFilter = THREE.NearestFilter;
+```
+
+**List of filters**
+* THREE.NearestFilter
+* THREE.LinearFilter
+* THREE.NearestMipmapNearestFilter
+* THREE.NearestMipmapLinearFilter
+* THREE.LinearMipMapNearestFilter
+* THREE.LinearMipMapLinearFilter
+* 
+
+By using differents material images we can clearly vizualice the effects
+add the texture 
+```javascript
+const colorTexture = textureLoader.load('/textures/checkerboard-1024x1024.png');
+```
+And you will be able to see it clearly
+
+Magnification FIlter
+It's used when the texture iamge is too small
+```javascript
+
+```

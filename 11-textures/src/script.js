@@ -10,19 +10,8 @@ textureManager.onProgress = (e) =>{console.log("progress", e || undefined)}
 textureManager.onError = (e) =>{console.log("error", e || undefined)}
 
 const textureLoader = new THREE.TextureLoader(textureManager);
-const colorTexture = textureLoader.load('/textures/door/color.jpg');
-
-// Transforming
-colorTexture.repeat.x = 2;
-colorTexture.repeat.y = 3;
-
-// to fix the displacement
-colorTexture.wrapS = THREE.RepeatWrapping;
-colorTexture.wrapT = THREE.RepeatWrapping;
-
-
-colorTexture.rotation = Math.PI * 0.25; // radian 25 degrees of pi
-
+const colorTexture = textureLoader.load('/textures/checkerboard-1024x1024.png');
+colorTexture.minFilter = THREE.NearestFilter;
 /**
  * Base
  */

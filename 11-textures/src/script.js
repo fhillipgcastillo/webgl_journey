@@ -1,17 +1,17 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { LoadingManager } from 'three';
 /**
  * Textures 
  */
 const textureManager = new THREE.LoadingManager();
-LoadingManager.onStart = () =>{}
-LoadingManager.onProgress = () =>{}
-LoadingManager.onError = () =>{}
+textureManager.onStart = (e) =>{console.log("start", e || undefined)}
+textureManager.onProgress = (e) =>{console.log("progress", e || undefined)}
+textureManager.onError = (e) =>{console.log("error", e || undefined)}
 
 const textureLoader = new THREE.TextureLoader(textureManager);
-const texture = textureLoader.load('/textures/door/color.jpg');
+const colorTexture = textureLoader.load('/textures/door/color.jpg');
+const alphaTexture = textureLoader.load('/textures/door/alpha.jpg');
 
 
 /**
@@ -27,7 +27,7 @@ const scene = new THREE.Scene()
  * Object
  */
 const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ map: texture});
+const material = new THREE.MeshBasicMaterial({ map: colorTexture,});
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 

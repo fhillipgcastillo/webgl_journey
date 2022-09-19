@@ -838,3 +838,19 @@ const colorTexture = textureLoader.load('/textures/checkerboard-8x8.png');
 colorTexture.magFilter = THREE.NearestFilter;
 ```
 
+When preparing the texture, 3 crusials elements to keep in mind
+* the weight
+* the size (the resolution)
+* the data
+
+Th weight
+how many MBs the iamge have
+
+We need to choose the right image type
+* `.jpg` loosy compression but usually lighter
+* `.png` loosless compression but usually heavier
+
+There are compression websites like TinyPNG
+
+WHen choosing the resolution, try having resolution on power of 2, means, we can device the res by 2.
+

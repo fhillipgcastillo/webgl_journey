@@ -859,3 +859,10 @@ It holds all the color information of the geomeotry.
 
 Shaders are the algoritms that handle colors of the pixels of te material.
 
+Have in mind that some values when being passed on the initialization can be set later but may be with different data types, for example color.
+
+Alpha maps need to have the `transparency = true` fro the materials when being used
+```javascript
+material.transparent = true;
+material.alphaMap = doorAlphaTexture;
+```

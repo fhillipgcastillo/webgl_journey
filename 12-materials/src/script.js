@@ -32,9 +32,11 @@ const scene = new THREE.Scene()
  * Objects
  */
 
-const material = new THREE.MeshBasicMaterial({color: 0x00f0d0});
-material.opacity = 0.5;
+const material = new THREE.MeshBasicMaterial({});
+// material.opacity = 0.5;
+material.map = doorColorTexture;
 material.transparent = true;
+material.alphaMap = doorAlphaTexture;
 
 const sphere = new THREE.Mesh(
     new THREE.SphereBufferGeometry(0.5, 16, 16),

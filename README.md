@@ -891,4 +891,7 @@ Normals are like pointings, which goes in a direction, and if the light comes fr
 
 New prperty the NormalMaterial have in comparizon with the BasicMaterial is `flatShading` property.
 
+> `Basic`, `Normal` and `Matcap` materials are great to be used without lights
+
+Where to find matcaps https://github.com/nidorx/matcaps
 

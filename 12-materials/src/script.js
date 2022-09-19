@@ -40,8 +40,15 @@ const scene = new THREE.Scene()
 // material.side = THREE.DoubleSide;
 
 
-const material = new THREE.MeshNormalMaterial()
-material.flatShading = true;
+// const material = new THREE.MeshNormalMaterial()
+// material.flatShading = true;
+
+// meshMatcapMaterial
+const material = new THREE.MeshMatcapMaterial();
+material.matcap = matcapTexture;
+
+
+material.side = THREE.DoubleSide;
 
 const sphere = new THREE.Mesh(
     new THREE.SphereBufferGeometry(0.5, 16, 16),

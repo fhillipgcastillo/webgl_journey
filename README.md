@@ -639,3 +639,22 @@ const parameters = {
 
 gui.add(parameters, 'spin');
 ```
+
+Toggle hide pannel or show panel with `h` key.
+
+We can also defined it as default as follow
+```javascript
+gui.hide();
+```
+
+We can toggle the panel to contract or full open by
+```javascript
+const gui = new dat.GUI({ closed: true });
+```
+
+We can also modify the width of the column by dragin it edge or by manually specifying it on the gui instance create
+```javascript
+const gui = new dat.GUI({ width: 300 });
+```
+
+**Recomended**, add each gui as you go, that way it goes progresivelly as you go.

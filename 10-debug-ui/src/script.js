@@ -7,7 +7,8 @@ import * as dat from 'dat.gui';
 /**
  * Debug UI
  */
-const gui = new dat.GUI();
+const gui = new dat.GUI({ closed: false, width: 300 });
+// gui.hide();
 
 const objectParameters = {
     color: 0xff0000,

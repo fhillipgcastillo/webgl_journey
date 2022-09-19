@@ -68,28 +68,30 @@ material.roughness = 0.65;
 material.map = doorColorTexture;
 material.side = THREE.DoubleSide;
 material.aoMap = doorAmbientOcclusionTexture;
-
+material.displacementMap = doorHeightTexture;
+material.displacementScale = 0.05;
 dgui.add(material, "metalness").min(0).max(1).step(0.0001);
 dgui.add(material, "roughness").min(0).max(1).step(0.0001);
+dgui.add(material, "displacementScale").min(0).max(1).step(0.001);
 
 
 const sphere = new THREE.Mesh(
-    new THREE.SphereBufferGeometry(0.5, 16, 16),
+    new THREE.SphereBufferGeometry(0.5, 64, 64),
     material
 );
 
-sphere.position.x = -1.5;
+sphere.position.x = -2;
 const plane = new THREE.Mesh(
-    new THREE.PlaneBufferGeometry(1, 1),
+    new THREE.PlaneBufferGeometry(1, 1, 100, 100),
     material
 );
 
 const torus = new THREE.Mesh(
-    new THREE.TorusBufferGeometry(0.3, 0.2, 16, 32),
+    new THREE.TorusBufferGeometry(0.3, 0.2, 64, 128),
     material
 );
 
-torus.position.x = 1.5;
+torus.position.x = 2;
 
 scene.add(sphere, plane, torus);
 
@@ -126,10 +128,11 @@ const guiParameters = {
         } else {
             material.aoMapIntensity = 0;
         }
-    }
+    },
 }
-dgui.add(guiParameters, 'enablePlaneAO');
 dgui.add(material, 'aoMapIntensity').min(0).max(3).step(0.0001);
+dgui.add(guiParameters, 'enablePlaneAO');
+dgui.add(material, 'wireframe');
 
 
 /**
@@ -195,13 +198,13 @@ const clock = new THREE.Clock()
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
-    // sphere.rotation.x = 0.1 * elapsedTime;
-    // plane.rotation.x = 0.1 * elapsedTime;
-    // torus.rotation.x = 0.1 * elapsedTime;
+    sphere.rotation.x = 0.1 * elapsedTime;
+    plane.rotation.x = 0.1 * elapsedTime;
+    torus.rotation.x = 0.1 * elapsedTime;
 
-    // sphere.rotation.y = 0.5 * elapsedTime;
-    // plane.rotation.y = 0.5 * elapsedTime;
-    // torus.rotation.y = 0.5 * elapsedTime;
+    sphere.rotation.y = 0.5 * elapsedTime;
+    plane.rotation.y = 0.5 * elapsedTime;
+    torus.rotation.y = 0.5 * elapsedTime;
 
     // Update controls
     controls.update()

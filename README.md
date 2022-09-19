@@ -982,3 +982,30 @@ Lets add the map material and the ambientOcclusion texture by `aoMap`. Also we n
     ```javascript
     material.aoMapIntensity = 5;
     ```
+4. DisplacementMap will move the vertices to create relief
+    ```javascript
+    material.displacementMap = doorHeightTexture;
+    ```
+   * It will show the reliefs and if we're using a plane we need to add multiple subdivision so it have more vertices
+        ```javascript
+        const sphere = new THREE.Mesh(
+            new THREE.SphereBufferGeometry(0.5, 64, 64),
+            material
+        );
+
+        const plane = new THREE.Mesh(
+            new THREE.PlaneBufferGeometry(1, 1, 100, 100),
+            material
+        );
+
+        const torus = new THREE.Mesh(
+            new THREE.TorusBufferGeometry(0.3, 0.2, 64, 128),
+            material
+        );
+        ```
+    * Add the displacement scale to a lower scale
+        ```javascript
+        material.displacementScale = 0.05;
+        ```
+
+

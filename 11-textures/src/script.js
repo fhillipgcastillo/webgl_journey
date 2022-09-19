@@ -1,10 +1,16 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { LoadingManager } from 'three';
 /**
- * Textures
+ * Textures 
  */
-const textureLoader = new THREE.TextureLoader();
+const textureManager = new THREE.LoadingManager();
+LoadingManager.onStart = () =>{}
+LoadingManager.onProgress = () =>{}
+LoadingManager.onError = () =>{}
+
+const textureLoader = new THREE.TextureLoader(textureManager);
 const texture = textureLoader.load('/textures/door/color.jpg');
 
 

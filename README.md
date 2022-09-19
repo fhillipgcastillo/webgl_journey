@@ -743,5 +743,10 @@ const texture = textureLoader.load('/textures/door/color.jpg', () => success, ()
 ### **LoadingManager**
 handle multiple events
 ```javascript
+const textureManager = new THREE.LoadingManager();
+LoadingManager.onStart = () =>{}
+LoadingManager.onProgress = () =>{}
+LoadingManager.onError = () =>{}
 
+const textureLoader = new THREE.TextureLoader(LoadingManager);
 ```

@@ -712,8 +712,36 @@ Example link: https://3dtextures.me/2019/04/16/door-wood-001/
 * By adding them into the `/static/` path of the project and calling them directly
 
 **How to get the image**
-From static path
+From `/static/` path
 
+```javascript
+const image = new Image();
+const texture = new THREE.Texture(image);
+image.addEventListener('load', (e) =>{
+    console.log('image loaded')
+    texture.needsUpdate = true;
+});
+image.src = '/textures/door/color.jpg';
 
+const material = new THREE.MeshBasicMaterial({ map: texture});
+```
 
+A better way to do this, is by using a loader
+```javascript
+const textureLoader = new THREE.TextureLoader();
+const texture = textureLoader.load('/textures/door/color.jpg');
+```
+Note: one texture loader can load multiple textures.
 
+When loading a texture, we can provided 3 callback, after the texture path
+* load - when the image loaded successfully
+* progress - when the loading is progressing
+* error - if somethign went wrong
+```javascript
+const texture = textureLoader.load('/textures/door/color.jpg', () => success, () => progress, () => error);
+```
+### **LoadingManager**
+handle multiple events
+```javascript
+
+```

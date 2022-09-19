@@ -819,6 +819,16 @@ And you will be able to see it clearly
 
 Magnification FIlter
 It's used when the texture iamge is too small
-```javascript
 
+MagFilter have 2 values
+* THREE.NearestFilter - Gives better looking results and more sharp 
+* THREE.LinearFilter - seems to be the default - more blurry
+
+> **THREE.NearestFilter**
+>  
+> Give better performance thatn the others
+
+```javascript
+const colorTexture = textureLoader.load('/textures/checkerboard-8x8.png');
+colorTexture.magFilter = THREE.NearestFilter;
 ```

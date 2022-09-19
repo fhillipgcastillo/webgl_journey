@@ -10,8 +10,8 @@ textureManager.onProgress = (e) =>{console.log("progress", e || undefined)}
 textureManager.onError = (e) =>{console.log("error", e || undefined)}
 
 const textureLoader = new THREE.TextureLoader(textureManager);
-const colorTexture = textureLoader.load('/textures/checkerboard-1024x1024.png');
-colorTexture.minFilter = THREE.NearestFilter;
+const colorTexture = textureLoader.load('/textures/checkerboard-8x8.png');
+colorTexture.magFilter = THREE.NearestFilter;
 /**
  * Base
  */

@@ -63,13 +63,26 @@ const scene = new THREE.Scene()
 // material.gradientMap = gradientTexture;
 
 const material = new THREE.MeshStandardMaterial();
-material.metalness = 0.45;
-material.roughness = 0.65;
+material.metalness = 0;
+material.roughness = 1;
 material.map = doorColorTexture;
 material.side = THREE.DoubleSide;
 material.aoMap = doorAmbientOcclusionTexture;
 material.displacementMap = doorHeightTexture;
 material.displacementScale = 0.05;
+material.aoMapIntensity = 1.5;
+
+material.metalnessMap = doorMetalnessTexture;
+material.roughnessMap = doorRoughnessTexture;
+
+material.normalMap = doorNormalTexture;
+material.normalScale.set(0.5, 0.5);
+
+// adding hte alpha and transparent views
+material.alphaMap = doorAlphaTexture;
+material.transparent = true;
+material.DoubleSide = true;
+
 dgui.add(material, "metalness").min(0).max(1).step(0.0001);
 dgui.add(material, "roughness").min(0).max(1).step(0.0001);
 dgui.add(material, "displacementScale").min(0).max(1).step(0.001);
@@ -118,20 +131,7 @@ torus.geometry.setAttribute(
 );
 
 // gui
-const guiParameters = {
-    enableAO: false,
-    enablePlaneAO: () => {
-        guiParameters.enableAO = !guiParameters.enableAO;
-        // only work for setting te values
-        if (guiParameters.enableAO) {
-            material.aoMapIntensity = 1.5;
-        } else {
-            material.aoMapIntensity = 0;
-        }
-    },
-}
 dgui.add(material, 'aoMapIntensity').min(0).max(3).step(0.0001);
-dgui.add(guiParameters, 'enablePlaneAO');
 dgui.add(material, 'wireframe');
 
 
@@ -198,13 +198,13 @@ const clock = new THREE.Clock()
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
-    sphere.rotation.x = 0.1 * elapsedTime;
-    plane.rotation.x = 0.1 * elapsedTime;
-    torus.rotation.x = 0.1 * elapsedTime;
+    sphere.rotation.x = 0.01 * elapsedTime;
+    plane.rotation.x = 0.01 * elapsedTime;
+    torus.rotation.x = 0.01 * elapsedTime;
 
-    sphere.rotation.y = 0.5 * elapsedTime;
-    plane.rotation.y = 0.5 * elapsedTime;
-    torus.rotation.y = 0.5 * elapsedTime;
+    sphere.rotation.y = 0.05 * elapsedTime;
+    plane.rotation.y = 0.05 * elapsedTime;
+    torus.rotation.y = 0.05 * elapsedTime;
 
     // Update controls
     controls.update()

@@ -1007,5 +1007,23 @@ Lets add the map material and the ambientOcclusion texture by `aoMap`. Also we n
         ```javascript
         material.displacementScale = 0.05;
         ```
-
+5. We can use `metalnessMap` and `roughnessMap` instead of the `metalness` and `roughness` material properties.
+   ```javascript
+    material.metalnessMap = doorMetalnessTexture;
+    material.roughnessMap = doorRoughnessTexture;
+    ```
+    * Remove the `metalness` and `roughness` properties from the material, that were previously used or use the default values.
+        ```javascript
+        material.metalness = 0;
+        material.roughness = 1;
+        ```
+6. Now combine that with the normal map to add more realism detail
+    ```javascrit
+    material.normalMap = doorNormalTexture;
+    ```
+    * We can also specify the normal scale
+        ```javascript
+        material.normalScale.set(x, y);
+        ```
+6. 
 

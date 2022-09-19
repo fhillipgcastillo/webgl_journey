@@ -548,8 +548,13 @@ Libraries to help with the ui
 * Guify
 * Oui
 
-dat.GUI
+### dat.GUI
 its one of the more popular out there
 
 Example:
 https://bruno-simon.com/#debug
+
+**Instalation**
+```bash
+npm i --save dat.gui
+```

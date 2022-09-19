@@ -44,9 +44,10 @@ const scene = new THREE.Scene()
 // material.flatShading = true;
 
 // meshMatcapMaterial
-const material = new THREE.MeshMatcapMaterial();
-material.matcap = matcapTexture;
+// const material = new THREE.MeshMatcapMaterial();
+// material.matcap = matcapTexture;
 
+const material = new THREE.MeshDepthMaterial();
 
 material.side = THREE.DoubleSide;
 

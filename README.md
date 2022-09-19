@@ -895,3 +895,8 @@ New prperty the NormalMaterial have in comparizon with the BasicMaterial is `fla
 
 Where to find matcaps https://github.com/nidorx/matcaps
 
+### Mesh Dept Material
+The closest to the camera, the whitest the value.
+
+
+## Materials that need Lights

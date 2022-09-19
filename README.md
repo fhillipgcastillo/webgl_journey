@@ -817,7 +817,12 @@ const colorTexture = textureLoader.load('/textures/checkerboard-1024x1024.png');
 ```
 And you will be able to see it clearly
 
-Magnification FIlter
+> When using `mipMapping` and `NearestFilter` we not need `mipmaps`
+```javascript
+texture.generateMipmaps = false;
+```
+
+**Magnification Filter**
 It's used when the texture iamge is too small
 
 MagFilter have 2 values
@@ -832,3 +837,4 @@ MagFilter have 2 values
 const colorTexture = textureLoader.load('/textures/checkerboard-8x8.png');
 colorTexture.magFilter = THREE.NearestFilter;
 ```
+

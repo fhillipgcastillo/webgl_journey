@@ -744,9 +744,20 @@ const texture = textureLoader.load('/textures/door/color.jpg', () => success, ()
 handle multiple events
 ```javascript
 const textureManager = new THREE.LoadingManager();
-LoadingManager.onStart = () =>{}
-LoadingManager.onProgress = () =>{}
-LoadingManager.onError = () =>{}
+textureManager.onStart = (e) =>{console.log("start", e || undefined)}
+textureManager.onProgress = (e) =>{console.log("progress", e || undefined)}
+textureManager.onError = (e) =>{console.log("error", e || undefined)}
 
-const textureLoader = new THREE.TextureLoader(LoadingManager);
+const textureLoader = new THREE.TextureLoader(textureManager);
+const colorTexture = textureLoader.load('/textures/door/color.jpg');
+const alphaTexture = textureLoader.load('/textures/door/alpha.jpg');
 ```
+
+### UV Unwrapping
+* It's used whent he geometry is not completely ment to that texture and the texture is not looking good or unstrech
+* It's like unwrapping an origami
+* IT'll be like a 2D map of the 3D object
+
+### Transforming Textures
+It utilize the `texture.repeat` and it's a vector2 object, with `x` and `y` properties.
+

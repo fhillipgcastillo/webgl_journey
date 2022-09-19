@@ -11,7 +11,14 @@ textureManager.onError = (e) =>{console.log("error", e || undefined)}
 
 const textureLoader = new THREE.TextureLoader(textureManager);
 const colorTexture = textureLoader.load('/textures/door/color.jpg');
-const alphaTexture = textureLoader.load('/textures/door/alpha.jpg');
+
+// Transforming
+colorTexture.repeat.x = 2;
+colorTexture.repeat.y = 3;
+
+// to fix the displacement
+colorTexture.wrapS = THREE.RepeatWrapping;
+colorTexture.wrapT = THREE.RepeatWrapping;
 
 
 /**

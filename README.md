@@ -658,3 +658,62 @@ const gui = new dat.GUI({ width: 300 });
 ```
 
 **Recomended**, add each gui as you go, that way it goes progresivelly as you go.
+
+
+## Textures
+Texture are based on images, that will cover the surface fo the geometries.
+There are many types with differents effects.
+
+Example link: https://3dtextures.me/2019/04/16/door-wood-001/
+
+**Images texture contains:**
+* Color (or albedo)
+  * the one that will be actually applied to the geometry
+  * the most simple one
+* alpha
+  * gray scale image that will show what will be shown or not (black = noe, white = visible)
+* Height (or displacement)
+  * grayscale image
+  * move the vertices to create some relief
+  * need enough subdivision
+* Normal
+  * Add details about lighting
+  * doesn't need subdivision
+  * the vertices won't move
+  * lure the ligh about the face orientation
+  * better performances thatn adding a height texture with a lot of subdivisions
+* Ambient occlusion
+  * gayscale image
+  * add fake shadows in crevides
+  * not physically accuerate
+  * helps to create constras and see details
+* Metalness
+  * gayscale image
+  * white is metallic
+  * black is non-metallic
+  * mostly for reflection
+* Roughness
+  * gayscale image
+  * in duo with the metalness
+  * white is rough
+  * black is smooth
+  * mostly for light dissipation - Remove reflection for surface
+* PBR principle
+  For all those textures (especially the metalness and the roughness) follow this principles
+  * Physically base rendering
+  * Many tecnics hat tend to follow real-life directions to get realistic results
+  * becoming the standard of realistic renders
+  * many software, engines and libraries are using it
+  * > [https://marmoset.co/posts/basic-theory-of-physically-based-rendering] 
+
+### How to load textures
+**differents ways to load a image**
+* By putting textures into the src folder and import them directly
+* By adding them into the `/static/` path of the project and calling them directly
+
+**How to get the image**
+From static path
+
+
+
+

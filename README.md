@@ -861,6 +861,10 @@ Shaders are the algoritms that handle colors of the pixels of te material.
 
 Have in mind that some values when being passed on the initialization can be set later but may be with different data types, for example color.
 
+### Mesh Basic Material
+
+
+
 Alpha maps need to have the `transparency = true` fro the materials when being used
 ```javascript
 material.transparent = true;
@@ -868,10 +872,23 @@ material.alphaMap = doorAlphaTexture;
 ```
 
 
-Show something behinde the planes properties
+### **Show something behine the planes properties**
 `material.side`
 
-Side possible values:
+**Side possible values:**
 * THREE.FrontSide
 * THREE.BackSide
 * THREE.DoubleSide
+
+> `DoubleSite` can cause lower performance
+
+### Mesh Normal Material
+This are better looking than Basic Materials.
+
+NOrmals are abot lighting, reflection, refraction,etc.
+
+Normals are like pointings, which goes in a direction, and if the light comes from that direction it means it need to show.
+
+New prperty the NormalMaterial have in comparizon with the BasicMaterial is `flatShading` property.
+
+

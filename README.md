@@ -937,3 +937,15 @@ THis will lose the cartoonish effect used by the minMapping. So to fix this, we 
 ```javascript
 
 ```
+
+**Mesh Standard Material**
+Is one of the most populars. It uses PBR (Physically Based Rendering) principles.
+
+Like Lamber and Phong materials, it support lights with a more realism rendering algoritm and uses  the parameters like `roughness` and `metalness`.
+
+```javascript
+const material = new THREE.MeshStandardMaterial();
+material.metalness = 0.45;
+material.roughness = 0.65;
+```
+

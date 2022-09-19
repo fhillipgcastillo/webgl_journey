@@ -51,17 +51,19 @@ const scene = new THREE.Scene()
 
 // const material = new THREE.MeshLambertMaterial();
 
-const material = new THREE.MeshToonMaterial();
-material.shiness = 100;
-material.specular = new THREE.Color(0x1188ff);
+// const material = new THREE.MeshToonMaterial();
+// material.shiness = 100;
+// material.specular = new THREE.Color(0x1188ff);
+// gradientTexture.minFilter = THREE.NearestFilter;
+// gradientTexture.magFilter = THREE.NearestFilter;
+// gradientTexture.generateMipmaps  = false;
+// material.gradientMap = gradientTexture;
 
-gradientTexture.minFilter = THREE.NearestFilter;
-gradientTexture.magFilter = THREE.NearestFilter;
-gradientTexture.generateMipmaps  = false;
+const material = new THREE.MeshStandardMaterial();
+material.metalness = 0.45;
+material.roughness = 0.65;
 
-material.gradientMap = gradientTexture;
-
-material.side = THREE.DoubleSide;
+// material.side = THREE.DoubleSide;
 
 const sphere = new THREE.Mesh(
     new THREE.SphereBufferGeometry(0.5, 16, 16),

@@ -48,7 +48,12 @@ const scene = new THREE.Scene()
 // material.matcap = matcapTexture;
 
 // const material = new THREE.MeshDepthMaterial();
-const material = new THREE.MeshLambertMaterial();
+
+// const material = new THREE.MeshLambertMaterial();
+
+const material = new THREE.MeshPhongMaterial();
+material.shiness = 100;
+material.specular = new THREE.Color(0x1188ff);
 
 material.side = THREE.DoubleSide;
 

@@ -901,9 +901,22 @@ The closest to the camera, the whitest the value.
 
 ## Materials that need Lights
 
-MeshLambertMaterial
+**MeshLambertMaterial**
+
 ```javascript
 const material = new THREE.MeshLambertMaterial();
 ```
 
 It's great for performance but have some rendering weirdness that is not so good for realism
+
+**Mesh Phong Material**
+
+Similar to Lamber material, but without the edges that lamber shows, this is more smooth
+
+This have the shiness properties which control the reflrectio fo the light and the color of this reflection can be handle by the specular property.
+
+```javascript
+material.shiness = 100;
+material.specular = new THREE.Color(0x1188ff);
+```
+

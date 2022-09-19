@@ -21,6 +21,8 @@ colorTexture.wrapS = THREE.RepeatWrapping;
 colorTexture.wrapT = THREE.RepeatWrapping;
 
 
+colorTexture.rotation = Math.PI * 0.25; // radian 25 degrees of pi
+
 /**
  * Base
  */

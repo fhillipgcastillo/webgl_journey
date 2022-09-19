@@ -758,6 +758,34 @@ const alphaTexture = textureLoader.load('/textures/door/alpha.jpg');
 * It's like unwrapping an origami
 * IT'll be like a 2D map of the 3D object
 
-### Transforming Textures
+**Transforming Textures**
 It utilize the `texture.repeat` and it's a vector2 object, with `x` and `y` properties.
 
+```javascript
+// Transforming
+colorTexture.repeat.x = 2;
+colorTexture.repeat.y = 3;
+
+// to fix the displacement
+colorTexture.wrapS = THREE.RepeatWrapping;
+colorTexture.wrapT = THREE.RepeatWrapping;
+```
+There's also a mirroring repeat wrapping
+```javascript
+colorTexture.wrapS = THREE.MirroredRepeatWrapping;
+```
+**Offset** 
+It will transform the offset values on x and y
+
+```javascript
+texture.offset.x = 0.5;
+texture.offset.y = 0.5;
+```
+
+Pibot point
+Is the point of the mesh where the modification will be apply
+let's say we want to rotate the texture, and its doing it on the botton left corner of a face and we want to move that pibot point ot he cente
+```javascript
+texture.center.x = 1;
+texture.center.y = 1;
+```

@@ -866,3 +866,12 @@ Alpha maps need to have the `transparency = true` fro the materials when being u
 material.transparent = true;
 material.alphaMap = doorAlphaTexture;
 ```
+
+
+Show something behinde the planes properties
+`material.side`
+
+Side possible values:
+* THREE.FrontSide
+* THREE.BackSide
+* THREE.DoubleSide

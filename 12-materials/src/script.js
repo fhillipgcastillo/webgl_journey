@@ -37,6 +37,7 @@ const material = new THREE.MeshBasicMaterial({});
 material.map = doorColorTexture;
 material.transparent = true;
 material.alphaMap = doorAlphaTexture;
+material.side = THREE.DoubleSide;
 
 const sphere = new THREE.Mesh(
     new THREE.SphereBufferGeometry(0.5, 16, 16),

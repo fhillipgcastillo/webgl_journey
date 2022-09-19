@@ -854,3 +854,8 @@ There are compression websites like TinyPNG
 
 WHen choosing the resolution, try having resolution on power of 2, means, we can device the res by 2.
 
+## Materials
+It holds all the color information of the geomeotry.
+
+Shaders are the algoritms that handle colors of the pixels of te material.
+

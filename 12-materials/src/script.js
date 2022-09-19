@@ -47,7 +47,8 @@ const scene = new THREE.Scene()
 // const material = new THREE.MeshMatcapMaterial();
 // material.matcap = matcapTexture;
 
-const material = new THREE.MeshDepthMaterial();
+// const material = new THREE.MeshDepthMaterial();
+const material = new THREE.MeshLambertMaterial();
 
 material.side = THREE.DoubleSide;
 
@@ -70,6 +71,18 @@ const torus = new THREE.Mesh(
 torus.position.x = 1.5;
 
 scene.add(sphere, plane, torus);
+
+
+/**
+ * Lights
+ */
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+const pointLight = new THREE.PointLight(0xffffff, 0.5)
+pointLight.position.set(2, 3, 4);
+
+scene.add(ambientLight, pointLight);
+
+
 /**
  * Sizes
  */

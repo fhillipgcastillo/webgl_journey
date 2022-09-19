@@ -900,3 +900,10 @@ The closest to the camera, the whitest the value.
 
 
 ## Materials that need Lights
+
+MeshLambertMaterial
+```javascript
+const material = new THREE.MeshLambertMaterial();
+```
+
+It's great for performance but have some rendering weirdness that is not so good for realism

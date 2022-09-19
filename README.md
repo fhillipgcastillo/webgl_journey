@@ -949,3 +949,36 @@ material.metalness = 0.45;
 material.roughness = 0.65;
 ```
 ### Re-add debug UI
+
+```javascript
+import * as dat from 'dat.gui';
+
+const dgui = new dat.GUI();
+dgui.add(material, "metalness").min(0).max(1).step(0.0001);
+dgui.add(material, "roughness").min(0).max(1).step(0.0001);
+```
+
+### Ambient Occlusion
+
+Lets add the map material and the ambientOcclusion texture by `aoMap`. Also we need to specify to the mesh.geometry attribute the uv2 attribute so it can handle the ambien occlusion map.
+
+**Step for enabling the Ambien Occlusion to the meshes**
+1. First change the geometry uv2 attribute as followed for each meshStandardMaterial
+    ```javascript
+    meshStandart.geometry.setAttribute(
+        'uv2',
+        new THREE.BufferAttribute(
+            meshStandart.geometry.attributes.uv.array, 
+            meshStandart.geometry.attributes.uv.itemSize
+        )
+    );
+    ```
+
+2. Then just need to add the aoMap texture
+    ```javascript
+    material.aoMap = doorAmbientOcclusionTexture;
+    ```
+3. We can set the aoMap intensity
+    ```javascript
+    material.aoMapIntensity = 5;
+    ```

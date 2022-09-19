@@ -65,11 +65,13 @@ const scene = new THREE.Scene()
 const material = new THREE.MeshStandardMaterial();
 material.metalness = 0.45;
 material.roughness = 0.65;
+material.map = doorColorTexture;
+material.side = THREE.DoubleSide;
+material.aoMap = doorAmbientOcclusionTexture;
 
 dgui.add(material, "metalness").min(0).max(1).step(0.0001);
 dgui.add(material, "roughness").min(0).max(1).step(0.0001);
 
-// material.side = THREE.DoubleSide;
 
 const sphere = new THREE.Mesh(
     new THREE.SphereBufferGeometry(0.5, 16, 16),
@@ -91,6 +93,43 @@ torus.position.x = 1.5;
 
 scene.add(sphere, plane, torus);
 
+plane.geometry.setAttribute(
+    'uv2',
+    new THREE.BufferAttribute(
+        plane.geometry.attributes.uv.array,
+        plane.geometry.attributes.uv.itemSize
+    )
+);
+sphere.geometry.setAttribute(
+    'uv2',
+    new THREE.BufferAttribute(
+        sphere.geometry.attributes.uv.array,
+        sphere.geometry.attributes.uv.itemSize
+    )
+);
+torus.geometry.setAttribute(
+    'uv2',
+    new THREE.BufferAttribute(
+        torus.geometry.attributes.uv.array,
+        torus.geometry.attributes.uv.itemSize
+    )
+);
+
+// gui
+const guiParameters = {
+    enableAO: false,
+    enablePlaneAO: () => {
+        guiParameters.enableAO = !guiParameters.enableAO;
+        // only work for setting te values
+        if (guiParameters.enableAO) {
+            material.aoMapIntensity = 1.5;
+        } else {
+            material.aoMapIntensity = 0;
+        }
+    }
+}
+dgui.add(guiParameters, 'enablePlaneAO');
+
 
 /**
  * Lights
@@ -110,8 +149,7 @@ const sizes = {
     height: window.innerHeight
 }
 
-window.addEventListener('resize', () =>
-{
+window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
@@ -153,17 +191,16 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  */
 const clock = new THREE.Clock()
 
-const tick = () =>
-{
+const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
-    sphere.rotation.x = 0.1 * elapsedTime;
-    plane.rotation.x = 0.1 * elapsedTime;
-    torus.rotation.x = 0.1 * elapsedTime;
+    // sphere.rotation.x = 0.1 * elapsedTime;
+    // plane.rotation.x = 0.1 * elapsedTime;
+    // torus.rotation.x = 0.1 * elapsedTime;
 
-    sphere.rotation.y = 0.5 * elapsedTime;
-    plane.rotation.y = 0.5 * elapsedTime;
-    torus.rotation.y = 0.5 * elapsedTime;
+    // sphere.rotation.y = 0.5 * elapsedTime;
+    // plane.rotation.y = 0.5 * elapsedTime;
+    // torus.rotation.y = 0.5 * elapsedTime;
 
     // Update controls
     controls.update()

@@ -1083,5 +1083,13 @@ const environmentMapTexture = cubeTextureLoader.load([
 ]);
 ```
 
+We can tweak he metalness and roughness to get differnts results
 
+Where to find environment maps 
 
+* [HDRI Haven](https://polyhaven.com/hdris)
+* [main page](https://polyhaven.com/)
+
+From over there, we get 1 image with the full environment map
+
+We can conver then with https://matheowis.github.io/HDRI-to-CubeMap/

@@ -928,7 +928,7 @@ Have a cartoonish look and can use the `gradientMap` and use the `gradientTextur
 const material = new THREE.MeshToonMaterial();
 ```
 
-To add our custom mappings
+**To add our custom mappings**
 ```javascript
 material.gradientMap = gradientTexture;
 ```
@@ -938,7 +938,7 @@ THis will lose the cartoonish effect used by the minMapping. So to fix this, we 
 
 ```
 
-**Mesh Standard Material**
+## **Mesh Standard Material**
 Is one of the most populars. It uses PBR (Physically Based Rendering) principles.
 
 Like Lamber and Phong materials, it support lights with a more realism rendering algoritm and uses  the parameters like `roughness` and `metalness`.
@@ -1025,5 +1025,52 @@ Lets add the map material and the ambientOcclusion texture by `aoMap`. Also we n
         ```javascript
         material.normalScale.set(x, y);
         ```
-6. 
+
+### Mesh Physical Material
+Have all the same of the `MeshStandardMaterial` but with teh support of a clear coat effect (More realistic).
+
+[ThreeJS Example](https://threejs.org/examples/?q=physi#webgl_materials_physical_clearcoat)
+
+**PointMaterial**
+Will be cover later 
+
+
+### ShaderMaterial and RawShaderMaterial
+Both used to create our custom materials. 
+This will be also covered Later
+
+## Environment Map
+
+* Its what is surrounding the scene
+* It can be used for reflectio or refraction but also for general lighting
+* Are supported by multiple materisl but we're going to use MesStandardMaterial for them
+
+> ThreeJS only support Cube Maps for the env maps
+
+To import the Environment maps, we're going to use `CubeTextureLoader` for this.
+
+```javascript
+scene.background = new THREE.CubeTextureLoader()
+    .setPath('path/to/textures')
+    .load(['texture.name'])
+```
+Also we can use this one
+
+```javascript
+cubeTextureLoader.load([
+    'path1',
+    'path2',
+    'path3',
+    'path4',
+    'path5',
+    'path6',
+])
+```
+
+Thy are structure as:
+* positive `x`, `y`, `z` .<fileextension> (`px.jpg`, `py.jpg`, `pz.jpg`)
+* negative `x`, `y`, `z` .<fileextension> (`nx.jpg`, `ny.jpg`, `nz.jpg`)
+
+
+
 

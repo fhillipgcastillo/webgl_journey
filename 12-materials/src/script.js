@@ -9,6 +9,16 @@ const dgui = new dat.GUI();
  * Textures
  */
 const textureLoader = new THREE.TextureLoader();
+const cubeTextureLoader = new THREE.CubeTextureLoader();
+
+const environmentMapTexture = cubeTextureLoader.load([
+    '/textures/environmentMaps/0/px.jpg',
+    '/textures/environmentMaps/0/nx.jpg',
+    '/textures/environmentMaps/0/py.jpg',
+    '/textures/environmentMaps/0/ny.jpg',
+    '/textures/environmentMaps/0/pz.jpg',
+    '/textures/environmentMaps/0/nz.jpg',
+]);
 
 // door
 const doorColorTexture = textureLoader.load('/textures/door/color.jpg')
@@ -31,6 +41,9 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+// scene.background = new THREE.CubeTextureLoader()
+//     .setPath('')
+//     .load([])
 /**
  * Objects
  */
@@ -62,26 +75,33 @@ const scene = new THREE.Scene()
 // gradientTexture.generateMipmaps  = false;
 // material.gradientMap = gradientTexture;
 
+// const material = new THREE.MeshStandardMaterial();
+// material.metalness = 0;
+// material.roughness = 1;
+// material.map = doorColorTexture;
+// material.side = THREE.DoubleSide;
+// material.aoMap = doorAmbientOcclusionTexture;
+// material.displacementMap = doorHeightTexture;
+// material.displacementScale = 0.05;
+// material.aoMapIntensity = 1.5;
+
+// material.metalnessMap = doorMetalnessTexture;
+// material.roughnessMap = doorRoughnessTexture;
+
+// material.normalMap = doorNormalTexture;
+// material.normalScale.set(0.5, 0.5);
+
+// // adding hte alpha and transparent views
+// material.alphaMap = doorAlphaTexture;
+// material.transparent = true;
+// material.DoubleSide = true;
+
 const material = new THREE.MeshStandardMaterial();
-material.metalness = 0;
-material.roughness = 1;
-material.map = doorColorTexture;
-material.side = THREE.DoubleSide;
-material.aoMap = doorAmbientOcclusionTexture;
-material.displacementMap = doorHeightTexture;
-material.displacementScale = 0.05;
-material.aoMapIntensity = 1.5;
+material.metalness = 0.7;
+material.roughness = 0.2;
 
-material.metalnessMap = doorMetalnessTexture;
-material.roughnessMap = doorRoughnessTexture;
-
-material.normalMap = doorNormalTexture;
-material.normalScale.set(0.5, 0.5);
-
-// adding hte alpha and transparent views
-material.alphaMap = doorAlphaTexture;
-material.transparent = true;
-material.DoubleSide = true;
+material.envMap = environmentMapTexture;
+scene.background = environmentMapTexture;
 
 dgui.add(material, "metalness").min(0).max(1).step(0.0001);
 dgui.add(material, "roughness").min(0).max(1).step(0.0001);

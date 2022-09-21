@@ -1236,3 +1236,13 @@ const matcapTexture = textureLoader.load('/textures/matcaps/7.png');
 const textMaterial = new THREE.MeshMatcapMaterial({matcap: matcapTexture});
 ```
 
+## Go live
+Options
+* manually running `npm run build` and copying that into your website.
+* Using Netlify
+* Github pages
+* Vercel
+  * Vercel have integration with Github, gitlab and bitbucket
+  * `npm install vercel`
+  * add script to package.json `"deploy": "vercel --prod"`
+  * 

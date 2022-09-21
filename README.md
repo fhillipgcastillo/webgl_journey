@@ -26,3 +26,8 @@
 > Chapter 13 - 3D Texts
 > 
 > Chapter 14 - Go Live quick notes
+
+[Level 2 Notes](./Level%202/README.md)
+
+> [15 - Lights](./Level%202/README.md#15)
+> 

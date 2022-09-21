@@ -51,5 +51,5 @@ pointLight.position.set(1, -0.5, 1);
 > 
 
 ```javascript
-
+const pointLight = new THREE.PointLight(0xff9000, 0.5, 4, 2);
 ```

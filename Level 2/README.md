@@ -89,9 +89,17 @@ Acts like a flashlight. It's a cone of light, starting at a point and oriented i
 * decay
   * `decay` how fast the light loose will be
 
+```javascript
+const spotLight = new THREE.SpotLight(0x78ff00, 0.5, 10, Math.PI * 0.1, 0.25, 1);
+spotLight.position.set(0, 2, 3);
+scene.add(spotLight);
+```
 ### Rotating SpotLight with `target`
 To rotate an spotlight we're going to use the target property
 
-```javascript
+Target is an object, so we'll need to add it to the scene to being able to make it work
 
+```javascript
+spotLight.target.position.x =-1.75;
+scene.add(spotLight.target);
 ```

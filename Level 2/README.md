@@ -74,3 +74,24 @@ we can move it, rotate it and also use the lookAt
 
 > To better visualize it, sometimes is better to high the other lights and see it's cool effect.
 
+## SpotLight
+Acts like a flashlight. It's a cone of light, starting at a point and oriented in a direction.
+
+### Parameters
+* color
+* intensity
+* distance
+  * `Distance` how far it will iluminate
+* angle
+  * `angle` how wide it will be
+* penumbra
+  * `penumbra` is how dim the edges will look like, so `0` will show a really sharp penumbra
+* decay
+  * `decay` how fast the light loose will be
+
+### Rotating SpotLight with `target`
+To rotate an spotlight we're going to use the target property
+
+```javascript
+
+```

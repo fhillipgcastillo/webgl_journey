@@ -1226,3 +1226,13 @@ There's a simpler way of doing this
 geometry.center()
 ```
 
+### Add matcap to text
+Change material mesh to MeshMatcapMaterial.
+
+```javascript
+const textureLoader = new THREE.TextureLoader()
+const matcapTexture = textureLoader.load('/textures/matcaps/7.png');
+
+const textMaterial = new THREE.MeshMatcapMaterial({matcap: matcapTexture});
+```
+

@@ -103,3 +103,24 @@ Target is an object, so we'll need to add it to the scene to being able to make 
 spotLight.target.position.x =-1.75;
 scene.add(spotLight.target);
 ```
+
+## Performances
+lights cost a lot when it comes into performances
+
+### Recomendations:
+* USe the lest lights posible
+* Use minimal cost light for better performance
+
+**Minimal Cost Lights**
+* AmbientLight
+* HemisphereLight
+
+**Moderate cost lights**
+* DirectionalLight
+* PointLight
+
+**High Cost**
+* SpotLight
+* ReEctAreaLight
+
+

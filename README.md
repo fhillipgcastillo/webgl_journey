@@ -1093,3 +1093,136 @@ Where to find environment maps
 From over there, we get 1 image with the full environment map
 
 We can conver then with https://matheowis.github.io/HDRI-to-CubeMap/
+
+## Text
+For text create it's used the `TextBufferGeometry`
+
+Font conversion app https://gero3.github.io/facetype.js/
+
+
+We need ot use typeface fonts
+To load the fonts, there a FontLoader which we can use. 
+
+```javascript
+const fontLoader = new THREE.FontLoader();
+```
+
+Now we need to load the font which the parameters the `load` method need:
+* font path
+* onSuccess callback
+
+It won't return any value
+
+```javascript
+fontLoader.load(
+    'path/to/the/font',
+    () => {}
+);
+```
+A fulle xample
+```javascript
+const fontLoader = new FontLoader();
+let font;
+
+fontLoader.load(
+    '/fonts/helvetiker_regular.typeface.json',
+    (response) => {
+        console.log('loaded', response);
+        font = response;
+    },
+    () => { console.log('load') },
+    (err) => { console.log('Error', err) }
+);
+
+```
+
+### Create Geometry
+Going to use `TextBufferGeometry`
+
+Here are some of the parameters
+* string
+
+
+```javascript
+
+fontLoader.load(
+    '/fonts/helvetiker_regular.typeface.json',
+    (response) => {
+        console.log('loaded', response);
+        font = response;
+        textGeometry = new TextGeometry(
+            'Hello World',
+            {
+                font: font,
+                size: 0.5,
+                height: 0.2,
+                curveSegments: 5,
+                bevelEnabled: true,
+                bevelThickness: 0.03,
+                bevelSize: 0.02,
+                bevelOffset: 0,
+                bevelSegments: 4,
+            }
+        );
+        const textMaterial = new THREE.MeshBasicMaterial();
+        textMaterial.wireframe = true;
+
+        const textMesh = new THREE.Mesh(
+            textGeometry,
+            textMaterial,
+        )
+        
+        scene.add(textMesh);
+    },
+    () => { console.log('load') },
+    (err) => { console.log('Error', err) }
+);
+```
+
+### Bounding
+**Center the text**
+
+First add axes helper to the scene
+```javascript
+const axesHelper = new THREE.AxesHelper();
+scene.add(axesHelper);
+```
+
+Bounding is an information associated with about the geometry spacing that its taking. So we're going to use tha bounding info to center the text.
+
+Bounding can be an square or a spere.
+
+By default threejs uses the sphere bounding. To change it, we need to run the `textMaterial.computeBOundingBox()` this way it generates the boundingBox information.
+
+we cna see the boundingBox info as
+```javascript
+textGeometry.boundingBox;
+```
+
+
+To center the text we need to move it geometry center position to half its position, that way the mesh axes will have the geometry at its center axes.
+
+To move it we need to use the `geometry.translate` and pass the `x`, `y` and `z`.
+
+```javascript
+ textGeometry.translate(
+    - textGeometry.boundingBox.max.x * 0.5,
+    - textGeometry.boundingBox.max.y * 0.5,
+    - textGeometry.boundingBox.max.z * 0.5,
+)
+```
+WE need to have in consideration that if we're using bavel we need to add those value withing the new xyz vaues, for example:
+
+```javascript
+ textGeometry.translate(
+    - (textGeometry.boundingBox.max.x - 0.2) * 0.5,
+    - (textGeometry.boundingBox.max.y - 0.2) * 0.5,
+    - (textGeometry.boundingBox.max.z) * 0.5,
+)
+```
+
+There's a simpler way of doing this
+```javacript
+geometry.center()
+```
+

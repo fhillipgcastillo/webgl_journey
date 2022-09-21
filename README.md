@@ -3,7 +3,7 @@
 
 [Level 1 Notes](./Level%201/README.md)
 
-> Chapter 3 - Basics.
+> [Chapter 3 - Basics](./Level%201/README.md#00-basics).
 > 
 > Chapter 4 - Webpack
 > 

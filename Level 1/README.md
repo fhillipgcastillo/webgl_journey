@@ -1,5 +1,5 @@
 # ThreeJS Journy
-## 00 - Base ThreeJS
+## 00 - Base ThreeJS {#00-basics}
 for node instalation
 for web as cdn
 bundler/webpack and its configurations

@@ -53,3 +53,24 @@ pointLight.position.set(1, -0.5, 1);
 ```javascript
 const pointLight = new THREE.PointLight(0xff9000, 0.5, 4, 2);
 ```
+## Rect Area light
+Workes like a big rectangle light and really harch lighting. It's a mix beween directional light adn diffuse light.
+
+### Parameters
+* color
+* intensity
+* width
+* height
+
+```javascript
+const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 0.5, 1, 1);
+
+```
+
+> RectAreaLight only works with `MeshStandardMaterial` and `MesPhysicalMaterial`
+
+**Position it**
+we can move it, rotate it and also use the lookAt
+
+> To better visualize it, sometimes is better to high the other lights and see it's cool effect.
+

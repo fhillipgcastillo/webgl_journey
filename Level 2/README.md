@@ -30,3 +30,26 @@ scene.add(directionalLight);
 const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 0.6);
 scene.add(hemisphereLight)
 ```
+
+## PointLight
+Workes similar to a lighter, where the light starts at an infinitely small point and spreads uniformely in every directions
+
+### Parameters
+* color
+* intensity
+
+```javascript
+const pointLight = new THREE.PointLight(0xff9000, 0.5);
+pointLight.position.set(1, -0.5, 1);
+```
+
+> By default the light intensity doesn't face.
+> 
+> We can control the face distance and how fast it fades with `distance` and `decay`.
+> 
+> **PointLigt(** `color`, `intensity`, `distance`, `decay` **)**
+> 
+
+```javascript
+
+```

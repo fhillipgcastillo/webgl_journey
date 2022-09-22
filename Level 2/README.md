@@ -1,4 +1,11 @@
 # 15 - Light (#15)
+
+**TO DO**
+> This relationship summary have to be like, XLight is like a lightbulb and it's low GPU cost
+* [ ] Create a relationship summary of the lights
+* [ ] Create a relaship summary of the basic parts, Geometry, Texture, Material and Mesh
+
+
 ## Ambient light
 IT's applied omnidirectional lighting
 ### Parameters
@@ -123,4 +130,11 @@ lights cost a lot when it comes into performances
 * SpotLight
 * ReEctAreaLight
 
+
+## Baking
+When we want to add a bunch of lights its better to use a 3d software. Btw baking is kind of the way or solution.
+
+The idea is to bake the ligth into the texture. This can be done in a 3D Software. The drawback is that we cannont move the light anymore and we have to load a huge texture.
+
+WHat baking means is to bakely design the lights into the texture image (baking), to look like it have the lights but it's kind of fake.
 

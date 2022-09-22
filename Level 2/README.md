@@ -138,3 +138,66 @@ The idea is to bake the ligth into the texture. This can be done in a 3D Softwar
 
 WHat baking means is to bakely design the lights into the texture image (baking), to look like it have the lights but it's kind of fake.
 
+## Helpers
+TO ease the light positioning there are ligths helpers. They will receibe as parameter the Light and an extra value
+
+* HemisphereLightHelper
+* DirectionalLightHelper
+* PointLightHelper
+* RectAreaLightHelper
+* SportLightHelper
+* Etc...
+
+### Parameters
+
+* light 
+* size: number, 
+* color?: THREE.ColorRepresentation | undefined
+
+
+Example:
+```javascript
+const hsLHelper = new THREE.HemisphereLightHelper(hemisphereLight, 0.2);
+scene.add(hsLHelper);
+```
+
+> **SportLight**
+> * doesn't have `size`.
+> * It also need to get the update method called on the next frame, after moving the target.
+
+
+Example:
+```javascript
+const helper = new THREE.SpotLightHelper(spotLight);
+scene.add(helper);
+
+// Update on next frame
+window.requestAnimationFrame(()=> {
+    helper.update();
+});
+
+```
+
+
+### RectAreaLightHelper
+This light isn't part of three so we must import it
+
+```javascript
+import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
+// .
+// .
+// .
+const ralHelper = new RectAreaLightHelper(rectAreaLight);
+scene.add(ralHelper);
+```
+
+
+Now we need to fully update its position on the next frame manually
+
+```javasscript
+window.requestAnimationFrame(()=>{
+    ralHelper.position.copy(rectAreaLight.position);
+    ralHelper.quaternion.copy(rectAreaLight.quaternion);
+    ralHelper.update();
+});
+```

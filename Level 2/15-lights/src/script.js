@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
+import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
 
 /**
  * Base
@@ -55,6 +56,38 @@ scene.add(spotLight);
 
 spotLight.target.position.x =-1.75;
 scene.add(spotLight.target);
+
+
+
+// Helpers
+
+const hsLHelper = new THREE.HemisphereLightHelper(hemisphereLight, 0.2);
+scene.add(hsLHelper);
+
+const dlhelper = new THREE.DirectionalLightHelper(directionalLight, 0.2);
+scene.add(dlhelper);
+
+const plhelper = new THREE.PointLightHelper(pointLight, 0.2);
+scene.add(plhelper);
+
+const slhelper = new THREE.SpotLightHelper(spotLight);
+scene.add(slhelper);
+
+// Update on next frame
+window.requestAnimationFrame(()=> {
+    slhelper.update();
+});
+
+
+const ralHelper = new RectAreaLightHelper(rectAreaLight);
+scene.add(ralHelper);
+
+window.requestAnimationFrame(()=>{
+    ralHelper.position.copy(rectAreaLight.position);
+    ralHelper.quaternion.copy(rectAreaLight.quaternion);
+    ralHelper.update();
+});
+
 /**
  * Objects
  */

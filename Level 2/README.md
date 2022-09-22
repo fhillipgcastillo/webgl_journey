@@ -201,3 +201,35 @@ window.requestAnimationFrame(()=>{
     ralHelper.update();
 });
 ```
+
+# 16 - Shadows (#16)
+By Default the object have what is called **Core Shadow**. It is the dark shadow in the back of the objects when we add the lights.
+
+What is missing is the **drop shadows**.
+
+
+### How to activate shadows
+Enable shadowMap to the renderer
+
+```javascript
+    renderer.shadowMap.enabled = true;
+```
+
+objects can receive shadows and/or cast shadows
+
+```javascript
+sphere.castShadow = true;
+plane.receiveShadow = true;
+
+```
+
+**Type of lights that support shadows**
+
+* PointLight
+* DiretionalLight
+* SportLight
+
+We also need to enable the light to cast a shadow
+```javascript
+directionalLight.castShadow = true;
+```

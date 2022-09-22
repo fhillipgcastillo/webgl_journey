@@ -30,7 +30,9 @@ gui.add(directionalLight, 'intensity').min(0).max(1).step(0.001)
 gui.add(directionalLight.position, 'x').min(- 5).max(5).step(0.001)
 gui.add(directionalLight.position, 'y').min(- 5).max(5).step(0.001)
 gui.add(directionalLight.position, 'z').min(- 5).max(5).step(0.001)
-scene.add(directionalLight)
+scene.add(directionalLight);
+
+directionalLight.castShadow = true;
 
 /**
  * Materials
@@ -47,15 +49,24 @@ const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 32, 32),
     material
 )
-
+sphere.castShadow = true;
 const plane = new THREE.Mesh(
     new THREE.PlaneGeometry(5, 5),
     material
 )
 plane.rotation.x = - Math.PI * 0.5
 plane.position.y = - 0.5
-
+plane.receiveShadow = true;
 scene.add(sphere, plane)
+
+
+gui.add(sphere, "castShadow" ).name("Sphere Cast Shadow");
+gui.add(plane, "castShadow" ).name("Plan Cast Shadow");
+gui.add(directionalLight, "castShadow" ).name("DirectionalLight Cast Shadow");
+
+gui.add(sphere, "receiveShadow" ).name("Sphere Receives Shadow");
+gui.add(plane, "receiveShadow" ).name("Plan Receives Shadow");
+gui.add(directionalLight, "receiveShadow" ).name("DirectionalLight Receives Shadow");
 
 /**
  * Sizes
@@ -102,6 +113,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.shadowMap.enabled = true;
 
 /**
  * Animate

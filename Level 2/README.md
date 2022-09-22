@@ -233,3 +233,34 @@ We also need to enable the light to cast a shadow
 ```javascript
 directionalLight.castShadow = true;
 ```
+
+
+### Shadow Optimization
+Optimize render size
+
+modify the light
+
+by giving the shadow mapSize a width and heigh
+```javascript
+directionalLight.shadow.mapSize.width = 1024;
+directionalLight.shadow.mapSize.height = 1024;
+```
+
+Near and Far controls
+We can access the shadow camera as:\
+```javascript
+light.shadow.camera
+```
+
+We can add cameraHelper to the shadows cameras
+```javascript
+const dlcHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
+scene.add(dlcHelper);
+```
+
+We can control the near and the far of the shadow as:
+```javascript
+
+directionalLight.shadow.camera.near = 1.0;
+directionalLight.shadow.camera.far = 8;
+```

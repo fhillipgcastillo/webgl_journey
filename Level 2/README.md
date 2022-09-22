@@ -264,3 +264,13 @@ We can control the near and the far of the shadow as:
 directionalLight.shadow.camera.near = 1.0;
 directionalLight.shadow.camera.far = 8;
 ```
+
+### Ampliture
+To control how far each side of the camera can seem witg `top`, `right`, `bottom` and `left`
+
+```javascript
+directionalLight.shadow.camera.top = 2;
+directionalLight.shadow.camera.right = -2;
+directionalLight.shadow.camera.bottom = -2;
+directionalLight.shadow.camera.left = 2;
+```

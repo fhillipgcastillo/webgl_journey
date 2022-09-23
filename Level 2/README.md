@@ -274,3 +274,25 @@ directionalLight.shadow.camera.right = -2;
 directionalLight.shadow.camera.bottom = -2;
 directionalLight.shadow.camera.left = 2;
 ```
+
+### Shadow blur
+We can cantrol it with `radius` property.
+```javascript
+directionalLight.shadow.radius = 10;
+```
+
+### Shadow Map Algorithm
+This will change a lot the results
+All are inside of `Three.`
+
+* BasicShadowMap - Higher Performance but lower quality
+* PCFShadowMap - This is the default map - High performance but smoother edges than the basic
+* PCFSoftShadowMap - Lesses Performance but with even softer edges - Radius doesn't work with this algorithm
+* VSMShadowMap - Less performant, more constraints, can have unexpected results
+ 
+To udpate the shadow type we need to specify them inside the renderer
+```javascript
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+```
+
+

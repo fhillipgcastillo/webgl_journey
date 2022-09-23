@@ -48,20 +48,45 @@ directionalLight.shadow.camera.far = 6;
 
 const dlcHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
 scene.add(dlcHelper);
+dlcHelper.visible = false;
+gui.add(dlcHelper, 'visible').name('DirLight Helper');
 
 // SpotLight
-const spotLight = new THREE.SpotLight(0xffffff, 0.4, 10, Math.PI * 0.3);
+const spotLight = new THREE.SpotLight(0xffffff, 0.3, 10, Math.PI * 0.3);
 spotLight.castShadow = true;
 spotLight.shadow.mapSize.width = 1024;
 spotLight.shadow.mapSize.height = 1024;
 
 spotLight.position.set(0, 1, 2);
+spotLight.shadow.camera.fov = 30;
 
+spotLight.shadow.camera.near = 1;
+spotLight.shadow.camera.far = 5;
 scene.add(spotLight);
 scene.add(spotLight.target);
 
 const spcHelper = new THREE.CameraHelper(spotLight.shadow.camera);
 scene.add(spcHelper);
+spcHelper.visible = false;
+gui.add(spcHelper, 'visible').name("SpotLight Helper");
+
+
+//PointLIght
+const pointLight = new THREE.PointLight(0xffffff, 0.3);
+pointLight.castShadow = true;
+pointLight.position.set(-1, 1, 0)
+pointLight.shadow.mapSize.width = 1024;
+pointLight.shadow.mapSize.height = 1024;
+pointLight.shadow.camera.near = 0.1;
+pointLight.shadow.camera.far = 5;
+
+
+scene.add(pointLight);
+
+const plHelper = new THREE.CameraHelper(pointLight.shadow.camera);
+scene.add(plHelper);
+plHelper.visible = false;
+gui.add(plHelper, 'visible').name("PointLight Helper");
 
 /**
  * Materials

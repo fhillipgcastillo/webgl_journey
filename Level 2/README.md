@@ -310,3 +310,31 @@ scene.add(spcHelper);
 
 Getting bigger shadow mapsize
 
+### Adding amplitud to spotlight
+> Using FOV we cna control de amplitud for the spotLight 
+
+* Spotlight is using a PerspectiveCamera
+* DirectionalLight uses a DirectionalCamera
+
+```javascript
+spotLight.shadow.camera.fov = 30;
+```
+
+Changing the near and the far
+
+```javascript
+spotLight.shadow.camera.near = 1;
+spotLight.shadow.camera.far = 5;
+```
+
+### PointLight
+As normal, to activate the shadows for the PointLights we just add teh castShadow to true
+
+```javascript
+pointLight.castShadow = true;
+```
+
+> PointLight uses a PerspectiveCamera for casting the shadows, but in all directions
+
+We can tweal the mapSize, near and far
+

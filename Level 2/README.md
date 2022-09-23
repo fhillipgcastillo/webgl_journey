@@ -294,5 +294,19 @@ To udpate the shadow type we need to specify them inside the renderer
 ```javascript
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 ```
+### SpotLight
 
+```javascript
+const spotLight = new THREE.SpotLight(0xffffff, 0.4, 10, Math.PI * 0.3);
+spotLight.castShadow = true;
+spotLight.position.set(0, 1, 2);
+
+scene.add(spotLight);
+scene.add(spotLight.target);
+
+const spcHelper = new THREE.CameraHelper(spotLight.shadow.camera);
+scene.add(spcHelper);
+```
+
+Getting bigger shadow mapsize
 

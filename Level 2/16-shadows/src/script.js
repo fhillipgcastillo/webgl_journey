@@ -19,12 +19,12 @@ const scene = new THREE.Scene()
  * Lights
  */
 // Ambient light
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.3)
 gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001)
 scene.add(ambientLight)
 
 // Directional light
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3)
 directionalLight.position.set(2, 2, - 1)
 gui.add(directionalLight, 'intensity').min(0).max(1).step(0.001)
 gui.add(directionalLight.position, 'x').min(- 5).max(5).step(0.001)
@@ -49,13 +49,27 @@ directionalLight.shadow.camera.far = 6;
 const dlcHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
 scene.add(dlcHelper);
 
+// SpotLight
+const spotLight = new THREE.SpotLight(0xffffff, 0.4, 10, Math.PI * 0.3);
+spotLight.castShadow = true;
+spotLight.shadow.mapSize.width = 1024;
+spotLight.shadow.mapSize.height = 1024;
+
+spotLight.position.set(0, 1, 2);
+
+scene.add(spotLight);
+scene.add(spotLight.target);
+
+const spcHelper = new THREE.CameraHelper(spotLight.shadow.camera);
+scene.add(spcHelper);
+
 /**
  * Materials
  */
 const material = new THREE.MeshStandardMaterial()
 material.roughness = 0.7
-gui.add(material, 'metalness').min(0).max(1).step(0.001)
-gui.add(material, 'roughness').min(0).max(1).step(0.001)
+gui.add(material, 'metalness').min(0).max(1).step(0.001).name("Material Metalness");
+gui.add(material, 'roughness').min(0).max(1).step(0.001).name("Material Roughness");
 
 /**
  * Objects
@@ -75,13 +89,13 @@ plane.receiveShadow = true;
 scene.add(sphere, plane)
 
 
-gui.add(sphere, "castShadow" ).name("Sphere Cast Shadow");
-gui.add(plane, "castShadow" ).name("Plan Cast Shadow");
-gui.add(directionalLight, "castShadow" ).name("DirectionalLight Cast Shadow");
+gui.add(sphere, "castShadow").name("Sphere Cast Shadow");
+gui.add(plane, "castShadow").name("Plan Cast Shadow");
+gui.add(directionalLight, "castShadow").name("DirectionalLight Cast Shadow");
 
-gui.add(sphere, "receiveShadow" ).name("Sphere Receives Shadow");
-gui.add(plane, "receiveShadow" ).name("Plan Receives Shadow");
-gui.add(directionalLight, "receiveShadow" ).name("DirectionalLight Receives Shadow");
+gui.add(sphere, "receiveShadow").name("Sphere Receives Shadow");
+gui.add(plane, "receiveShadow").name("Plan Receives Shadow");
+gui.add(directionalLight, "receiveShadow").name("DirectionalLight Receives Shadow");
 
 /**
  * Sizes
@@ -91,8 +105,7 @@ const sizes = {
     height: window.innerHeight
 }
 
-window.addEventListener('resize', () =>
-{
+window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
@@ -129,14 +142,13 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.VSMShadowMap;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 /**
  * Animate
  */
 const clock = new THREE.Clock()
 
-const tick = () =>
-{
+const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
     // Update controls

@@ -528,3 +528,29 @@ scene.add(ghost3);
 
 ### Animate the ghosts
 
+
+# 18 - Particles (#18)
+* Particles can be used to create `stars`, `smoke`, `rain`, `dust`, `fire`, etc.
+* low cost on frame rates
+* Each particle is composed of a plane (2 triangles) always facing the camera
+
+Creation is like creating a mesh
+* a geometry (bufferGeometry)
+* a mterial (PointsMaterial)
+* a points instance instead of a Mesh
+
+**Simple Particles**
+```javascript
+const particlesGeometry = new THREE.SphereGeometry(1, 32, 32);
+const particleMaterial = new THREE.PointsMaterial({
+    size: 0.02,
+    sizeAttenuation: true // Closer to the camera, the bigger, and so on
+});
+
+const particles = new THREE.Points(
+    particlesGeometry,
+    particleMaterial
+)
+scene.add(particles)
+```
+

@@ -21,13 +21,24 @@ const scene = new THREE.Scene()
 const textureLoader = new THREE.TextureLoader()
 
 /**
- * Test cube
+ * Particles
  */
-const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial()
+
+// Geometry
+const particlesGeometry = new THREE.SphereGeometry(1, 32, 32);
+
+// Material
+const particleMaterial = new THREE.PointsMaterial({
+    size: 0.02,
+    sizeAttenuation: true // Closer to the camera, the bigger, and so on
+});
+
+//Points
+const particles = new THREE.Points(
+    particlesGeometry,
+    particleMaterial
 )
-scene.add(cube)
+scene.add(particles)
 
 /**
  * Sizes

@@ -406,3 +406,20 @@ Hounted house create with primitive geometries
 
 > We should consider 1 unit measurement as 1 meter
 
+First, everything will be grouped.
+
+To group object use `Three.Group`
+
+```javascript
+const house = new THREE.Group();
+scene.add(house);
+```
+
+Now we only need to create our Meshes and add them to the house group
+```javascript
+house.add(boxMesh)
+```
+
+## The Graves
+We'll be try to add it gradually
+

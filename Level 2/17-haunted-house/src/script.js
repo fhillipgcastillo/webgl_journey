@@ -19,10 +19,98 @@ const scene = new THREE.Scene()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-
+const doorTexture = textureLoader.load('/textures/door/color.jpg');
+const doorNormal = textureLoader.load('/textures/door/normal.jpg');
+const doorAlpha = textureLoader.load('/textures/door/alpha.jpg');
 /**
  * House
  */
+// group
+const house = new THREE.Group();
+scene.add(house);
+
+// Walls
+const wallsDetails = {
+    x: 4,
+    y: 2.5,
+    z: 4,
+};
+
+const walls = new THREE.Mesh(
+    new THREE.BoxGeometry(wallsDetails.x, wallsDetails.y, wallsDetails.z),
+    new THREE.MeshStandardMaterial({color: '#ac8e82'})
+);
+house.add(walls);
+walls.position.y = wallsDetails.y / 2;
+
+// Roof
+const roof = new THREE.Mesh(
+    new THREE.ConeGeometry(3.5, 1, 4),
+    new THREE.MeshStandardMaterial({color: '#b35f45'}),
+);
+
+roof.rotation.y = Math.PI / 4;
+roof.position.y = wallsDetails.y + 0.5;
+
+house.add(roof);
+
+// Door
+const door = new THREE.Mesh(
+    new THREE.PlaneGeometry(2, 2),
+    new THREE.MeshStandardMaterial({
+        color: '#aa7b7b', 
+        // map: doorTexture, 
+        // normalMap: doorNormal,
+        // alphaMap: doorAlpha,
+    })
+);
+door.position.y = 1;
+door.position.z = (wallsDetails.z/2)+0.001;
+
+house.add(door);
+
+//Bushes
+const bushGeometry = new THREE.SphereGeometry(1, 16, 16);
+const bushMaterial = new THREE.MeshStandardMaterial({color: '#89c854'});
+
+const bush1 = new THREE.Mesh(bushGeometry, bushMaterial);
+bush1.scale.set(0.5, 0.5, 0.5);
+bush1.position.set(0.8, 0.2, 2.2);
+
+const bush2 = new THREE.Mesh(bushGeometry, bushMaterial);
+bush2.scale.set(0.25, 0.25, 0.25);
+bush2.position.set(1.4, 0.1, 2.1);
+
+const bush3 = new THREE.Mesh(bushGeometry, bushMaterial);
+bush3.scale.set(0.4, 0.4, 0.4);
+bush3.position.set(-0.8, 0.1, 2.2);
+
+const bush4 = new THREE.Mesh(bushGeometry, bushMaterial);
+bush4.scale.set(0.15, 0.15, 0.15);
+bush4.position.set(-1, 0.05, 2.6);
+
+
+house.add(bush1, bush2, bush3, bush4);
+
+// Graves
+const graves = new THREE.Group();
+
+const graveGeometry = new THREE.BoxGeometry(0.6, 0.8, 0.2);
+const graveMaterial = new THREE.MeshStandardMaterial({color: '#b2b6b1'});
+
+for(let i = 0; i < 50; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const radius = 3 + Math.random() * 6;
+
+    const x = Math.sin(angle) * radius;
+    const z = Math.cos(angle) * radius;
+
+    const grave = new THREE.Mesh(graveGeometry, graveMaterial);
+    grave.position.set(x, 0.4, z);
+    graves.add(grave);
+    console.log(grave);
+}
+scene.add(graves);
 
 // Floor
 const floor = new THREE.Mesh(
@@ -32,6 +120,7 @@ const floor = new THREE.Mesh(
 floor.rotation.x = - Math.PI * 0.5
 floor.position.y = 0
 scene.add(floor)
+
 
 /**
  * Lights
@@ -79,8 +168,8 @@ window.addEventListener('resize', () =>
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.x = 4
-camera.position.y = 2
-camera.position.z = 5
+camera.position.y = 4
+camera.position.z = 8
 scene.add(camera)
 
 // Controls

@@ -456,3 +456,60 @@ const door = new THREE.Mesh(
 );
 ```
 
+Walls
+```javascript
+const walls = new THREE.Mesh(
+    new THREE.BoxGeometry(wallsDetails.x, wallsDetails.y, wallsDetails.z),
+    new THREE.MeshStandardMaterial({ 
+        map: bricksColorTexture,
+        normalMap: bricksNormalTexture,
+        aoMap: bricksAmbienOcclusionTexture,
+        roughnessMap: bricksRoughnessTexture,
+     })
+);
+
+walls.geometry.setAttribute(
+    'uv2',
+    new THREE.Float32BufferAttribute(walls.geometry.attributes.uv.array, 2)
+)
+```
+
+## Grass
+```javascript
+const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(20, 20),
+    new THREE.MeshStandardMaterial({ 
+        map: grassColorTexture,
+        normalMap: grassNormalTexture,
+        aoMap: grassAmbienOcclusionTexture,
+        roughnessMap: grassRoughnessTexture,
+        
+     })
+)
+
+floor.geometry.setAttribute(
+    'uv2',
+    new THREE.Float32BufferAttribute(floor.geometry.attributes.uv.array, 2)
+)
+```
+
+To fix issues with grass texture being too bing, we can make the patterns to repeat and make them smaller, for this we need to add those values for each grass texture, and enable wrapping for each axes.
+
+```javascript
+grassColorTexture.repeat.set(8,8);
+grassColorTexture.wrapS = THREE.RepeatWrapping;
+grassColorTexture.wrapT = THREE.RepeatWrapping;
+
+grassAmbienOcclusionTexture.repeat.set(8,8);
+grassAmbienOcclusionTexture.wrapS = THREE.RepeatWrapping;
+grassAmbienOcclusionTexture.wrapT = THREE.RepeatWrapping;
+
+grassNormalTexture.repeat.set(8,8);
+grassNormalTexture.wrapS = THREE.RepeatWrapping;
+grassNormalTexture.wrapT = THREE.RepeatWrapping;
+
+grassRoughnessTexture.repeat.set(8,8);
+grassRoughnessTexture.wrapS = THREE.RepeatWrapping;
+grassRoughnessTexture.wrapT = THREE.RepeatWrapping;
+```
+

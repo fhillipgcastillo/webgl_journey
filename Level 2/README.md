@@ -554,3 +554,43 @@ const particles = new THREE.Points(
 scene.add(particles)
 ```
 
+## Custom Geomeotry
+
+## Color, Map and Alpha Map
+Particles maps
+https://www.kenney.nl/assets/particle-pack
+
+```javascript
+const particleMaterial = new THREE.PointsMaterial({
+    color: 'red',
+    size: 0.1,
+    sizeAttenuation: true,
+    alphaMap: particleColorTexture,
+    transparent: true,
+    alphaTest: 0.001,
+});
+```
+
+For fixing alpha maps transparency issue there are some value that can fix them
+
+* alphaTest - Float - 
+* deptTest - Boolean - enable or disable GPU trying to identify which is closer or farer - But can create bugs if there're other objects
+* DeptWrite - Boolean
+
+```javascript
+const particleMaterial = new THREE.PointsMaterial({
+    color: '#ff00ff',
+    size: 0.1,
+    sizeAttenuation: true, 
+    alphaMap: particleColorTexture,
+    transparent: true,
+    // alphaTest: 0.001,
+    // depthTest: false,
+    depthWrite: false,
+});
+```
+**Material `Blending`**
+Impact the GPU Performance
+
+`blending: THREE.AdditiveBlending`
+

@@ -174,7 +174,7 @@ scene.add(graves);
 
 // Floor
 const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(20, 20),
+    new THREE.PlaneGeometry(40, 40),
     new THREE.MeshStandardMaterial({ 
         map: grassColorTexture,
         normalMap: grassNormalTexture,

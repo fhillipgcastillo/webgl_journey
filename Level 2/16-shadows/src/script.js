@@ -18,6 +18,12 @@ const scene = new THREE.Scene()
 /**
  * Lights
  */
+
+// textures
+const textureLoader = new THREE.TextureLoader();
+const bakedShadow = textureLoader.load("/textures/bakedShadow.jpg");
+
+
 // Ambient light
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.3)
 gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001)
@@ -106,7 +112,7 @@ const sphere = new THREE.Mesh(
 sphere.castShadow = true;
 const plane = new THREE.Mesh(
     new THREE.PlaneGeometry(5, 5),
-    material
+    new THREE.MeshStandardMaterial({map: bakedShadow})
 )
 plane.rotation.x = - Math.PI * 0.5
 plane.position.y = - 0.5
@@ -166,7 +172,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.shadowMap.enabled = true;
+renderer.shadowMap.enabled = false;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 /**
  * Animate

@@ -338,3 +338,22 @@ pointLight.castShadow = true;
 
 We can tweal the mapSize, near and far
 
+### Backing Shadows
+As Normal, we should add backed shadows to places that will needed, like in this example, the plan.
+
+First deactivate the current shadows, by disabling the renderer shadowMaps
+
+Here's an example:
+```javascript
+
+const textureLoader = new THREE.TextureLoader();
+const bakedShadow = textureLoader.load("/textures/bakedShadow.jpg");
+
+const plane = new THREE.Mesh(
+    new THREE.PlaneGeometry(5, 5),
+    new THREE.MeshStandardMaterial({map: bakedShadow})
+)
+
+renderer.shadowMap.enabled = false;
+```
+

@@ -436,3 +436,23 @@ renderer.setClearColor("#ddddff");
 ```
 
 
+## Textures
+
+add the color texture
+```javascript
+const door = new THREE.Mesh(
+    new THREE.PlaneGeometry(2, 2, 100, 100),
+    new THREE.MeshStandardMaterial({
+        map: doorColorTexture,
+        alphaMap: doorAlphaTexture,
+        transparent: true,
+        aoMap: doorAmbienOcclusionTexture,
+        displacementMap: doorHeightTexture,
+        displacementScale: 0.1,
+        normalMap: doorNormalTexture,
+        metalnessMap: doorMetalnessTexture,
+        roughnessMap: doorRoughnessTexture,
+    })
+);
+```
+

@@ -215,6 +215,15 @@ doorLight.position.set(0, 2.2, 2.7);
 house.add(doorLight)
 
 
+// Ghosts
+const ghost1 = new THREE.PointLight("#ff00ff", 2, 3);
+scene.add(ghost1);
+
+const ghost2 = new THREE.PointLight("#00ffff", 2, 3);
+scene.add(ghost2);
+
+const ghost3 = new THREE.PointLight("#ffff00", 1,  2, 3);
+scene.add(ghost3);
 
 /**
  * Sizes
@@ -261,6 +270,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.setClearColor("#ddddff");
+
 /**
  * Animate
  */
@@ -268,7 +278,29 @@ const clock = new THREE.Clock()
 
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
+    // animate ghost
+    const ghostAngle = elapsedTime * 0.5;
+    // const ghostRadius = (Math.random() - 0.5) * 3;
 
+    ghost1.position.set(
+        Math.cos(ghostAngle) * 4,
+        Math.sin(ghostAngle) * 4,
+        Math.sin(ghostAngle * 3),
+    );
+    const ghost2Angle = - elapsedTime * 0.32;
+
+    ghost2.position.set(
+        Math.cos(ghost2Angle) * 5,
+        Math.sin(ghost2Angle) * 5,
+        Math.sin(ghost2Angle * 4) + Math.sin(ghost2Angle * 2.5),
+    )
+    const ghost3Angle = - elapsedTime * 0.65;
+
+    ghost3.position.set(
+        Math.cos(ghost3Angle) * (7 + Math.sin(elapsedTime * 0.32)),
+        Math.sin(ghost3Angle) * (7 + Math.sin(elapsedTime * 0.5)),
+        Math.sin(ghost3Angle * 4) * Math.sin(ghost3Angle * 2.5),
+    )
     // Update controls
     controls.update()
 

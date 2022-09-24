@@ -513,3 +513,18 @@ grassRoughnessTexture.wrapS = THREE.RepeatWrapping;
 grassRoughnessTexture.wrapT = THREE.RepeatWrapping;
 ```
 
+## Ghosts
+
+```javascript
+const ghost1 = new THREE.PointLight("#ff00ff", 2, 3);
+scene.add(ghost1);
+
+const ghost2 = new THREE.PointLight("#00ffff", 2, 3);
+scene.add(ghost2);
+
+const ghost3 = new THREE.PointLight("#ffff00", 2, 3);
+scene.add(ghost3);
+```
+
+### Animate the ghosts
+

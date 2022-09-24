@@ -18,7 +18,7 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 //fog
-const fog = new THREE.Fog('#ddddff', 1, 15)
+const fog = new THREE.Fog('#262837', 1, 15)
 scene.fog = fog;
 /**
  * Textures
@@ -167,6 +167,7 @@ for (let i = 0; i < 50; i++) {
 
     grave.rotation.y = (Math.random() - 0.5) * 0.4;
     grave.rotation.z = (Math.random() - 0.5) * 0.4;
+    grave.castShadow = true;
     graves.add(grave);
 }
 scene.add(graves);
@@ -222,7 +223,7 @@ scene.add(ghost1);
 const ghost2 = new THREE.PointLight("#00ffff", 2, 3);
 scene.add(ghost2);
 
-const ghost3 = new THREE.PointLight("#ffff00", 1,  2, 3);
+const ghost3 = new THREE.PointLight("#ffff00", 1.5, 3, 1);
 scene.add(ghost3);
 
 /**
@@ -269,8 +270,29 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setClearColor("#ddddff");
+renderer.setClearColor("#262837");
+renderer.shadowMap.enabled = true;
 
+/**
+ * Shadows
+ */
+
+moonLight.castShadow = true;
+doorLight.castShadow = true;
+ghost1.castShadow = true;
+ghost2.castShadow = true;
+ghost3.castShadow = true;
+
+
+// Objects Shadows
+walls.castShadow = true;
+walls.receiveShadow = true;
+bush1.castShadow = true;
+bush2.castShadow = true;
+bush3.castShadow = true;
+bush4.castShadow = true;
+
+floor.receiveShadow = true;
 /**
  * Animate
  */
@@ -290,17 +312,19 @@ const tick = () => {
     const ghost2Angle = - elapsedTime * 0.32;
 
     ghost2.position.set(
-        Math.cos(ghost2Angle) * 5,
+        Math.cos(ghost2Angle - 0.5) * 5,
         Math.sin(ghost2Angle) * 5,
         Math.sin(ghost2Angle * 4) + Math.sin(ghost2Angle * 2.5),
     )
     const ghost3Angle = - elapsedTime * 0.65;
 
     ghost3.position.set(
-        Math.cos(ghost3Angle) * (7 + Math.sin(elapsedTime * 0.32)),
-        Math.sin(ghost3Angle) * (7 + Math.sin(elapsedTime * 0.5)),
-        Math.sin(ghost3Angle * 4) * Math.sin(ghost3Angle * 2.5),
+        Math.cos(ghost3Angle  -0.5) * (7 + Math.sin(elapsedTime * 0.32)),
+        Math.sin(ghost3Angle),
+        Math.sin(ghost3Angle -0.5) * 5,
     )
+    const g3LightHelper = new THREE.PointLightHelper(ghost3)
+    // scene.add(g3LightHelper)
     // Update controls
     controls.update()
 

@@ -423,3 +423,16 @@ house.add(boxMesh)
 ## The Graves
 We'll be try to add it gradually
 
+## add fog
+`Three.Fog`
+
+```javascript
+const fog = new THREE.Fog('#ddddff', 2, 6)
+
+scene.fog = fog; 
+
+renderer.setClearColor("#ddddff");
+
+```
+
+

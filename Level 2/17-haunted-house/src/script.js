@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
+import { Fog } from 'three'
 
 /**
  * Base
@@ -12,9 +13,13 @@ const gui = new dat.GUI()
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
+
 // Scene
 const scene = new THREE.Scene()
 
+//fog
+const fog = new THREE.Fog('#ddddff', 1, 15)
+scene.fog = fog;
 /**
  * Textures
  */
@@ -147,6 +152,8 @@ const doorLight = new THREE.PointLight('#ff7d46', 1, 7);
 doorLight.position.set(0, 2.2, 2.7);
 house.add(doorLight)
 
+
+
 /**
  * Sizes
  */
@@ -192,7 +199,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
+renderer.setClearColor("#ddddff");
 /**
  * Animate
  */

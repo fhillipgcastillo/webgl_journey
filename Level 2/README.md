@@ -357,3 +357,48 @@ const plane = new THREE.Mesh(
 renderer.shadowMap.enabled = false;
 ```
 
+### Alternative for Baking Shadows
+Baked shadow that can move
+Added a bake shadow of only the object shade and auto move it when the object move
+
+```javascript
+const plane = new THREE.Mesh(
+    new THREE.PlaneGeometry(5, 5),
+    material,
+)
+
+const sphereShadow = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.5, 1.5),
+    new THREE.MeshBasicMaterial({
+        color: 0x000000,
+        transparent: true,
+        alphaMap: simpleShadow
+    })
+);
+
+sphereShadow.rotation.x = -Math.PI * 0.5;
+sphereShadow.position.y = plane.position.y + 0.001;
+scene.add(sphereShadow);
+```
+
+Now lets animate the sphere so we can see the baked shadow move
+
+```javascript
+sphere.position.set(
+    Math.cos(elapsedTime) * 1.5,
+    Math.abs(Math.sin(elapsedTime * 3)),
+    Math.sin(elapsedTime) * 1.5,
+)
+sphereShadow.position.x = sphere.position.x;
+sphereShadow.position.z = sphere.position.z;
+sphereShadow.material.opacity = (1 - sphere.position.y) * 0.8;
+```
+
+Which is the right solution
+* His implementation was a combination of backed shadow and moving backed shadow on his page.
+* The plane(floor) was a full backed shadow, the car have a backed moving shadow and all the models have full baked shadow and the scene didn't have any light on it.
+* 
+> https://bruno-simon.com/
+
+
+# 17 - Hounted House (#17)

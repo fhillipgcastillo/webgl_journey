@@ -22,6 +22,7 @@ const scene = new THREE.Scene()
 // textures
 const textureLoader = new THREE.TextureLoader();
 const bakedShadow = textureLoader.load("/textures/bakedShadow.jpg");
+const simpleShadow = textureLoader.load("/textures/simpleShadow.jpg");
 
 
 // Ambient light
@@ -112,13 +113,24 @@ const sphere = new THREE.Mesh(
 sphere.castShadow = true;
 const plane = new THREE.Mesh(
     new THREE.PlaneGeometry(5, 5),
-    new THREE.MeshStandardMaterial({map: bakedShadow})
+    material,
 )
 plane.rotation.x = - Math.PI * 0.5
 plane.position.y = - 0.5
 plane.receiveShadow = true;
 scene.add(sphere, plane)
 
+const sphereShadow = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.5, 1.5),
+    new THREE.MeshBasicMaterial({
+        color: 0x000000,
+        transparent: true,
+        alphaMap: simpleShadow
+    })
+);
+sphereShadow.rotation.x = -Math.PI * 0.5;
+sphereShadow.position.y = plane.position.y + 0.001;
+scene.add(sphereShadow);
 
 gui.add(sphere, "castShadow").name("Sphere Cast Shadow");
 gui.add(plane, "castShadow").name("Plan Cast Shadow");
@@ -179,8 +191,23 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
  */
 const clock = new THREE.Clock()
 
+const animateBakedShadow =() => {
+    sphereShadow.position.x = sphere.position.x;
+    sphereShadow.position.z = sphere.position.z;
+    sphereShadow.material.opacity = (1 - sphere.position.y) * 0.8;
+}
+const animateSphere = (elapsedTime)=> {
+    sphere.position.set(
+        Math.cos(elapsedTime) * 1.5,
+        Math.abs(Math.sin(elapsedTime * 3)),
+        Math.sin(elapsedTime) * 1.5,
+    )
+    animateBakedShadow();
+}
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
+
+    animateSphere(elapsedTime);
 
     // Update controls
     controls.update()

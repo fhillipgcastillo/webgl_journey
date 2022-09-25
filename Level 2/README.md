@@ -619,3 +619,7 @@ We can normally animate the whole group of particles as a normal mesh
 
 But we cna also move then separately by accesing the  geometry attributes arruy. Btw the best solution is to use Custom Shaders.
 
+# Galaxy Generator
+
+Let the user create and tweck the galaxy by using the parameters in the control panel
+

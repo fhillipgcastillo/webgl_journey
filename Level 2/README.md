@@ -589,8 +589,33 @@ const particleMaterial = new THREE.PointsMaterial({
     depthWrite: false,
 });
 ```
-**Material `Blending`**
+### **Material `Blending`**
 Impact the GPU Performance
 
-`blending: THREE.AdditiveBlending`
+```javascript
+particleMateria.blending = THREE.AdditiveBlending;
+```
+
+### Differents color for each particle
+```javascript
+const positions = new Float32Array(count * 3);
+const colors = new Float32Array(count * 3);
+
+for (let i = 0; i < count * 3; i++) {
+    positions[i] = (Math.random() - 0.5) * 10  
+    colors[i] = Math.random()
+}
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3) );
+particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3) );
+
+particleMateria.vertexColors = true;
+```
+
+## Animate
+
+We can normally animate the whole group of particles as a normal mesh
+
+`particles.rotation.y = elapsedTime * 0.2;`
+
+But we cna also move then separately by accesing the  geometry attributes arruy. Btw the best solution is to use Custom Shaders.
 

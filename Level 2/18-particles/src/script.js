@@ -30,17 +30,24 @@ const particlesGeometry = new THREE.BufferGeometry();
 const count = 5000;
 
 const positions = new Float32Array(count * 3);
+const colors = new Float32Array(count * 3);
+
 for (let i = 0; i < count * 3; i++) {
     positions[i] = (Math.random() - 0.5) * 10  
+    colors[i] = Math.random()
 }
 particlesGeometry.setAttribute(
     'position', 
     new THREE.BufferAttribute(positions, 3)
 );
+particlesGeometry.setAttribute(
+    'color',
+    new THREE.BufferAttribute(colors, 3)
+);
 
 // Material
 const particleMaterial = new THREE.PointsMaterial({
-    color: '#ff00ff',
+    // color: '#ff00ff',
     // map: particleColorTexture,
     size: 0.1,
     sizeAttenuation: true, // Closer to the camera, the bigger, and so on
@@ -50,6 +57,7 @@ const particleMaterial = new THREE.PointsMaterial({
     // depthTest: false,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
+    vertexColors: true,
 });
 
 //Points
@@ -111,7 +119,9 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
-
+    // animate particles
+    particles.rotation.y = elapsedTime * 0.27;
+    
     // Update controls
     controls.update()
 

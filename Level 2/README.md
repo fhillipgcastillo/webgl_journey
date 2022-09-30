@@ -623,3 +623,11 @@ But we cna also move then separately by accesing the  geometry attributes arruy.
 
 Let the user create and tweck the galaxy by using the parameters in the control panel
 
+Destroy old generated stars
+```javasctript
+if(points !== null) {
+  material.dispose();
+  geometry.dispose();
+  scene.remove(points);
+}
+```

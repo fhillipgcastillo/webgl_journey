@@ -631,3 +631,29 @@ if(points !== null) {
   scene.remove(points);
 }
 ```
+
+## Shaping the galaxy
+**Radius**
+```javascript
+const parameters = {
+    count: 10000,
+    size: 0.01,
+    radius: 5,
+};
+
+gui.add(parameters, 'radius').min(0.01).max(20).step(0.01).onFinishChange(generateGalaxy);
+
+```
+
+Inside the generate galaxy add the following for each particle position
+```javascript
+    for (let i = 0; i < parameters.count; i++) {
+        // generate a random radius number from 0 to 5
+        const radius = Math.random() * parameters.radius;
+
+        const i3 = i * 3 ;
+        positions[i3 + 0] = radius;
+        positions[i3 + 1] = 0;
+        positions[i3 + 2] = 0;
+    }
+```

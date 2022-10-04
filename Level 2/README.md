@@ -706,3 +706,37 @@ for (let i = 0; i < parameters.count; i++) {
     positions[i3 + 2] = Math.sin(branchAngel + spinAngle) * radius;
 }
 ```
+
+### Adding some randomness
+First step of randomness
+
+```javascript
+for (let i = 0; i < parameters.count; i++) {
+    // ...
+    // Code above
+    const randomX = Math.random() - 0.5 * parameters.randomness;
+    const randomY = Math.random() - 0.5 * parameters.randomness;
+    const randomZ = Math.random() - 0.5 * parameters.randomness;
+    
+    const i3 = i * 3 ;
+    positions[i3 + 0] = Math.cos(branchAngel + spinAngle) * radius + randomX;
+    positions[i3 + 1] = randomY;
+    positions[i3 + 2] = Math.sin(branchAngel + spinAngle) * radius + randomZ;
+}
+```
+
+Better way to randomize the values and having dynamism
+```javascript
+for (let i = 0; i < parameters.count; i++) {
+    // Code above
+    
+    const randomX = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1);
+    const randomY = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1);
+    const randomZ = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1);
+    
+    // Same Code bellow
+}
+```
+* it generates a random value and multiplies it by the randomness
+* then multiplay that value by a random value from 0 to 1, and if it's over 0.5 it will be multiply by it invers (-1)
+

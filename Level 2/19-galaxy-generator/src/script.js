@@ -43,6 +43,10 @@ function generateGalaxy(){
     // Galaxy
     geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(parameters.count * 3);
+    
+    // generate a random value and randomly multiply by -1 or 1, if its under or above 0.5
+    const getRandomPNMultiplier = () => Math.random() < 0.5 ? 1 : -1;
+    const getRandomPowByRandomnessPower = () => Math.pow(Math.random(), parameters.randomnessPower);
 
     for (let i = 0; i < parameters.count; i++) {
         // generate a random radius number from 0 to 5
@@ -50,9 +54,9 @@ function generateGalaxy(){
         const spinAngle = radius * parameters.spin; // how much will the branch curve/spin, which it will increase on how far it gets from the center
         const branchAngel = (i % parameters.branches) / parameters.branches * (Math.PI * 2);
         
-        const randomX = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1);
-        const randomY = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1);
-        const randomZ = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1);
+        const randomX = getRandomPowByRandomnessPower() * getRandomPNMultiplier();
+        const randomY = getRandomPowByRandomnessPower() * getRandomPNMultiplier();
+        const randomZ = getRandomPowByRandomnessPower() * getRandomPNMultiplier();
         
         const i3 = i * 3 ;
         positions[i3 + 0] = Math.cos(branchAngel + spinAngle) * radius + randomX;

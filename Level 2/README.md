@@ -639,9 +639,11 @@ const parameters = {
     count: 10000,
     size: 0.01,
     radius: 5,
+    branches: 3,
 };
 
 gui.add(parameters, 'radius').min(0.01).max(20).step(0.01).onFinishChange(generateGalaxy);
+gui.add(parameters, 'branches').min(2).max(20).step(1).onFinishChange(generateGalaxy);
 
 ```
 
@@ -657,3 +659,29 @@ Inside the generate galaxy add the following for each particle position
         positions[i3 + 2] = 0;
     }
 ```
+
+Adding branches
+```
+for (let i = 0; i < parameters.count; i++) {
+        // generate a random radius number from 0 to 5
+        const radius = Math.random() * parameters.radius;
+        const branchAngel = (i % parameters.branches) / parameters.branches * (Math.PI * 2);
+
+        const i3 = i * 3 ;
+        positions[i3 + 0] = Math.cos(branchAngel) * radius;
+        positions[i3 + 1] = 0;
+        positions[i3 + 2] = Math.sin(branchAngel) * radius;
+    }
+```
+
+Branches explanation:
+* FIrst a radius was generated with a random values, which will be kind of how far from center it'll be
+* Second we have to use mod (`%`) to equally devide by the amount of branch for the galaxy
+  * first, get the mod of the current particle number wit the amount of branches (to equally align them), that way it will enver surpass the amount of branches
+  * Then, devide it by the amount of branches, to get like a percetange of the circle cycle
+  * Finally devide all of the previously calculus by the Pi multiplied by 2
+    * which means, it will be multiply wit a max of a full 360 angle
+*  Finally it modify the X, Y and Z for he particle positions
+   *  need to better understand the cos and sin, but they go from a value up to 2 and the comes bck
+   *  also multiply that results with the radius to position them in a straigh line from the center but in kind of a random position
+

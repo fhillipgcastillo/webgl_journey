@@ -22,6 +22,7 @@ const parameters = {
     count: 10000,
     size: 0.01,
     radius: 5,
+    branches: 3,
 };
 let geometry = null;
 let material = null;
@@ -43,11 +44,12 @@ function generateGalaxy(){
     for (let i = 0; i < parameters.count; i++) {
         // generate a random radius number from 0 to 5
         const radius = Math.random() * parameters.radius;
+        const branchAngel = (i % parameters.branches) / parameters.branches * (Math.PI * 2);
 
         const i3 = i * 3 ;
-        positions[i3 + 0] = radius;
+        positions[i3 + 0] = Math.cos(branchAngel) * radius;
         positions[i3 + 1] = 0;
-        positions[i3 + 2] = 0;
+        positions[i3 + 2] = Math.sin(branchAngel) * radius;
     }
 
     geometry.setAttribute(
@@ -82,6 +84,7 @@ generateGalaxy();
 gui.add(parameters, 'count').min(100).max(1000000).step(100).onFinishChange(generateGalaxy);
 gui.add(parameters, 'size').min(0.001).max(0.1).step(0.001).onFinishChange(generateGalaxy);
 gui.add(parameters, 'radius').min(0.01).max(20).step(0.01).onFinishChange(generateGalaxy);
+gui.add(parameters, 'branches').min(2).max(20).step(1).onFinishChange(generateGalaxy);
 /**
  * Sizes
  */

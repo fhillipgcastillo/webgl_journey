@@ -624,7 +624,7 @@ But we cna also move then separately by accesing the  geometry attributes arruy.
 Let the user create and tweck the galaxy by using the parameters in the control panel
 
 Destroy old generated stars
-```javasctript
+```javascript
 if(points !== null) {
   material.dispose();
   geometry.dispose();
@@ -685,7 +685,7 @@ Branches explanation:
    *  need to better understand the cos and sin, but they go from a value up to 2 and the comes bck
    *  also multiply that results with the radius to position them in a straigh line from the center but in kind of a random position
 
-# Spin the branches
+## Spin the branches
 First creat the parameter and add the gui
 ```javascript
 parameter.spin = 1;
@@ -740,3 +740,10 @@ for (let i = 0; i < parameters.count; i++) {
 * it generates a random value and multiplies it by the randomness
 * then multiplay that value by a random value from 0 to 1, and if it's over 0.5 it will be multiply by it invers (-1)
 
+## Adding colors
+First add inside and ourside colors to the parameters
+
+```javascript
+const mixedColor = colorInside.clone()
+mixedColor.lerp(colorOutside, radius / parameters.radius);
+```

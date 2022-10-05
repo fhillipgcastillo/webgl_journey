@@ -26,6 +26,8 @@ const parameters = {
     spin: 1, // spin angle from - to +
     randomness: 0.2,
     randomnessPower: 3,
+    insideColor: "#ff6030",
+    outsideColor: "#1b2984",
 };
 let geometry = null;
 let material = null;
@@ -43,12 +45,19 @@ function generateGalaxy(){
     // Galaxy
     geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(parameters.count * 3);
-    
+    const colors = new Float32Array(parameters.count * 3);
+    // instance of instance threejs color
+    const colorInside = new THREE.Color(parameters.insideColor);
+    const colorOutside = new THREE.Color(parameters.outsideColor);
+    // now get the mix color values
+    // to mix colors, Colors instances have a method called `lerp` which receive a color and an alpha float value for interpolation factor [0, 1]
+
     // generate a random value and randomly multiply by -1 or 1, if its under or above 0.5
     const getRandomPNMultiplier = () => Math.random() < 0.5 ? 1 : -1;
     const getRandomPowByRandomnessPower = () => Math.pow(Math.random(), parameters.randomnessPower);
 
     for (let i = 0; i < parameters.count; i++) {
+        // position
         // generate a random radius number from 0 to 5
         const radius = Math.random() * parameters.radius; // radius is how long it will be from the center
         const spinAngle = radius * parameters.spin; // how much will the branch curve/spin, which it will increase on how far it gets from the center
@@ -59,16 +68,27 @@ function generateGalaxy(){
         const randomZ = getRandomPowByRandomnessPower() * getRandomPNMultiplier();
         
         const i3 = i * 3 ;
-        positions[i3 + 0] = Math.cos(branchAngel + spinAngle) * radius + randomX;
+        positions[i3] = Math.cos(branchAngel + spinAngle) * radius + randomX;
         positions[i3 + 1] = randomY;
         positions[i3 + 2] = Math.sin(branchAngel + spinAngle) * radius + randomZ;
+
+        // color
+        const mixedColor = colorInside.clone()
+        mixedColor.lerp(colorOutside, radius / parameters.radius);
+        
+        colors[i3] = mixedColor.r;
+        colors[i3 + 1] = mixedColor.g;
+        colors[i3 + 2] = mixedColor.b;
     }
 
     geometry.setAttribute(
         'position',
         new THREE.BufferAttribute( positions, 3)
     );
-
+    geometry.setAttribute(
+        'color',
+        new THREE.BufferAttribute( colors, 3)
+    );
 
 
     /**
@@ -79,6 +99,7 @@ function generateGalaxy(){
         sizeAttenuation: true,
         depthWrite: false,
         blending: THREE.AdditiveBlending,
+        vertexColors: true,
     });
 
     /**
@@ -100,6 +121,8 @@ gui.add(parameters, 'branches').min(2).max(20).step(1).onFinishChange(generateGa
 gui.add(parameters, 'spin').min(-5).max(5).step(0.001).onFinishChange(generateGalaxy);
 gui.add(parameters, 'randomness').min(0).max(2).step(0.001).onFinishChange(generateGalaxy);
 gui.add(parameters, 'randomnessPower').min(1).max(10).step(0.001).onFinishChange(generateGalaxy);
+gui.addColor(parameters, 'insideColor').onFinishChange(generateGalaxy);
+gui.addColor(parameters, 'outsideColor').onFinishChange(generateGalaxy);
 /**
  * Sizes
  */

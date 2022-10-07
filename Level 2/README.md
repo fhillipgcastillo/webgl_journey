@@ -901,6 +901,7 @@ const renderer = new THREE.WebGLRenderer({
 > 
 > My idea with this is, in certain place we can fully remove its transparency and show everything with a background or remove everything.
 
+add more objects
 
 
 

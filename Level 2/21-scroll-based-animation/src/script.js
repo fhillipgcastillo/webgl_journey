@@ -13,6 +13,9 @@ const parameters = {
 
 gui
     .addColor(parameters, 'materialColor')
+    .onChange(() => {
+        material.color.set(parameters.materialColor);
+    })
 
 /**
  * Base
@@ -24,14 +27,39 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 /**
- * Test cube
+ * Objects
  */
-const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial({ color: '#ff0000' })
-)
-scene.add(cube)
+// texture
+const textureLoader = new THREE.TextureLoader();
+const gradientTexture = textureLoader.load('textures/gradients/5.jpg');
+gradientTexture.magFilter = THREE.NearestFilter;
 
+const material = new THREE.MeshToonMaterial({
+    color: parameters.materialColor,
+    gradientMap: gradientTexture
+});
+
+const mesh1 = new THREE.Mesh(
+    new THREE.TorusGeometry(1, 0.4, 16, 60),
+    material,
+)
+const mesh2 = new THREE.Mesh(
+    new THREE.ConeGeometry(1, 2, 22),
+    material,
+)
+const mesh3 = new THREE.Mesh(
+    new THREE.TorusKnotGeometry(0.8, 0.3, 100, 16),
+    material,
+)
+// mesh1.position.set()
+scene.add(mesh1, mesh2, mesh3)
+
+/**
+ * Lights
+ */
+const directionalLight = new THREE.DirectionalLight('#ffffff', 1);
+directionalLight.position.set(1, 1, 0);
+scene.add(directionalLight);
 /**
  * Sizes
  */

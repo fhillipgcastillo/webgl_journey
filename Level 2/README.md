@@ -896,4 +896,11 @@ const renderer = new THREE.WebGLRenderer({
 })
 ```
 
+> There is a method for the renderer called `clearAlpha` which receives a float from `0.0` to `1.0` 
+> and it set the amount of transparency of the alpha color, the default is 0. 
+> 
+> My idea with this is, in certain place we can fully remove its transparency and show everything with a background or remove everything.
+
+
+
 

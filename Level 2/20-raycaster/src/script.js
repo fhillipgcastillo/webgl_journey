@@ -42,16 +42,7 @@ scene.add(object1, object2, object3)
  */
 
 const raycaster = new THREE.Raycaster();
-const rayOrigin = new THREE.Vector3(-3, 0, 0);
-const rayDir = new THREE.Vector3(10,0,0);
-rayDir.normalize(); // this normalize the vector to a length of 1, and its required by the rayCaster
 
-raycaster.set(rayOrigin, rayDir);
-const intersect = raycaster.intersectObject(object2);
-const intersects = raycaster.intersectObjects([object1, object2, object3]);
-
-console.log("intersect", intersect);
-console.log("intersects", intersects);
 //cast a ray
 
 /**
@@ -106,6 +97,29 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+    // animate objects
+    object1.position.y = Math.sin(elapsedTime * 0.3) * 1.5;
+    object2.position.y = Math.sin(elapsedTime * 0.6) * 1.5;
+    object3.position.y = Math.sin(elapsedTime * 0.9) * 1.5;
+
+    //cast a ray
+    const rayOrigin = new THREE.Vector3(-3, 0, 0);
+    const rayDirection = new THREE.Vector3(1, 0, 0);
+    rayDirection.normalize();
+    // position the ray
+    raycaster.set(rayOrigin, rayDirection);
+    
+    // shoot the ray
+    const objects = [object1, object2, object3];
+    const intersects = raycaster.intersectObjects(objects);
+    
+    // set every object color to red
+    objects.forEach(obj => obj.material.color.set("#ff0000"));
+
+    // set intersecting objects to blue
+    for( const intersect of intersects) {
+        intersect.object.material.color.set('#0000ff');
+    }
 
     // Update controls
     controls.update()

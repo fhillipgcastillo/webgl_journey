@@ -747,3 +747,45 @@ First add inside and ourside colors to the parameters
 const mixedColor = colorInside.clone()
 mixedColor.lerp(colorOutside, radius / parameters.radius);
 ```
+
+# 20 Ray Caster (#20)
+Which object intersept with a ray caster
+
+## create a raycaster
+
+```
+const raycaster = new THREE.Raycaster();
+const rayOrigin = new THREE.Vector3(-3, 0, 0);
+const rayDir = new THREE.Vector3(10,0,0);
+rayDir.normalize(); // this normalize the vector to a length of 1, and its required by the rayCaster
+
+raycaster.set(rayOrigin, rayDir);
+```
+
+we need to tell the initial of the raycaster and the final
+
+### Cast a Ray
+* intersectObject(...) - to test one object
+* intersectObjects(...) - to test an array of objects
+
+ 
+```javascript
+const instersect = raycaster.intersectObject(object1);
+const instersects = raycaster.intersectObjects([object1, object2]);
+```
+
+The ray can hit 1 object multiple times
+
+**intersect array object**
+* distance - distance between the origin of the ray and the collision point
+* face - which face of the geomeotry
+* faceIndex
+* object
+* point - vector the position in hte 3d space of the colision
+* uv - the 2d coordinates of that geometry uv
+* lenght
+* __proto__: Object
+
+# Test on each  frame
+ITs heaving for being used on each frame, be carefull
+

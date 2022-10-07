@@ -881,3 +881,5 @@ window.addEventListener('click', (e) => {
     }
 });
 ```
+
+# 21 - Scroll Based Animation (#21)

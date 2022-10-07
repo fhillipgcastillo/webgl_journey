@@ -853,3 +853,31 @@ for( const intersect of intersects) {
     intersect.object.material.color.set('#0000ff');
 }
 ```
+
+## Mouse enter and mouse leave events
+
+```javascript
+const currentIntersect = null;
+
+if(intersects.length) {
+    if(currentIntersect === null) {
+        console.log("mouse enter");
+    }
+    currentIntersect = intersects[0];
+} else {
+    if(currentIntersect) {
+        console.log("mouse leave");
+    }
+    currentIntersect = null;
+}
+```
+
+## action on click
+
+```javascript
+window.addEventListener('click', (e) => {
+    if(currentIntersect) {
+        console.log("object clicked");
+    }
+});
+```

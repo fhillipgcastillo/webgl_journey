@@ -824,3 +824,32 @@ for( const intersect of intersects) {
 ```
 
 ## Use raycaster with the mouse
+* first we need to ge the mouse coordinates and no the pixels
+
+```javascript
+const mouse = new THREE.Vector2();
+
+window.addEventListener('mousemove', (e)=> {
+    mouse.x = e.clientX / sizes.width * 2 - 1;
+    mouse.y = -(e.clientY / sizes.height) * 2 + 1;
+    // console.log(mouse);
+});
+```
+
+**Now we set the  position from the mouse and camera positions**
+```javascript
+//cast a ray
+raycaster.setFromCamera(mouse, camera);
+
+// shoot the ray
+const objects = [object1, object2, object3];
+const intersects = raycaster.intersectObjects(objects);
+
+// set every object color to red
+objects.forEach(obj => obj.material.color.set("#ff0000"));
+
+// set intersecting objects to blue
+for( const intersect of intersects) {
+    intersect.object.material.color.set('#0000ff');
+}
+```

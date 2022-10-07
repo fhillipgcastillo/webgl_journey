@@ -883,3 +883,17 @@ window.addEventListener('click', (e) => {
 ```
 
 # 21 - Scroll Based Animation (#21)
+
+**Html Scroll**
+First we need to have the html and body to `overflow: hidden;`
+
+The page background and the webgl canvas background are differents, so  we could match them or we can add a transparent backgorund to the canvas by adding flag `alpha: true` to the renderer.
+
+```javascript
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+})
+```
+
+

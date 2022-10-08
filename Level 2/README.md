@@ -996,3 +996,26 @@ it's based on doing a fragment movement each frame, let say a 10th closer.
 cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 0.1;
 cameraGroup.position.y += (parallaxY - cameraGroup.position.y) * 0.1;
 ```
+
+## Considering the frame rates
+we need to get te delta time, because for high frame rates screen the tick is calle more oftem.
+
+```javascript
+const clock = new THREE.Clock()
+const previousTime = 0;
+
+tick = () => {
+    const elapsedTime = clock.getElapsedTime()
+    const deltaTime = elapsedTime - previousTime;
+    previousTime = elapsedTime;
+
+     //animate camera
+     camera.position.y = - (scrollY / sizes.height) * objectsDistance;
+    
+     const parallaxX = cursor.x;
+     const parallaxY = -cursor.y;
+     cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 0.3 * deltaTime;
+     cameraGroup.position.y += (parallaxY - cameraGroup.position.y) * 0.3 * deltaTime;
+
+}
+```

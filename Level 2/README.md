@@ -946,3 +946,43 @@ mesh2.position.x = -2;
 mesh3.position.x = 2;
 ```
 
+## Parallax Effect
+
+**Store the mouse movement based on the viewport**
+```javascript
+/**
+ * Cursor
+ */
+const cursor = {
+    x: 0,
+    y: 0,
+};
+
+window.addEventListener("mousemove", (e) => {
+    cursor.x = e.clientX / sizes.width - 0.5;
+    cursor.y = e.clientY / sizes.height - 0.5;
+    // console.log(cursor)
+});
+```
+
+**Add camera group**
+
+Add camera to camera group to add the parallax effect to it and have the scroll movement for the camera directly
+```javascript
+// group
+const cameraGroup = new THREE.Group();
+scene.add(cameraGroup);
+
+cameraGroup.add(camera)
+```
+
+Add the camera animation
+```javascript
+//animate camera
+camera.position.y = - (scrollY / sizes.height) * objectsDistance;
+
+const parallaxX = cursor.x;
+const parallaxY = -cursor.y;
+cameraGroup.position.x = parallaxX * 0.1;
+cameraGroup.position.y = parallaxY * 0.1;
+```

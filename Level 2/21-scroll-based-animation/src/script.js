@@ -103,10 +103,14 @@ window.addEventListener('resize', () =>
 /**
  * Camera
  */
+// group
+const cameraGroup = new THREE.Group();
+scene.add(cameraGroup);
+
 // Base camera
 const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 100)
 camera.position.z = 6
-scene.add(camera)
+cameraGroup.add(camera)
 
 /**
  * Renderer
@@ -125,7 +129,19 @@ let scrollY = window.scrollY;
 window.addEventListener("scroll", (e)=>{
     scrollY = window.scrollY;
 });
+/**
+ * Cursor
+ */
+const cursor = {
+    x: 0,
+    y: 0,
+};
 
+window.addEventListener("mousemove", (e) => {
+    cursor.x = e.clientX / sizes.width - 0.5;
+    cursor.y = e.clientY / sizes.height - 0.5;
+    console.log(cursor)
+});
 /**
  * Animate
  */
@@ -134,16 +150,20 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
-
+     //animate camera
+     camera.position.y = - (scrollY / sizes.height) * objectsDistance;
+    
+     const parallaxX = cursor.x;
+     const parallaxY = -cursor.y;
+     cameraGroup.position.x = parallaxX * 0.1;
+     cameraGroup.position.y = parallaxY * 0.1;
     // Animate meshes
     for(const mesh of sectionMeshes){
         mesh.rotation.x = elapsedTime * 0.1;
         mesh.rotation.y = elapsedTime * 0.12;
     }
 
-    //animate camera
-    camera.position.y = - (scrollY / sizes.height) * objectsDistance;
-    // Render
+   // Render
     renderer.render(scene, camera)
 
     // Call tick again on the next frame

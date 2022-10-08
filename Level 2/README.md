@@ -1019,3 +1019,37 @@ tick = () => {
 
 }
 ```
+
+## Adding particles
+
+Create the particles
+```javascript
+// Particles
+// Geometry
+const particlesCount = 200;
+const positions = new Float32Array(particlesCount * 3);
+
+for(let i = 0; i < particlesCount; i++){
+    positions[i * 3] = (Math.random() - 0.5) * 10;
+    positions[i * 3 + 1] = objectsDistance * 0.5 - Math.random() * objectsDistance * sectionMeshes.length;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+}
+const particesGeometry = new THREE.BufferGeometry();
+particesGeometry.setAttribute(
+    'position', 
+    new THREE.BufferAttribute(positions, 3)
+);
+const particlesMaterial = new THREE.PointsMaterial(
+    {
+        color: parameters.materialColor,
+        sizeAttenuation: true,
+        size: 0.03,
+    }
+);
+const particles = new THREE.Points(
+    particesGeometry,
+    particlesMaterial
+);
+scene.add(particles); 
+```
+

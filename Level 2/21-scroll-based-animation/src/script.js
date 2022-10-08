@@ -47,23 +47,26 @@ const mesh1 = new THREE.Mesh(
     new THREE.TorusGeometry(1, 0.4, 16, 60),
     material,
 )
-mesh1.position.y = -objectsDistance * 0;
-mesh1.position.x = 2;
-mesh1.scale.set(0.5, 0.5, 0.5);
 
 const mesh2 = new THREE.Mesh(
     new THREE.ConeGeometry(1, 2, 22),
     material,
 )
 // mesh2.visible = false;
-mesh2.scale.set(0.5, 0.5, 0.5);
-mesh2.position.y = -objectsDistance;
-mesh2.position.x = -2;
 
 const mesh3 = new THREE.Mesh(
     new THREE.TorusKnotGeometry(0.8, 0.3, 100, 16),
     material,
 )
+
+mesh1.position.y = -objectsDistance * 0;
+mesh1.position.x = 2;
+mesh1.scale.set(0.5, 0.5, 0.5);
+
+mesh2.scale.set(0.5, 0.5, 0.5);
+mesh2.position.y = -objectsDistance;
+mesh2.position.x = -2;
+
 mesh3.position.y = -objectsDistance * 2;
 mesh3.position.x = 2;
 mesh3.scale.set(0.5, 0.5, 0.5);
@@ -71,6 +74,33 @@ mesh3.scale.set(0.5, 0.5, 0.5);
 scene.add(mesh1, mesh2, mesh3)
 const sectionMeshes = [mesh1, mesh2, mesh3];
 
+// Particles
+// Geometry
+const particlesCount = 200;
+const positions = new Float32Array(particlesCount * 3);
+
+for(let i = 0; i < particlesCount; i++){
+    positions[i * 3] = (Math.random() - 0.5) * 10;
+    positions[i * 3 + 1] = objectsDistance * 0.5 - Math.random() * objectsDistance * sectionMeshes.length;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+}
+const particesGeometry = new THREE.BufferGeometry();
+particesGeometry.setAttribute(
+    'position', 
+    new THREE.BufferAttribute(positions, 3)
+);
+const particlesMaterial = new THREE.PointsMaterial(
+    {
+        color: parameters.materialColor,
+        sizeAttenuation: true,
+        size: 0.03,
+    }
+);
+const particles = new THREE.Points(
+    particesGeometry,
+    particlesMaterial
+);
+scene.add(particles); 
 /**
  * Lights
  */

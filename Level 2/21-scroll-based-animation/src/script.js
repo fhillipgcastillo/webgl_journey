@@ -54,7 +54,7 @@ const mesh2 = new THREE.Mesh(
     new THREE.ConeGeometry(1, 2, 22),
     material,
 )
-mesh2.visible = false;
+// mesh2.visible = false;
 mesh2.scale.set(0.5, 0.5, 0.5);
 mesh2.position.y = -objectsDistance;
 
@@ -116,6 +116,14 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 /**
+ * Scroll
+ */
+let scrollY = window.scrollY;
+window.addEventListener("scroll", (e)=>{
+    scrollY = window.scrollY;
+});
+
+/**
  * Animate
  */
 const clock = new THREE.Clock()
@@ -130,6 +138,8 @@ const tick = () =>
         mesh.rotation.y = elapsedTime * 0.12;
     }
 
+    //animate camera
+    camera.position.y = - (scrollY / sizes.height) * objectsDistance;
     // Render
     renderer.render(scene, camera)
 

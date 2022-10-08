@@ -903,7 +903,46 @@ const renderer = new THREE.WebGLRenderer({
 
 add more objects
 
-Move camera on scroll
+## Move camera on scroll
 
 
 **Animate meshes on scroll**
+```javascript
+const objectsDistance = 4;
+
+/**
+ * Scroll
+ */
+let scrollY = window.scrollY;
+window.addEventListener("scroll", (e)=>{
+    scrollY = window.scrollY;
+});
+
+const tick = () =>
+{
+    const elapsedTime = clock.getElapsedTime()
+
+    // Animate meshes
+    for(const mesh of sectionMeshes){
+        mesh.rotation.x = elapsedTime * 0.1;
+        mesh.rotation.y = elapsedTime * 0.12;
+    }
+
+    //animate camera
+    camera.position.y = - (scrollY / sizes.height) * objectsDistance;
+    // Render
+    renderer.render(scene, camera)
+
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick)
+}
+```
+
+**Position Object horizontally**
+
+```javascript
+mesh1.position.x = 2;
+mesh2.position.x = -2;
+mesh3.position.x = 2;
+```
+

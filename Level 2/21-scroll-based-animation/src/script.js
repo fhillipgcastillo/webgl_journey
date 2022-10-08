@@ -48,6 +48,7 @@ const mesh1 = new THREE.Mesh(
     material,
 )
 mesh1.position.y = -objectsDistance * 0;
+mesh1.position.x = 2;
 mesh1.scale.set(0.5, 0.5, 0.5);
 
 const mesh2 = new THREE.Mesh(
@@ -57,12 +58,14 @@ const mesh2 = new THREE.Mesh(
 // mesh2.visible = false;
 mesh2.scale.set(0.5, 0.5, 0.5);
 mesh2.position.y = -objectsDistance;
+mesh2.position.x = -2;
 
 const mesh3 = new THREE.Mesh(
     new THREE.TorusKnotGeometry(0.8, 0.3, 100, 16),
     material,
 )
 mesh3.position.y = -objectsDistance * 2;
+mesh3.position.x = 2;
 mesh3.scale.set(0.5, 0.5, 0.5);
 
 scene.add(mesh1, mesh2, mesh3)

@@ -986,3 +986,13 @@ const parallaxY = -cursor.y;
 cameraGroup.position.x = parallaxX * 0.1;
 cameraGroup.position.y = parallaxY * 0.1;
 ```
+
+## Easing
+> Smothing or lerping
+
+it's based on doing a fragment movement each frame, let say a 10th closer.
+
+```javascript
+cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 0.1;
+cameraGroup.position.y += (parallaxY - cameraGroup.position.y) * 0.1;
+```

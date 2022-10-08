@@ -64,8 +64,9 @@ const mesh3 = new THREE.Mesh(
 )
 mesh3.position.y = -objectsDistance * 2;
 mesh3.scale.set(0.5, 0.5, 0.5);
-// mesh1.position.set()
+
 scene.add(mesh1, mesh2, mesh3)
+const sectionMeshes = [mesh1, mesh2, mesh3];
 
 /**
  * Lights
@@ -86,7 +87,7 @@ window.addEventListener('resize', () =>
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
-
+    
     // Update camera
     camera.aspect = sizes.width / sizes.height
     camera.updateProjectionMatrix()
@@ -122,6 +123,12 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+
+    // Animate meshes
+    for(const mesh of sectionMeshes){
+        mesh.rotation.x = elapsedTime * 0.1;
+        mesh.rotation.y = elapsedTime * 0.12;
+    }
 
     // Render
     renderer.render(scene, camera)

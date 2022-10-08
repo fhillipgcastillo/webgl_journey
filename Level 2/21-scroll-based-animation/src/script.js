@@ -29,10 +29,14 @@ const scene = new THREE.Scene()
 /**
  * Objects
  */
+
 // texture
 const textureLoader = new THREE.TextureLoader();
 const gradientTexture = textureLoader.load('textures/gradients/5.jpg');
 gradientTexture.magFilter = THREE.NearestFilter;
+
+// meshes
+const objectsDistance = 4;
 
 const material = new THREE.MeshToonMaterial({
     color: parameters.materialColor,
@@ -43,14 +47,23 @@ const mesh1 = new THREE.Mesh(
     new THREE.TorusGeometry(1, 0.4, 16, 60),
     material,
 )
+mesh1.position.y = -objectsDistance * 0;
+mesh1.scale.set(0.5, 0.5, 0.5);
+
 const mesh2 = new THREE.Mesh(
     new THREE.ConeGeometry(1, 2, 22),
     material,
 )
+mesh2.visible = false;
+mesh2.scale.set(0.5, 0.5, 0.5);
+mesh2.position.y = -objectsDistance;
+
 const mesh3 = new THREE.Mesh(
     new THREE.TorusKnotGeometry(0.8, 0.3, 100, 16),
     material,
 )
+mesh3.position.y = -objectsDistance * 2;
+mesh3.scale.set(0.5, 0.5, 0.5);
 // mesh1.position.set()
 scene.add(mesh1, mesh2, mesh3)
 

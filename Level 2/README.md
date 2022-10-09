@@ -1053,3 +1053,60 @@ const particles = new THREE.Points(
 scene.add(particles); 
 ```
 
+## Triggering rotation
+
+**Getting current section**
+First we ned to know which section we're in so we can know which mesh to animate.
+
+```javascript
+let scrollY = window.scrollY;
+let currentSection = 0;
+
+window.addEventListener("scroll", (e)=>{
+    scrollY = window.scrollY;
+    const newSection = Math.round(scrollY / sizes.height);
+    if(currentSection !== newSection) {
+        currentSection = newSection;
+        console.log("section changed", newSection);
+    }
+});
+```
+
+**Animate the mesh**
+Install gsap
+```bash
+npm i --save gsap@3.5.1
+```
+
+import it
+```javascript
+import gsap from 'gsap';
+```
+
+Now add the gsap to the event
+```javascript
+window.addEventListener("scroll", (e)=>{
+    // ...
+    if(currentSection !== newSection) {
+        // ...
+        gsap.to(
+            sectionMeshes[currentSection].rotation,
+            {
+                duration: 1.5,
+                ease: 'power2.inOut',
+                x: '+=6',
+                y: '+=3',
+            }
+        )
+    }
+});
+```
+
+Now modify the rotation animation to the tick, to sum the values
+```javascript
+// Animate meshes
+    for(const mesh of sectionMeshes){
+        mesh.rotation.x += deltaTime * 0.1;
+        mesh.rotation.y += deltaTime * 0.12;
+    }
+```

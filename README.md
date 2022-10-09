@@ -1,7 +1,7 @@
 ## Notes and Documentations
 
 
-[Level 1 Notes](./Level%201/README.md)
+[Level 1 - Basics](./Level%201/README.md)
 
 > [Chapter 3 - Basics](./Level%201/README.md#00-basics).
 > 
@@ -27,7 +27,10 @@
 > 
 > Chapter 14 - Go Live quick notes
 
-[Level 2 Notes](./Level%202/README.md)
+[Level 2 - Classic techniques](./Level%202/README.md)
 
 > [15 - Lights](./Level%202/README.md#15)
-> 
+
+[Level 3 - Advanced techniques](./Level-3/README.md#lvl3)
+> [22 - Physics](./Level-3/README.md#22)
+

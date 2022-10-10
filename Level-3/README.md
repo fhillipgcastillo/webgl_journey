@@ -120,3 +120,64 @@ For this we need cotanion
 floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
 ```
 
+### Contact material
+**Materials**
+
+On cannon a material is jsut a reference for each type of material, like plastic, concrete, jelly, etc.
+
+This changes the friction and bouncing of a body
+
+**Contact Material**
+Now we'll need a contoact material
+
+Is the combination of two materials and how they should collide or behave by each other.
+
+**Parameters**
+* 1st and 2nd are materials
+* 3rd object with the collition properties like:
+  * friction (how much does it rub)
+  * restitution (how much does it bounce)
+  * default values of both is `0.3`
+
+```javascript
+const concretePlasticContactMaterial  = new CANNON.ContactMaterial(
+    concreteMaterial,
+    plasticMaterial,
+    {
+        friction: 0.1,
+        restitution: 0.7,
+    }
+)
+```
+
+Now we need to add the contact material to the physics world
+```javascript
+world.addContactMaterial(concretePlasticContactMaterial);
+```
+
+Now to make it work, lets add them to the bodies
+
+```javascript
+const sphereBody = new CANNON.Body(
+    {
+        // ...
+        material: plasticMaterial,
+    }
+)
+```
+Or the following way
+
+```javascript
+floorBody.material = concreteMaterial;
+```
+
+We can also add a defautlContact material to the physic world
+
+```javascript
+world.defautlContactMaterial = defaultContactMaterial;
+```
+
+ANd we need to create the mterial acording to the defaults values we need.
+
+
+

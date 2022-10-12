@@ -171,6 +171,7 @@ Or the following way
 floorBody.material = concreteMaterial;
 ```
 
+### Simply
 We can also add a defautlContact material to the physic world
 
 ```javascript
@@ -179,5 +180,20 @@ world.defautlContactMaterial = defaultContactMaterial;
 
 ANd we need to create the mterial acording to the defaults values we need.
 
+```javascript
+const defaultMaterial = new CANNON.Material('default');
+
+const defaultContactMaterial  = new CANNON.ContactMaterial(
+    defaultMaterial,
+    defaultMaterial,
+    {
+        friction: 0.1,
+        restitution: 0.7,
+    }
+);
+
+world.addContactMaterial(defaultContactMaterial);
+```
+note: remember to change the bodies materials
 
 

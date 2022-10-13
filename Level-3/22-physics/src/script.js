@@ -61,9 +61,12 @@ const sphereBody = new CANNON.Body(
         mass: 1,
         position: new CANNON.Vec3(0, 3, 0),
         shape: sphereShape,
-        material: defaultMaterial,
+        // material: defaultMaterial,
     }
 )
+const sphereForce = new CANNON.Vec3(250, 0, 0);
+const sphereForceCoords = new CANNON.Vec3(0,0,0)
+sphereBody.applyForce(sphereForce, sphereForceCoords);
 world.addBody(sphereBody);
 
 //add floor
@@ -73,7 +76,7 @@ const floorBody = new CANNON.Body();
 floorBody.mass = 0;
 floorBody.addShape(floorShape);
 floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
-floorBody.material = defaultMaterial;
+// floorBody.material = defaultMaterial;
 
 world.addBody(floorBody)
 /**
@@ -183,8 +186,10 @@ const tick = () =>
     const elapsedTime = clock.getElapsedTime()
     const deltaTime = elapsedTime - oldElapsedTime;
     oldElapsedTime = elapsedTime;
-
+    
     // update phycis world
+    sphereBody.applyForce(new CANNON.Vec3(-0.5, 0, 0), sphereBody.position)
+
     world.step(1/60, deltaTime, 3)
 
     // copy sphere coording to new physics

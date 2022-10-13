@@ -203,3 +203,32 @@ First remove the material from the bodies and add this
 ```javascript
 world.defaultContactMaterial = defaultContactMaterial;
 ```
+
+### Applying forces
+
+**4 ways**
+* applyForce
+  * apply force from a specified point in space (not necessarily on the body's surface) like the wind, etc.
+* applyImpulse
+  * similar to `apply force` but instead of adding the force, will add tto the volicity.
+* applyLocalForce
+  * same as `applyForce` but the coordinates are local to the body where (0, 0, 0) will be the center of the body.
+* applyLocalImpulse
+  * apply impulse locally as `applyLocalForce`
+
+
+**Apply force**
+
+```javascript
+const sphereForce = new CANNON.Vec3(250, 0, 0);
+const sphereForceCoords = new CANNON.Vec3(0,0,0);
+sphereBody.applyForce(sphereForce, sphereForceCoords);
+```
+
+### mimic the wind
+on the tick and before updating the physics world
+
+```javascript
+// update phycis world
+sphereBody.applyForce(new CANNON.Vec3(-0.5, 0, 0), sphereBody.position)
+```

@@ -197,3 +197,9 @@ world.addContactMaterial(defaultContactMaterial);
 note: remember to change the bodies materials
 
 
+**ANother simpler way**
+First remove the material from the bodies and add this
+
+```javascript
+world.defaultContactMaterial = defaultContactMaterial;
+```

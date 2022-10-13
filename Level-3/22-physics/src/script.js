@@ -52,6 +52,7 @@ const defaultContactMaterial  = new CANNON.ContactMaterial(
 );
 
 world.addContactMaterial(defaultContactMaterial);
+world.defaultContactMaterial = defaultContactMaterial;
 
 //sphere
 const sphereShape = new CANNON.Sphere(0.5);

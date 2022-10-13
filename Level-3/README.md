@@ -234,3 +234,51 @@ sphereBody.applyForce(new CANNON.Vec3(-0.5, 0, 0), sphereBody.position)
 ```
 
 ## Handling multple objects physics
+First remove the sphere body related code and the sphere meshes related code.
+
+create an array that will hold the body and mesh information for each object:
+
+```javascript
+const objects = [];
+```
+
+create a utils function to create the physic body and the mesh in the same place:
+
+```javascript
+const createSphere = (radius, position) => {
+    // mesh
+    const mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(radius, 20, 20),
+        new THREE.MeshStandardMaterial({
+            metalness: 0.3,
+            roughness: .4,
+            envMap: environmentMapTexture,
+        })
+    );
+    mesh.castShadow = true;
+    mesh.position.copy(position);
+    scene.add(mesh);
+
+    // Cannon Body
+    const shape = new CANNON.Sphere(radius);
+    const body = new CANNON.Body({
+        mass: 1,
+        position: new CANNON.Vec3(0, 3, 0),
+        material: defaultMaterial,
+        shape,
+    });
+    body.position.copy(position); 
+    world.addBody(body);
+    objects.push({
+        mesh,
+        body
+    })
+};
+```
+
+Then update each mesh position from the body position
+```javascript
+objects.forEach(object => 
+    object.mesh.position.copy(object.body.position)
+);
+```

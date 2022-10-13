@@ -204,7 +204,7 @@ First remove the material from the bodies and add this
 world.defaultContactMaterial = defaultContactMaterial;
 ```
 
-### Applying forces
+## Applying forces
 
 **4 ways**
 * applyForce
@@ -232,3 +232,5 @@ on the tick and before updating the physics world
 // update phycis world
 sphereBody.applyForce(new CANNON.Vec3(-0.5, 0, 0), sphereBody.position)
 ```
+
+## Handling multple objects physics

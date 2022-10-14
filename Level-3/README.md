@@ -391,3 +391,19 @@ It work similar to position but with quatonion
 ```javascript
 object.mesh.quaternion.copy(object.body.quaternion);
 ```
+### Fixing performances issues
+**boadphase**
+
+AN issue with cannon is that each body try to see if it's colliding with the others, and that same way each object try to verify if they have colliden with the others.
+
+THere differents broadphase options to fix this issue
+* NaiveBroadphase - test every BOdies against every other Bodies (Default)
+* GridBroadphase - quadrilles the world and only tests BOdies against other Bodies in the same drid box or the neightBoards's drid boxes
+* SAPBroadphase ( Sweep And Prune) - tests Bodies on arbitrary axes during multiples steps
+
+
+To use the broadphase we need to change what the world.broadphase have with a new instance of CANNON and the broadphase option, and passing as parameter the world.
+```javascript
+world.broadphase = new CANNON.SAPBroadphase(world);
+```
+

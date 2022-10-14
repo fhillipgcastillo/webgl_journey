@@ -18,9 +18,23 @@ const debugObject = {
                 z: (Math.random() - 0.5) * 3
             }
         );
+    },
+    createBox: () => {
+        // const boxSize = (Math.random() - 0.5) * 2;
+        createBox(
+            (Math.random() - 0.5) * 2,
+            (Math.random() - 0.5) * 2,
+            (Math.random() - 0.5) * 2,
+            {
+                x: (Math.random() - 0.5) * 2,
+                y: 3,
+                z: (Math.random() - 0.5) * 2,
+            }
+        )
     }
 };
 gui.add(debugObject, 'createSphere')
+gui.add(debugObject, 'createBox')
 
 /**
  * Base
@@ -195,6 +209,27 @@ const createSphere = (radius, position) => {
     })
 };
 
+const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+const createBox = (width, height, dept, position) => {
+    const mesh = new THREE.Mesh(
+        boxGeometry, meshMaterial,
+    );
+    mesh.scale.set(width, height, dept);
+    mesh.castShadow = true;
+    mesh.position.copy(position);
+    scene.add(mesh);
+    const shape = new CANNON.Box(new CANNON.Vec3(width/2, height/2, dept/2))
+    const body = new CANNON.Body({
+        mass: 1,
+        position: position,
+        material: defaultMaterial,
+        shape,
+    });
+    body.position.copy(position);
+    world.addBody(body);
+
+    objectsToUpdate.push({ mesh, body });
+}
 // objects
 createSphere(0.5, { x: 0, y: 3, z: 0 });
 /**

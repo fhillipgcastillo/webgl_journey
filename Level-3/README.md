@@ -282,3 +282,62 @@ objects.forEach(object =>
     object.mesh.position.copy(object.body.position)
 );
 ```
+
+### Add gui
+
+create an debugObject for the gui
+
+```javascript
+const debugObject = {
+    createSphere: () => {}
+}
+```
+
+**ADd it to the debug**
+```javascript
+gui.add(debugObject, 'createSphere')
+```
+
+**Now add the create sphere function with is encesary parameters**
+```javascript
+const debugObject = {
+    createSphere: () => {
+        createSphere(0.5, {x: 0, y: 3, z: 0});
+    }
+};
+```
+
+**Now add some randomness**
+```javascript
+const debugObject = {
+    createSphere: () => {
+        createSphere(
+            Math.random() * 0.5, 
+            {
+                x: (Math.random() - 0.5) * 3,
+                y: 3,
+                z: (Math.random() - 0.5) * 3
+            }
+        );
+    }
+};
+```
+### Optimize
+Extrat the mesh geometry and material,as they are only 1, so we can change only the scale having an standard, or defaults one.
+
+```javascript
+const meshGeometry = new THREE.SphereGeometry(1, 20, 20);
+const meshMaterial = new THREE.MeshStandardMaterial({
+    metalness: 0.3,
+    roughness: .4,
+    envMap: environmentMapTexture,
+});
+const createSphere = (radius, position) => {
+    const mesh = new THREE.Mesh(
+        meshGeometry,
+        meshMaterial
+    );
+    mesh.scale.set(radius, radius, radius);
+    // rest of code ...
+}
+```

@@ -8,6 +8,19 @@ import CANNON from 'cannon';
  * Debug
  */
 const gui = new dat.GUI()
+const debugObject = {
+    createSphere: () => {
+        createSphere(
+            Math.random() * 0.5,
+            {
+                x: (Math.random() - 0.5) * 3,
+                y: 3,
+                z: (Math.random() - 0.5) * 3
+            }
+        );
+    }
+};
+gui.add(debugObject, 'createSphere')
 
 /**
  * Base
@@ -42,7 +55,7 @@ world.gravity.set(0, EARTH_GRAVITY, 0);
 // materials
 const defaultMaterial = new CANNON.Material('default');
 
-const defaultContactMaterial  = new CANNON.ContactMaterial(
+const defaultContactMaterial = new CANNON.ContactMaterial(
     defaultMaterial,
     defaultMaterial,
     {
@@ -108,8 +121,7 @@ const sizes = {
     height: window.innerHeight
 }
 
-window.addEventListener('resize', () =>
-{
+window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
@@ -150,16 +162,19 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  * Utils
  */
 const objectsToUpdate = [];
+const meshGeometry = new THREE.SphereGeometry(1, 20, 20);
+const meshMaterial = new THREE.MeshStandardMaterial({
+    metalness: 0.3,
+    roughness: .4,
+    envMap: environmentMapTexture,
+});
 const createSphere = (radius, position) => {
     // mesh
     const mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(radius, 20, 20),
-        new THREE.MeshStandardMaterial({
-            metalness: 0.3,
-            roughness: .4,
-            envMap: environmentMapTexture,
-        })
+        meshGeometry,
+        meshMaterial
     );
+    mesh.scale.set(radius, radius, radius);
     mesh.castShadow = true;
     mesh.position.copy(position);
     scene.add(mesh);
@@ -172,7 +187,7 @@ const createSphere = (radius, position) => {
         material: defaultMaterial,
         shape,
     });
-    body.position.copy(position); 
+    body.position.copy(position);
     world.addBody(body);
     objectsToUpdate.push({
         mesh,
@@ -181,24 +196,23 @@ const createSphere = (radius, position) => {
 };
 
 // objects
-createSphere(0.5, {x: 0, y:3, z: 0});
+createSphere(0.5, { x: 0, y: 3, z: 0 });
 /**
  * Animate
  */
 const clock = new THREE.Clock()
 let oldElapsedTime = 0;
 
-const tick = () =>
-{
+const tick = () => {
     const elapsedTime = clock.getElapsedTime()
     const deltaTime = elapsedTime - oldElapsedTime;
     oldElapsedTime = elapsedTime;
-    
+
     // update phycis world
-    world.step(1/60, deltaTime, 3)
+    world.step(1 / 60, deltaTime, 3)
 
     // copy sphere coording to new physics
-    objectsToUpdate.forEach(object => 
+    objectsToUpdate.forEach(object =>
         object.mesh.position.copy(object.body.position)
     );
     // Update controls

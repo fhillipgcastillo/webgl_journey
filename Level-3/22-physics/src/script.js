@@ -247,8 +247,10 @@ const tick = () => {
     world.step(1 / 60, deltaTime, 3)
 
     // copy sphere coording to new physics
-    objectsToUpdate.forEach(object =>
-        object.mesh.position.copy(object.body.position)
+    objectsToUpdate.forEach(object => {
+        object.mesh.position.copy(object.body.position);
+        object.mesh.quaternion.copy(object.body.quaternion);
+    }
     );
     // Update controls
     controls.update()

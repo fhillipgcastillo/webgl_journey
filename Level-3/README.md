@@ -384,3 +384,10 @@ createBox: () => {
     )
 }
 ```
+
+### How to rotate on collision
+It work similar to position but with quatonion
+
+```javascript
+object.mesh.quaternion.copy(object.body.quaternion);
+```

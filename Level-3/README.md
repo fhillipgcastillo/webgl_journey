@@ -500,3 +500,19 @@ recommended to read the documentation
 
 Examples:
 https://schteppe.github.io/cannon.js
+
+## Workers
+The componetn of the computer doing the physics is the cpu.
+
+Currently, everything is done by the same thread in the cpu.
+
+Workers help us to creat multiple threads.
+
+Example can be that one worker handle the physics world and the other the objects.
+
+## Cannon-es
+it's outdated
+but there are soe other folks alts
+* github.com/pmndrs/cannon-es
+* npmjs.com/package/cannon-es
+

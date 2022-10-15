@@ -20,15 +20,14 @@ const debugObject = {
         );
     },
     createBox: () => {
-        // const boxSize = (Math.random() - 0.5) * 2;
         createBox(
-            (Math.random() - 0.5) * 2,
-            (Math.random() - 0.5) * 2,
-            (Math.random() - 0.5) * 2,
+            (Math.random()),
+            (Math.random()),
+            (Math.random()),
             {
-                x: (Math.random() - 0.5) * 2,
+                x: (Math.random() - 0.5) * 3,
                 y: 3,
-                z: (Math.random() - 0.5) * 2,
+                z: (Math.random() - 0.5) * 3,
             }
         )
     }
@@ -45,6 +44,19 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+/** 
+ * ssounds
+ */
+const hitSound = new Audio('/sounds/hit.mp3');
+
+const playHitSOund = (collition) => {
+    const impact = collition.contact.getImpactVelocityAlongNormal();
+    if( impact > 1.5) {
+        hitSound.volume = Math.random();
+        hitSound.currentTime = 0;
+        hitSound.play();
+    }
+};
 /**
  * Textures
  */
@@ -220,7 +232,8 @@ const createBox = (width, height, dept, position) => {
     mesh.castShadow = true;
     mesh.position.copy(position);
     scene.add(mesh);
-    const shape = new CANNON.Box(new CANNON.Vec3(width/2, height/2, dept/2))
+
+    const shape = new CANNON.Box(new CANNON.Vec3(width * 0.5, height * 0.5, dept * 0.5))
     const body = new CANNON.Body({
         mass: 1,
         position: position,
@@ -228,6 +241,7 @@ const createBox = (width, height, dept, position) => {
         shape,
     });
     body.position.copy(position);
+    body.addEventListener('collide', playHitSOund);
     world.addBody(body);
 
     objectsToUpdate.push({ mesh, body });

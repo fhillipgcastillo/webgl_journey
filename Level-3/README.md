@@ -419,3 +419,55 @@ We can also change the `sleepSpeedLimit` and `sleepTImeLimit`
 * sleepTimeLimit
     * Amount of time to be considered sleeping within the sleepSpeedLimit
 
+## Events
+Bodies have events we can attach to and listen to, like `collide`, `sleep` and `wakeup`.
+
+We're going to add a sound when the event collide accur. Note: the sound can be prevented if we're not intereacting with the page.
+
+Load sound
+```javascript
+const hitSound = new Audio('/sounds/hit.mp3');
+
+const playHitSOund = () => {
+    hitSound.play();
+};
+```
+
+Subscribe into collide event fo rthe box
+
+```javascript
+    body.addEventListener('collide', playHitSOund);
+```
+A little solution that the sound soudns bad is by changing the currentTime to 0
+```javascript
+const playHitSOund = () => {
+    hitSound.currentTime = 0;
+    hitSound.play();
+};
+```
+
+Only play the sound if there is enough interactions
+```javascript
+const playHitSOund = (collition) => {
+    if(collition.contact.getImpactVelocityAlongNormal() > 0.5) {
+        hitSound.currentTime = 0;
+        hitSound.play();
+    }
+};
+```
+Add randomeness to the sound
+
+```javascript
+const playHitSOund = (collition) => {
+    if(collition.contact.getImpactVelocityAlongNormal() > 0.5) {
+        hitSound.volume = Math.random();
+        hitSound.currentTime = 0;
+        hitSound.play();
+    }
+};
+```
+
+Now on the createBox lets add the following to run the playHitSound when exist a collision
+```javascript
+body.addEventListener('collide', playHitSOund);
+```

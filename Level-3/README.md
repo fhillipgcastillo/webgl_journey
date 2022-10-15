@@ -488,3 +488,15 @@ debugObject.reset = () => {
 };
 gui.add(debugObject, "reset");
 ```
+## Constrains
+Can create constrants betweeWn 2 bodies
+* HingeConstraint - acts ike a door hinge
+* DistanceConstraint - Forces the bodies to keep a distance between each other (move together)
+* LockContrant - merges the bodies like if htey were one piece
+* POintTOPOintCOntraint - glues the bodies to a specific point
+
+## Classe, Methods, properties and events
+recommended to read the documentation
+
+Examples:
+https://schteppe.github.io/cannon.js

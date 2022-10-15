@@ -521,3 +521,26 @@ Lets try it
 * first remove the cannon package `npm uninstall --save cannon`
 * Note install the cannon-es `npm i --save cannon-es@0.15.1`
 * Import `cannon-es` as `import * as CANNON from 'cannon-es'`
+
+Recommended: 
+> Find the folks alternatives
+
+## Ammo.js
+Is harder to use adn to implement and with more features
+
+I'ts better and more popular, with better performance and better written.
+
+It's based on a verry c++ popular physic engine called Bullet.
+
+## PhysiJS
+ It combines cannon js and threeJs in a simple way.
+
+ For example
+ ```javascript
+ box = new Physijs.BoxMesh(
+    new THREE.CubeGeometry(5, 5, 5),
+    new THREE.MeshBasicMaterial{color: "red"},
+ );
+ scene.add(box)
+ ```
+ 

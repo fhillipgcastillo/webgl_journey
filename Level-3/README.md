@@ -512,7 +512,12 @@ Example can be that one worker handle the physics world and the other the object
 
 ## Cannon-es
 it's outdated
-but there are soe other folks alts
 * github.com/pmndrs/cannon-es
 * npmjs.com/package/cannon-es
 
+but there are soe other folks alts
+
+Lets try it
+* first remove the cannon package `npm uninstall --save cannon`
+* Note install the cannon-es `npm i --save cannon-es@0.15.1`
+* Import `cannon-es` as `import * as CANNON from 'cannon-es'`

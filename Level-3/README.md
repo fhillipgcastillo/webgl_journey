@@ -407,3 +407,15 @@ To use the broadphase we need to change what the world.broadphase have with a ne
 world.broadphase = new CANNON.SAPBroadphase(world);
 ```
 
+### Make te object Sleep
+```javascript
+world.allowSleep = true;
+```
+We can also change the `sleepSpeedLimit` and `sleepTImeLimit`
+
+* sleepSPeedLimit
+    * is what max speed will be considered as seeping
+
+* sleepTimeLimit
+    * Amount of time to be considered sleeping within the sleepSpeedLimit
+

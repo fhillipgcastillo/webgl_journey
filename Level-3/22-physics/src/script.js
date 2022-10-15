@@ -66,6 +66,7 @@ const world = new CANNON.World();
 const EARTH_GRAVITY = -9.82;
 world.gravity.set(0, EARTH_GRAVITY, 0);
 world.broadphase = new CANNON.SAPBroadphase(world);
+world.allowSleep = true;
 
 // materials
 const defaultMaterial = new CANNON.Material('default');

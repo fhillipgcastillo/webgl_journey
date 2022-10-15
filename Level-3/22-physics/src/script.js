@@ -30,7 +30,7 @@ const debugObject = {
                 z: (Math.random() - 0.5) * 3,
             }
         )
-    }
+    },
 };
 gui.add(debugObject, 'createSphere')
 gui.add(debugObject, 'createBox')
@@ -80,6 +80,17 @@ world.gravity.set(0, EARTH_GRAVITY, 0);
 world.broadphase = new CANNON.SAPBroadphase(world);
 world.allowSleep = true;
 
+debugObject.reset = () => {
+    objectsToUpdate.forEach(object => {
+        // removing body
+        object.body.removeEventListener("collide", playHitSOund);
+        world.remove(object.body);
+
+        // remove mesh
+        scene.remove(object.mesh);
+    })
+};
+gui.add(debugObject, "reset");
 // materials
 const defaultMaterial = new CANNON.Material('default');
 
@@ -216,6 +227,7 @@ const createSphere = (radius, position) => {
         shape,
     });
     body.position.copy(position);
+    body.addEventListener('collide', playHitSOund);
     world.addBody(body);
     objectsToUpdate.push({
         mesh,

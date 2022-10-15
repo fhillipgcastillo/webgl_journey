@@ -471,3 +471,20 @@ Now on the createBox lets add the following to run the playHitSound when exist a
 ```javascript
 body.addEventListener('collide', playHitSOund);
 ```
+
+## Removing things
+Remove everything fromt he scene and the world
+
+```javascript
+debugObject.reset = () => {
+    objectsToUpdate.forEach(object => {
+        // removing body
+        object.body.removeEventListener("collide", playHitSOund);
+        world.remove(object.body);
+
+        // remove mesh
+        scene.remove(object.mesh);
+    })
+};
+gui.add(debugObject, "reset");
+```

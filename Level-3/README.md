@@ -625,3 +625,20 @@ But we can add it as simple as
 ```javascript
 scene.add(gltf.scene.children[0])
 ```
+
+After we add any object fromt he childre of the scene imported to the scene we are using, it auto pop that from the children array. so we need to copy it into a new array.
+
+```javascript
+const children = [...gltf.scene.children];
+
+for( const child of children){
+    scene.add(child)
+}
+```
+
+Even simpler solution
+```javascript
+scene.add(gltf.scene)
+```
+
+

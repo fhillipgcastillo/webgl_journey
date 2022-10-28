@@ -641,4 +641,45 @@ Even simpler solution
 scene.add(gltf.scene)
 ```
 
+### Draco files
+
+website: https://google.github.io/draco/
+git repo: https://github.com/google/draco
+
+We need to provide the Draco Loader
+```javascript
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+```
+
+Note: initialize it before GLTF loader, that way the gltf use it
+```javascript
+const dracoLoader = new DRACOLoader();
+const gltfLoader = new GLTFLoader();
+```
+
+The decoder is available in Web Assembly, and it can be run in a worker to improve performances.
+
+ThreeJS provided it in the `node_modules/three/examples/js/libs/` folder.
+
+> * it recommends to copy the draco folder that is inside that libs folder and copy it into the `/static` folder, that way ti can load the decoder.wasm and other it need.
+> * And after that, set the decoder to `/draco/`
+> ```javascript
+> dracoLoader.setDecoderPath('/draco/');
+> ```
+
+Then set the draco loader to the gltf loader
+```
+gltfLoader.setDRACOLoader(dracoLoader);
+```
+here's a full example of using the draco loader
+```javascript
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('/draco/');
+
+const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
+```
 

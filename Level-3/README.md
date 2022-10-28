@@ -544,3 +544,84 @@ It's based on a verry c++ popular physic engine called Bullet.
  scene.add(box)
  ```
  
+ ## 23 - imported models (#23)
+
+Popular formats
+* OBJ
+* FBX
+* STL
+* PLY
+* COLLADA
+* 3DS
+* GLTF 
+
+### GLTF
+- (GL Transmission Format) made by Khronos group for OpenGl, WEwbGL, Vulkan, etc.
+- Support set of data like geometries, materials, cameras, lights, scene graph, animations, skeletons, morphings, etc.
+- File formats: json, binary, embed textures.
+- Have became the stadars for much 3D softwres
+
+### Where to find models
+GLTF team provides models for testing at https://github.com/KhronosGroup/glTF-Sample-Models
+
+**glTF formats**
+- glTF
+- glTF-Binary
+- glTF-Draco
+- glTF-Embedded
+
+### **.glTF**
+
+If you open them, they are a json-like file content with details for cameras, lghts,s cenes, materials, objects transformation, but not geometries nor textures
+
+Also contains information about the rest files, like texture, etc.
+
+**.bin files**
+
+contains data like geometries (vertices positions, UV coordinates, normals, colors, etc)
+
+**.png files**
+
+is the texture
+
+
+**Binary files**
+* Contains all the same as the other
+* it's easier to load
+* More difficult to modify
+
+### **Draco files**
+Compress version of the data
+
+### **Embedded**
+One file as JSOn data and it contains the texture and geometry is embedded inside the file data
+
+* Thes Most heavies of all
+* 
+
+## GLTF Loader
+Import it as
+```javascript
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+```
+Initialization
+```javascript
+const gltfLoader = new GLTFLoader();
+
+```
+Load models
+```javascript
+gltfLoader.load(
+    "path/to/the/file.gltf",
+    (gltf) => {/* Loaded */},
+    (progress) => {},
+    (error) => {},
+)
+```
+
+The gltf object received when loaded contains a lot of data. for example for the Duck we're using the mesh is inside `scene.children[0].children[1]`.
+
+But we can add it as simple as 
+```javascript
+scene.add(gltf.scene.children[0])
+```

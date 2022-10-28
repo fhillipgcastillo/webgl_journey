@@ -683,3 +683,23 @@ const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 ```
 
+### Animations 
+- The gltf object contains an `array` of animation clips. SO we'll need to create an AnimationMixer.
+- AnimationMixer is like a player associated with an object that can contain one or many animationClips
+
+Create the mixer
+```javascript
+const mixer = new THREE.AnimationMixer(gltf.scene);
+```
+the parameter it receives is the object we're going to animate
+
+to add the animationt ot he mixer, and we receive the action
+```javascript
+        const action = mixer.clipAction(gltf.animations[0]);
+
+```
+After adding the action adn play the action, we need to tell the mixer to update it.
+
+```javascript
+
+```

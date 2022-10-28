@@ -68,6 +68,7 @@ window.addEventListener('resize', () =>
     // Update renderer
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    // renderer.setPixelRatio(0.1) // if we want to add a low res effect to create more realism of an old video footage
 })
 
 /**
@@ -93,6 +94,7 @@ renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+// renderer.setPixelRatio(0.1) // if we want to add a low res effect to create more realism of an old video footage
 
 /**
  * Animate

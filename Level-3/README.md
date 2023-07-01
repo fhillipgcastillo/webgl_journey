@@ -823,4 +823,14 @@ by pressing `X`
 * Hide Non Selected object with `shift + H`
 
 ### Transforming objects
+* Position `G`
+* Rotation `R`
+* Scale `S`
+
+Press `T` to show or hide the menu on the left of the VIewpart - THis menu have the transforming options
+
+After selecting the transforming option, by pressing `shipt + axes` it will only move on that axes, for example: pressing `G` for changing the possition then pressing `shift + z` will only move the object on the Z axes.
+
+
+
 

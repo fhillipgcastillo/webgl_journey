@@ -717,3 +717,6 @@ if(mixer){
 Is a online 3D software
 https://threejs.org/editor/
 
+
+## 24 - Custom models with blender
+

@@ -720,3 +720,107 @@ https://threejs.org/editor/
 
 ## 24 - Custom models with blender
 
+### Interface
+each section of the screen are called *Areas* which can be change their positions.
+
+we can split areas
+* To do that so, we need to hover the mouse on the left top corner of an area, then left click, drag and drop to devide the area into a new sub areas
+* we can also un-split areas, by dragin and frop a little from above the area we want t otake over the other, then drag it into the other one.
+
+### Shortcuts
+* find cheatsheet and memorize them
+* shortcuts are area sensitive, so they will react to the selected/hovered aread
+* mode sensitive
+* os sensitive
+
+shortcuts:
+* https://docs.blender.org/manual/en/latest/interface/keymap/introduction.html
+* https://www.republicworld.com/technology-news/apps/blender-shortcut-keys-list-of-all-the-blender-commands-that-come-handy.html
+
+
+### View
+Reccommended to use mouse with middle wheel
+if not, use the 2 fingers as the same alternative
+
+### *Orbit rotate*
+we can rotate the camera with the orbit rotate with middle mouse or 2 fingers on touch pad
+
+### Truck and pedestal
+* Truck is horizontal (left and right)
+* pedestal is vertical (up and down)
+
+This is used by adding shift to the middle mouse/double fingers
+
+### Dolly
+with the whill to dolly, similar to zoom in and out
+but dolly with scroll wheel or equivalente, have a limit of zoom
+to surpase that we use `shipt + control + middle mouse  + mouse forward or backward`
+
+### Tilt and pan
+To use this we need to change the viewport mode to `Walk Mode` or also called `Fly mode`
+To activate the walk mode the shortcut is `shift + back quote` ( ` )
+
+To exit te walk mode use `esc` or `enter`
+
+If doesn't have the backtick (back quote) we cant modify it on `Edit > Preferences`, Keymap, View navigation and change theView navigation (walk/fly). and choose someting like `shipt + f`.
+
+This let us navigate like fly mode on games with awsd or the arrows keys and with shift it moves faster.
+
+### Perspective / Orthographic
+we can switch between them with `numpad 5`
+
+### Axes
+we can change between them by pressing numpad 1, 3 and 7, which change the x y or z axes for the camera
+
+By pressing control and tha number it goes into the opposive view
+
+Default axes going upward is the `z` axe, like in treeJs
+
+### Camera view
+by presing numpad 0 we get the camera view
+
+with `shift + c` we get back into the scene
+
+### Reset
+if we want to set the view into an object, first select iwth with left click then hit `numpad ,` and it will feel the screen with that object and it also change the point of view for the rotations.
+
+## focus and hide
+Use `numpad /` will focus on that obect and hide everything else
+Can also select multiple objects
+To get back to normal select it back
+
+
+### Selecting
+left click let us select
+to multi select use `shipt + left click` 
+
+ACtive object
+the brighter outlined object is the active one
+we cna only have one active object
+
+### Notes
+* we can undo selections with `ctrl +z`
+* We can unselect by `shift + left click` the active object
+* Select everything with `A`
+* unselect everything with double A
+* select a rectagle are with `B`
+* select like painting with `C` (use wheel to change the size)
+  * By pressing shift and selecting it will unselectd then (with B and C shortcuts)
+
+### Create objects
+* move the mouse over a section of the viewport then press `shift + A` and it will load a menu
+* After creating the object we'll be able to visualize a tab ont he botton left corner of that viewport that will let us change properties of the new create object
+* Also to see those properties if we lose then by pressing `F9`
+
+**Remove object**
+
+by pressing `X`
+
+
+**Hide an object**
+* We can hide an object by selecting `H`
+* to show everything that have been hiden with `alt + H`
+* Hide Non Selected object with `shift + H`
+
+### Transforming objects
+

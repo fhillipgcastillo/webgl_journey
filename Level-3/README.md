@@ -832,5 +832,114 @@ Press `T` to show or hide the menu on the left of the VIewpart - THis menu have 
 After selecting the transforming option, by pressing `shipt + axes` it will only move on that axes, for example: pressing `G` for changing the possition then pressing `shift + z` will only move the object on the Z axes.
 
 
+### Modes
+To change the modes, there are 2 main options, one is on the view port theres is a select dropdown on the top left part of the 3d viewport and the 2nd option is by pressing `CTRL + tab`
 
+Also we can shange from object to edit mode just by pressing `tab`.
+
+**Edit mode** is based to change the vertices, edges and faces.
+
+To switch between edit modes:
+* THere options on the top left corner section of the 3d viewport
+* Or just by pressing one of the 3 first numbers `1`, `2` and `3`.
+
+### Shading
+* its how we see the objects on the `3d view port`
+* the default is `Solid` and it's based on performance
+* Can change the shading modes from the top right corner of the `3D view port`
+  * or by pressing `z`
+
+**Shading modes**
+* Solid - default
+* Material - show a preview of the material  no realistic
+* Wireframe
+* Renderer - low quality render and more realistinc than material
+  * shades, textures, and more.
+
+### Properties
+This is one of the panels/menus
+it shows 
+* render properties, 
+* enviroment prperties 
+* and active objects properties
+
+**Object properties**
+* have the properties we can change with g, r, s and more.
+Object Modifyer
+* this have non destructive modifiers.
+
+**Material properties (redish circle icon)**
+* Default material is `Principled BSDF`
+  * which is similar to Mesh on used with ThreeJS
+
+### Render Engines
+We need to hange the mode to renderer
+
+**Types**
+* Eevvee - default - 
+  * realtime render engine
+  * uses GPU
+  * Very eprformante
+  * Limitation like realism, light bounce, refrection and refraction
+* workbench
+  * Legacy render
+  * not used a lot
+  * Performant
+  * not verry realistic
+* Cycles
+  * Ray tracing engine / path tracing
+  * very realistic rendering
+  * Handles light bounce, deep reflection, deep refraction,etc.
+  * Can be tremendouslyt long/time consuming
+
+### Rendering
+Press F12 to render through the camera
+then we can save the render.
+set rendered mode with `Z`
+
+### Search
+Press `F3` then it open the search panel.
+
+### Save Our Setup
+File -> defaults -0> save setup file
+then it will save a defauylt setup witht he current default
+
+### Hhamburger time
+First deside on unit scale
+its based on.
+we can change it fromt the scene properties, and on the units section change the Unit System 
+
+### Bottom bun
+* need to be on solid mode
+Note: always scale on edit mode so the scale never change
+
+**add modifier**
+Subdivision modifier, this help us create new shapes from a base shape, like having a cube and converting into a sphere
+What this does is having a base shape and then subdividing it into smaller shapes
+Note: This can help us to have like surface spacing based on a cube for collitions and so on.
+
+we can cut an object to subdivide it to generate new shapes based on adding new faces or edges.
+to do that so we use the `loop cut` which can be searched by `F3` or by pressing `ctrl + r`.
+
+**Save file**
+when saving we can use `ctrl + s`.
+but after the first time we save a file, when we save again Blender will create a blend1 file which is a backup save for the previous saved version.
+
+**Duplicate**
+Use `shift + D`
+
+Use the duplication to create the meat for the hamburger. then modify its parts to shape as you want
+**Cheese**
+then for the cheese, use a plane, create it by `shipft + a` , select plane then press tab to enter edit mode so after that we scale it and change it sizes and positioning on top of the meat.
+
+Now to give the cheese some shape to the cheese with subdiving, first select the whole plane face then press  right click and subdivide. after that a menu will appear in the bottom left corner with the subdivisions options and give it an amount of 10 subdivisions.
+
+now use edge selection mode and select 1 of the edges we want to "meld down" to the cheese, then use the shortcut `O` to toggle the proportionality of the edges.
+we cna also change the way the proprortionality behave. ALso we can uise scroll to have a bigger or smaller proprortionality.
+At the end add the modifier `Solidify` to the cheese.
+
+Also to make the cheese look more natural go to `Data object properties` and find the normals, and check the auto smooth there to have a more squared edges
+
+**Top Bun**
+dupliucate button bun and rotate it. Use control to have exact numbers.
 

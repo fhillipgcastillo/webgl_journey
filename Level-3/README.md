@@ -943,3 +943,26 @@ Also to make the cheese look more natural go to `Data object properties` and fin
 **Top Bun**
 dupliucate button bun and rotate it. Use control to have exact numbers.
 
+### Adding materials
+* Activate the renderer shading
+* Create the materials
+  * one for the buns, one for t he meat and one for the cheese
+* play twith their color and roughness
+* rename the materials
+
+**ADding materials**
+Select an object, Create custom material, rename them and play with the colors and the roughness.
+Now do the same with each object.
+
+### Export
+Select only the hamburger objects (exclude the lights).
+
+* Then go to file -> export -> gltf
+* On there use the file extention as you like, for this example glb for the binary one.
+* then on Include section, select limit to selected objects
+* Under mesh sselect APply modifiers, Normals and vertex colors
+* Under material select export and auto
+* and use compression
+
+Now runt he project and add the hambuerger to the project models
+

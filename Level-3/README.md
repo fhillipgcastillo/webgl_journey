@@ -963,6 +963,10 @@ Select only the hamburger objects (exclude the lights).
 * Under mesh sselect APply modifiers, Normals and vertex colors
 * Under material select export and auto
 * and use compression
+* Also set the +y conversion as checked
 
-Now runt he project and add the hambuerger to the project models
+Now run the project and add the hambuerger to the project models
+Note: the hamburger will look bad.
+
+
 

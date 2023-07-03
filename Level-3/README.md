@@ -1355,4 +1355,111 @@ this.time.on('tick', () => {
 ```
 
 ###  Scene
+this doesn't need a class as it will only be 1 line of code
+```javascript
+this.scene = new THREE.Scene();
+```
+
+### Camera
+this will need the class as it will control orbit control and other stuff.
+
+SOmething the camera will need is to have access to different properties and values from the Experience  and the sizes objects, like the canvas, the threejs camera, the sizes width and height, etc.
+
+**Three ways to  work with this**
+* from a global variable
+  * Not a good practice
+* by sending a parameter
+  * sending the needed values to the camera as parameter
+  * Seems to have a similar issue that the global variable
+* by using a singleton
+  * 
+
+### Singleton
+* normal class but for all the following time ti swill returnt hat first instance that was created
+* Need to convert the experience into a singleton
+
+**To enable the experience to be a singleton**
+
+We need to add on the Experience's  file a variable name instance which by default will be null, then inside the class constructor, replace that instance variable with the `this` and also before this asignment we need to verify if the instance have already be setup before to the this, then return that isntance or just asign it if not, all of that will look like the following:
+```javascript
+let instance = null;
+
+export default class Experience {
+    constructor(canvas) {
+        if(instance) {
+            return instance;
+        }
+
+        instance = this;
+    }
+}
+```
+And now we can initialize it on the Camera constructor as normal
+
+**Note:** After watching all 3 implementations, passing it as parameter its easier and it's similar to the singleton on how it will work at the end.
+
+### The camera instance
+He likes to have it in methods so constructor looks more clear
+```javascript
+setInstance() {
+    this.instance = new THREE.PerspectiveCamera(35, this.size.width / this.size.height, 0.1, 100);
+    this.instance.position.set(6, 4, 8);
+    this.scene.add(this.instance);
+}
+```
+
+Also create the orbit control
+```javascript
+setOrbitControls() {
+    this.controls = new OrbitControls(this.instance, this.canvas);
+    this.controls.enableDamping = true;
+}
+```
+
+Now we need to adapt the camera to the canvas on resize.
+
+We're going to do it on the resize method of the Experience we already have created
+
+the camera will have an resize method and a update method, which will be call respectebly fromt he experience resize and update methods.
+
+Here's the full Camera so far
+```javascript
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import Experience from "./Experience";
+
+export default class Camera {
+    constructor() {
+        this.experience = new Experience();
+        this.size = this.experience.sizes;
+        this.scene = this.experience.scene;
+        this.canvas = this.experience.canvas;
+
+        this.setInstance();
+        console.log('camera', this);
+
+        // controls
+        this.setOrbitControls();
+    }
+
+    setInstance() {
+        this.instance = new THREE.PerspectiveCamera(35, this.size.width / this.size.height, 0.1, 100);
+        this.instance.position.set(6, 4, 8);
+        this.scene.add(this.instance);
+    }
+
+    setOrbitControls() {
+        this.controls = new OrbitControls(this.instance, this.canvas);
+        this.controls.enableDamping = true;
+    }
+    resize(){
+        this.instance.aspect = this.size.width / this.size.height;
+        this.instance.updateProjectionMatrix();
+        console.log('camera resized');
+    }
+    update() {
+        this.controls.update();
+    }
+}
+```
 

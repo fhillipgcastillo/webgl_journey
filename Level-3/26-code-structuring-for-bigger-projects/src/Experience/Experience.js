@@ -1,14 +1,27 @@
+import * as THREE from 'three';
 import Sizes from "./Utils/Sizes";
 import Time from "./Utils/Time";
+import Camera from "./Camera";
+
+let instance = null;
+
 export default class Experience {
     constructor(canvas) {
-        // GLoball Acess
+        if(instance) {
+            return instance;
+        }
+
+        instance = this;
+
+        // GLoball Acess        
         window.experience = this;
 
         // options
         this.canvas = canvas;
         this.sizes = new Sizes();
         this.time = new Time();
+        this.scene = new THREE.Scene();
+        this.camera = new Camera();
 
         // events
         this.sizes.on('resize', () => {
@@ -17,12 +30,12 @@ export default class Experience {
         this.time.on('tick', () => {
             this.update();
         })
-        console.log('Experience');
-    }
-    resize() {
         
     }
+    resize() {
+        this.camera.resize();
+    }
     update(){
-
+        this.camera.update()
     }
 }

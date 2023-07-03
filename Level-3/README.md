@@ -1208,3 +1208,73 @@ Note: increase the bias until it desapear
 
 ## 26 - Code Structuring for bigger projects
 
+We're going to use classes and modules to reorganize and improve the code.
+
+* **Module** 
+separate code into multiple files and import then only when we need then.
+
+WE'll continued using webpack
+
+He explains how to use modules, import and export them, etc.
+
+He also explain basi Object oriented programming basic for JS
+
+**Notes** 
+* a good practice is to put the whole experience inside a main class that will then create everything else.
+* Experience is how he calles the main object which can be chance by desire.
+
+First he create a folder name `Experience` then a file with the same name inside.
+
+export a class name as it, then import it and initialize it on script.js
+
+**Note** A practice he uses is to add the Experience to the global windows so he can access it fromt he browser.
+for example `window.experience = this;`
+
+### Canvas
+He likes to receive the canvas from the initialization of the experience.
+```javascript
+const experience = new Experience(document.querySelector('canvas.webgl'));
+```
+
+### Usefull classes
+put those classes into Utils inside the experience project
+the sizes will be asign and initialize on the construction of Experience and it will be asign to a proeprty.
+
+the sizes class wil have width, height and pixelRatio
+```javascript
+export default class Sizes {
+    constructor(){
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        this.pixelRatio = Math.min(window.devicePixelRatio, 2); // limit pixel ratio
+    }
+}
+```
+Also add a resize event to update those values
+```javascript
+// on resize event
+window.addEventListener('resize', () =>{
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    this.pixelRatio = Math.min(window.devicePixelRatio, 2); // limit pixel ratio
+});
+```
+
+Now that we have one event listener for the resize and we want to make a few more updates unrelated to the sizes, we will creater an event emitter.
+
+### Event emitter
+He built one class for it.
+
+I copied it from the complete version fo the code for this proejct
+
+After adding it to the project we inherit it to Sizes
+```javascript
+export default class Sizes extends EventEmitter {
+    constructor(){
+        super();
+        // res of the code
+    }
+};
+```
+
+then inside the resize event listener add a trigger that will yell for resize

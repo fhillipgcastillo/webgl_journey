@@ -1278,3 +1278,81 @@ export default class Sizes extends EventEmitter {
 ```
 
 then inside the resize event listener add a trigger that will yell for resize
+
+Here's the full Sizes class
+```javascript
+import EventEmitter from "./EventEmitter";
+
+export default class Sizes extends EventEmitter {
+    constructor(){
+        super();
+
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        this.pixelRatio = Math.min(window.devicePixelRatio, 2); // limit pixel ratio
+
+        // on resize event
+        window.addEventListener('resize', () =>{
+            this.width = window.innerWidth;
+            this.height = window.innerHeight;
+            this.pixelRatio = Math.min(window.devicePixelRatio, 2); // limit pixel ratio
+            this.trigger('resize');
+        });
+    }
+}
+```
+
+### class time
+* have the current time
+* the elapsed time
+* the delta time between current frame and the prev frame
+
+On the constructor for delta he asign 16 because is something similar to the delta of the fps which are 60.
+
+```javascript
+import EventEmitter from "./EventEmitter";
+
+export default class Time extends EventEmitter {
+    constructor() {
+        super();
+        this.start = Date.now();
+        this.current = this.start;
+        this.elapsed = 0;
+        this.delta = 16; // default diferent than 0 to avoid errors
+    
+        window.requestAnimationFrame(() => {
+            this.tick();
+        });
+            
+
+    }
+    tick(){
+        const currentTime = Date.now();
+        this.delta = currentTime - this.current;
+        this.current = currentTime;
+        this.elapsed = this.current - this.start;
+
+        this.trigger('tick');
+
+        window.requestAnimationFrame(() => {
+            this.tick();
+        });
+
+    }
+}
+;
+```
+
+He also create 2 methods that will be call on the event that where triggered on Size and Time on the experience class
+
+```javascript
+this.sizes.on('resize', () => {
+    this.resize();
+});
+this.time.on('tick', () => {
+    this.update();
+})
+```
+
+###  Scene
+

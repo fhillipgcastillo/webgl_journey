@@ -1463,3 +1463,65 @@ export default class Camera {
 }
 ```
 
+### Renderer
+for this as the Camera we need to add the experience instance to it and also asign the properties for the canvas, sizes,  scene and camera.
+
+and on the setInstance we can define it as normal to the `this.instance`. Also copy, pased and fixed what's needed from the script.js renderer configurations.
+
+Here's a full renderer so far:
+```javascript
+import * as THREE from 'three';
+import Experience from './Experience';
+
+
+export default class Renderer {
+    constructor() {
+        this.experience = new Experience();
+        this.canvas = this.experience.canvas;
+        this.sizes = this.experience.sizes;
+        this.scene = this.experience.scene;
+        this.camera = this.experience.camera;
+
+        this.antiAlias = true;
+        this.setInstance();
+    }
+    setInstance() {
+        this.instance = new THREE.WebGLRenderer({
+            canvas: this.canvas,
+            antialias: this.antiAlias,
+        });
+        this.instance.physicallyCorrectLights = true;
+        this.instance.outputEncoding = THREE.sRGBEncoding;
+        this.instance.toneMapping = THREE.CineonToneMapping;
+        this.instance.toneMappingExposure = 1.75;
+        this.instance.shadowMap.enabled = true;
+        this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
+        this.instance.setClearColor('#211d20');
+        this.instance.setSize(this.sizes.width, this.sizes.height);
+        this.instance.setPixelRatio(this.sizes.pixelRatio);
+
+    }
+
+    resize() {
+
+    }
+}
+```
+
+Now for the resize and the update
+we can copy then from the scripts and use then on their respective methods
+
+```javascript
+ resize() {
+    this.instance.setSize(this.sizes.width, this.sizes.height);
+    this.instance.setPixelRatio(this.sizes.pixelRatio);
+    // console.log('renderer resized');
+}
+
+update() {
+    this.instance.render(this.scene, this.camera.instance);
+}
+```
+
+Also call them from the experience methods. Note: the renderer udpate need to be after the camera update.
+

@@ -1526,3 +1526,28 @@ update() {
 Also call them from the experience methods. Note: the renderer udpate need to be after the camera update.
 
 ### World
+Create a WOrld subforlder inside experience
+clear aWorld class that will have the experience and scene properties
+
+Also add a simple test mesh as wireframe to the scene.
+
+```javascript
+import * as THREE from 'three';
+import Experience from "../Experience";
+
+export default class World {
+    constructor() {
+        this.experience = new Experience();
+        this.scene = this.experience.scene;
+
+        // test mesh
+        const testMesh = new THREE.Mesh(
+            new THREE.BoxGeometry(1, 1, 1),
+            new THREE.MeshBasicMaterial({
+                wireframe: true
+            })
+        );
+        this.scene.add(testMesh);
+    }
+}
+```

@@ -1,5 +1,7 @@
 ## Notes and Documentations
 
+### To do
+[ ] Migrate the documentation into notion with a respective formate
 
 [Level 1 - Basics](./Level%201/README.md)
 

@@ -29,6 +29,7 @@ const updateAllMaterials = () => {
         if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
             // child.material.envMap = environmentMaps;
             child.material.envMapIntensity = debugObject.envMapIntensity;
+            child.material.needsUpdate = true;
         }
     })
 };
@@ -136,6 +137,16 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.physicallyCorrectLights = true;
 // renderer.outputEncoding = THREE.sRGBEncoding;
 // renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+// renderer.toneMapping = THREE.ReinhardToneMapping;
+gui.add(renderer, 'toneMapping', {
+    No: THREE.NoToneMapping,
+    Linear: THREE.LinearToneMapping,
+    Reinhard: THREE.ReinhardToneMapping,
+    Cineon: THREE.CineonToneMapping,
+    ACESFilmic: THREE.ACESFilmicToneMapping
+})
+.onFinishChange(updateAllMaterials);
 /**
  * Animate
  */

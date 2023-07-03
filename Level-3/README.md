@@ -1066,3 +1066,64 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 but now that is the default which isn't that necesary
 
+### Tone mapping
+
+this intens to conver HDR to LDR
+
+TO change this tone mapping, change the toneMapping property of the renderer
+```javascript
+renderer.tonMapping = ToneMappingOption;
+```
+
+**Tone mapping options**
+They are all under `THREE.`
+* NoToneMapping (default)
+* LinearToneMapping
+* ReinhardToneMapping
+* CineonToneMapping
+* ACESFilmicToneMapping
+
+here's a full example
+```javascript
+renderer.toneMapping = THREE.CineonToneMapping;
+```
+
+**Add a select to the GUI**
+```javascript
+gui.add(renderer, 'toneMapping', {
+    No: THREE.NoToneMapping,
+    Reinhard: THREE.ReinhardToneMapping,
+    Cineon: THREE.CineonToneMapping,
+    ACESFilmic: THREE.ACESFilmicToneMapping
+});
+```
+But this will not fully work because javascript convert the values to string and the toneMapping need numbers
+```javascript
+ui.add(renderer, 'toneMapping', {
+    No: THREE.NoToneMapping,
+    Linear: THREE.LinearToneMapping,
+    Reinhard: THREE.ReinhardToneMapping,
+    Cineon: THREE.CineonToneMapping,
+    ACESFilmic: THREE.ACESFilmicToneMapping
+})
+.onFinishChange(()=> {
+    renderer.toneMapping = Number(renderer.toneMapping);
+});
+```
+but by testing it seems like three js handles it now, but the only issue is that its only changing the envmap toneMapping and not the materials of the objects;
+To tocle this we are going to add need update to the updateAllMaterials then call it from the onFinishChange;
+
+```javascript
+updateAllMaterials = () => {
+// scene.traverse ....
+    child.material.needsUpdate = true;
+};
+
+//...
+ui.add(renderer, 'toneMapping', {
+    //...
+})
+.onFinishChange(updateAllMaterials);
+```
+
+

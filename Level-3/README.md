@@ -1184,8 +1184,27 @@ const directionalLightCameraHelper = new THREE.CameraHelper(directionalLight.sha
 scene.add(directionalLightCameraHelper);
 ```
 
-Now increase the shadow map resolution size
-
+Now increase the shadow map resolution size and the far values
 ```javascript
-
+directionalLight.shadow.mapSize.set(1024, 1024);
+directionalLight.shadow.camera.far = 15;
 ```
+
+### Hamburger
+Change the gltf import file to the hambuergerr `'/models/hamburger.glb'`. Also change the gltf scene scale to `0.3` on each values.
+
+A problem that appear with the hamburger is a call **shadow acne** which are rincles that accur on smooth surfaces.
+Thas a presition with the shadows calculations.
+
+The solution for this is by twicking the shadows' bias and normalBias
+* the `bias` ususally helps for flat surfaces.
+* the `normalBias` usuarlly helps for rounded surfaces
+
+for example:
+```javascript
+directionalLight.shadow.normalBias = 0.5;
+```
+Note: increase the bias until it desapear
+
+
+

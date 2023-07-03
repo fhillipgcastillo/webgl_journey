@@ -62,9 +62,10 @@ scene.environment = environmentMaps;
  * models
  */
 gltfLoader.load(
-    '/models/FlightHelmet/glTF/FlightHelmet.gltf',
+    '/models/hamburger.glb',
+    // '/models/FlightHelmet/glTF/FlightHelmet.gltf',
     (gltf) => {
-        gltf.scene.scale.set(10, 10, 10);
+        gltf.scene.scale.set(0.3, 0.3, 0.3);
         gltf.scene.position.set(0, -4, 0);
         gltf.scene.rotation.y = Math.PI / 2
         scene.add(gltf.scene)
@@ -91,6 +92,7 @@ directionalLight.position.set(0.25, 3, -2.25);
 directionalLight.castShadow = true;
 directionalLight.shadow.camera.far = 15;
 directionalLight.shadow.mapSize.set(1024, 1024);
+directionalLight.shadow.normalBias = 0.02;
 
 scene.add(directionalLight);
 

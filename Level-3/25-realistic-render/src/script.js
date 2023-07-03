@@ -138,7 +138,9 @@ renderer.physicallyCorrectLights = true;
 // renderer.outputEncoding = THREE.sRGBEncoding;
 // renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-// renderer.toneMapping = THREE.ReinhardToneMapping;
+renderer.toneMapping = THREE.ReinhardToneMapping;
+renderer.toneMappingExposure = 3;
+
 gui.add(renderer, 'toneMapping', {
     No: THREE.NoToneMapping,
     Linear: THREE.LinearToneMapping,
@@ -147,6 +149,8 @@ gui.add(renderer, 'toneMapping', {
     ACESFilmic: THREE.ACESFilmicToneMapping
 })
 .onFinishChange(updateAllMaterials);
+
+gui.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001).name('ToneMappingExposure');
 /**
  * Animate
  */

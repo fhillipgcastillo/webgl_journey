@@ -1126,4 +1126,14 @@ ui.add(renderer, 'toneMapping', {
 .onFinishChange(updateAllMaterials);
 ```
 
+There is also a tone mapping exposure like the intensity
+```javascript
+renderer.toneMappingExposure = 3;
+```
+We can also add it to the gui
+```javascript
+gui.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001).name('ToneMappingExposure');
+```
+
+Note: the ReinhardToneMapping will be the used for the rest of the chapter
 

@@ -1206,5 +1206,5 @@ directionalLight.shadow.normalBias = 0.5;
 ```
 Note: increase the bias until it desapear
 
-
+## 26 - Code Structuring for bigger projects
 

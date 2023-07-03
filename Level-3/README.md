@@ -1137,3 +1137,25 @@ gui.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001).name('ToneMa
 
 Note: the ReinhardToneMapping will be the used for the rest of the chapter
 
+### Antialiasing
+this fix the low resolution look of some objects that have an angle or liek circles
+ONe of the solution is by up sampling the pixels
+
+* Super Sampling (SSAA) or FullScreen sampling (FSAA)
+  * simple but not that good at performance
+* multi sampling (MSAA)
+  * this does similar work as SSAA or FSAA but only on the edges
+
+**DIference between Super and fullscreen sampling against multi sampling**
+
+ is that SSAA and FSAA will do the sampling for each pixed; but the MSAA will only apply that to the edges
+
+To activate the sampling, needs to be done when the renderer is being setup
+```javascript
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+})
+```
+Note: this will be usefull when we have the pixel ratio of 2, insted of whne its only 1
+

@@ -27,7 +27,7 @@ const scene = new THREE.Scene()
 const updateAllMaterials = () => {
     scene.traverse((child) => {
         if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
-            child.material.envMap = environmentMaps;
+            // child.material.envMap = environmentMaps;
             child.material.envMapIntensity = debugObject.envMapIntensity;
         }
     })
@@ -53,6 +53,7 @@ const environmentMaps = cubeTextureLoader.load([
     '/textures/environmentMaps/1/nz.jpg',
 ]);
 scene.background = environmentMaps;
+scene.environment = environmentMaps;
 /**
  * models
  */

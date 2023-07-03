@@ -1032,3 +1032,21 @@ const updateAllMaterials = () => {
     })
 }
 ```
+### Apply EnvMap as default
+
+There's a simpler way
+remove the envMap setup part formt he updateALlMaterials 
+```javascript
+const updateAllMaterials = () => {
+    scene.traverse((child) => {
+        if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
+            // child.material.envMap = environmentMaps;
+            child.material.envMapIntensity = debugObject.envMapIntensity;
+        }
+    })
+};
+```
+Then add enviromentmap to the environment of th scene.
+```javascript
+scene.environment = environmentMap;
+```

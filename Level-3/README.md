@@ -1159,3 +1159,33 @@ const renderer = new THREE.WebGLRenderer({
 ```
 Note: this will be usefull when we have the pixel ratio of 2, insted of whne its only 1
 
+### Shadows
+Now activate the shadow maps
+```javascript
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+```
+then activate cast shadow to the light
+```javascript
+directionalLight.castShadow = true;
+directionalLight.shadow.camera.far = 15;
+```
+
+then make evey imported mesh to cast and receive shadows
+```javascript
+child.castShadow = true;
+child.receiveShadow = true;
+```
+
+Use the camera helper to visualize the shadows camera
+
+```javascript
+const directionalLightCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
+scene.add(directionalLightCameraHelper);
+```
+
+Now increase the shadow map resolution size
+
+```javascript
+
+```

@@ -45,13 +45,14 @@ gui.add(debugObject, 'envMapIntensity')
  * Env Map
  */
 const environmentMaps = cubeTextureLoader.load([
-    '/textures/environmentMaps/1/px.jpg',
-    '/textures/environmentMaps/1/nx.jpg',
-    '/textures/environmentMaps/1/py.jpg',
-    '/textures/environmentMaps/1/ny.jpg',
-    '/textures/environmentMaps/1/pz.jpg',
-    '/textures/environmentMaps/1/nz.jpg',
+    '/textures/environmentMaps/0/px.jpg',
+    '/textures/environmentMaps/0/nx.jpg',
+    '/textures/environmentMaps/0/py.jpg',
+    '/textures/environmentMaps/0/ny.jpg',
+    '/textures/environmentMaps/0/pz.jpg',
+    '/textures/environmentMaps/0/nz.jpg',
 ]);
+// environmentMaps.encoding = THREE.sRGBEncoding;
 scene.background = environmentMaps;
 scene.environment = environmentMaps;
 /**
@@ -133,7 +134,8 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.physicallyCorrectLights = true;
-
+// renderer.outputEncoding = THREE.sRGBEncoding;
+// renderer.outputColorSpace = THREE.SRGBColorSpace;
 /**
  * Animate
  */

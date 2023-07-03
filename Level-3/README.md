@@ -1050,3 +1050,19 @@ Then add enviromentmap to the environment of th scene.
 ```javascript
 scene.environment = environmentMap;
 ```
+
+### Output enconding
+* lineal enconding - default
+* sRGB enconding
+
+to change it for better and more realistic output use sRGB as follow
+```javascript
+renderer.outputEncoding = THREE.sRGBEncoding; // Deprecated
+```
+This alternative was depricated, now the option could be
+```javascript
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+```
+
+but now that is the default which isn't that necesary
+

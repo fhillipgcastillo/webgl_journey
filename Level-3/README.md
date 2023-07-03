@@ -971,3 +971,64 @@ Note: the hamburger will look bad.
 
 ## 25 - Realistic Renders
 
+First we need to add some lights and the materials for the 
+* Change material of testSphere From `MeshBasicMaterial` to `MeshStandardMaterial`
+* Add one small directional light
+
+Add twichs tto the gui to add the intensity of the light and the position of the light.
+Now we need to add physically correct lights values, to be able to have consistency to the renderer.
+`renderer.physicallyCorrectLights = true`
+
+**Now import he model**
+* First import and start the loaders (GLTFLoader)
+* if the model is compress use the draco loader.
+
+then  load the model
+```javascript
+gltfLoader.load(
+    '/models/FlightHelmet/glTF/FlightHelmet.gltf',
+    (gltf) => {
+        gltf.scene.scale.set(10, 10, 10);
+        gltf.scene.position.set(0, -4, 0);
+        gltf.scene.rotation.y = Math.PI / 2
+        scene.add(gltf.scene)
+
+        console.log('success');
+        console.log(gltf);
+
+        gui.add(gltf.scene.rotation, 'y')
+        .min(- Math.PI)
+        .max(Math.PI)
+        .step(0.001)
+        .name('rotation');
+    }
+)
+```
+### Environment map
+First import the loader
+```
+const cubeTextureLoader = new THREE.CubeTextureLoader();
+```
+
+then initialize the load process and change the scene background with this new env map
+```javascript
+const environmentMaps = cubeTextureLoader.load([
+    '/textures/environmentMaps/1/px.jpg',
+    '/textures/environmentMaps/1/nx.jpg',
+    '/textures/environmentMaps/1/py.jpg',
+    '/textures/environmentMaps/1/ny.jpg',
+    '/textures/environmentMaps/1/pz.jpg',
+    '/textures/environmentMaps/1/nz.jpg',
+]);
+scene.background = environmentMaps;
+```
+
+Now apply the envmap to the model
+there's a way to update all materials on the whole scene.
+```javascript
+const updateAllMaterials = () => {
+    scene.traverse((child) => {
+        console.log(child)
+    })
+}
+```

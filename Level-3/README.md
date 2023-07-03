@@ -1551,3 +1551,38 @@ export default class World {
     }
 }
 ```
+### Sunlight
+WE're going to add an enviroment class.
+
+Also change the test mesh material to Mesh standdarMaterial so we can visualize the light we're going to be adding.
+
+also create a setSunLight method to initialize the directional light we have on the script.js file
+
+```javascript
+import * as THREE from 'three';
+import Experience from "../Experience";
+
+export default class Environment {
+    constructor() {
+        this.experience = new Experience();
+        this.scene = this.experience.scene;
+
+        this.setSunLight();
+    }
+
+    setSunLight() {
+        this.sunLight = new THREE.DirectionalLight('#ffffff', 4)
+        this.sunLight.castShadow = true
+        this.sunLight.shadow.camera.far = 15
+        this.sunLight.shadow.mapSize.set(1024, 1024)
+        this.sunLight.shadow.normalBias = 0.05
+        this.sunLight.position.set(3.5, 2, - 1.25)
+        this.scene.add(this.sunLight)
+    }
+    
+}
+
+```
+
+Now we're going to need a texture loader for the environment map
+

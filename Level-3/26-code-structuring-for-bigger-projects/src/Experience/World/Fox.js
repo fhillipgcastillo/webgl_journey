@@ -39,8 +39,31 @@ export default class Fox {
         this.animation.actions.walking = this.animation.mixer.clipAction(this.resource.animations[1]);
         this.animation.actions.running = this.animation.mixer.clipAction(this.resource.animations[2]);
         this.animation.actions.current = this.animation.actions.idle;
-
+        
         this.animation.actions.current.play();
+        this.animation.play = (name) => {
+            const newAction = this.animation.actions[name];
+            const oldAction = this.animation.actions.current;
+
+            newAction.reset();
+            newAction.play();
+            newAction.crossFadeFrom(oldAction, 1);
+
+            this.animation.actions.current = newAction;
+        }
+        if(this.debug.active){
+            const debugObject = {
+                playIdle: () => {this.animation.play('idle')},
+                playWalking: () => {this.animation.play('walking')},
+                playRunning: () => {this.animation.play('running')},
+            };
+            this.debug.ui.add(debugObject, 'playIdle');
+            this.debug.ui.add(debugObject, 'playWalking');
+            this.debug.ui.add(debugObject, 'playRunning');
+            // this.debugFolder.add(this.animation, "play", ["idle", "walking", "running"]).onChange((name) => {
+            //     this.animation.play(name);
+            // });
+        }
     }
     update(){
         this.animation.mixer.update(this.time.delta / 1000); // delta is in miliseconds

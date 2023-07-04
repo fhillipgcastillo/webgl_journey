@@ -1894,4 +1894,37 @@ setAnimation(){
 }
 ```
 
-now we need to make smooth transitions between animations
+now we need to make smooth transitions between animations. we're going to use the AnimationAction class like fades, etc. `crossFadeFrom` is the default
+
+First add a mthod to play for the animation
+```javascript
+this.animation.play = (name) => {
+    const newAction = this.animation.actions[name];
+    const oldAction = this.animation.actions.current;
+
+    newAction.reset();
+    newAction.play();
+    newAction.crossFadeFrom(oldAction, 1);
+
+    this.animation.actions.current = newAction;
+}
+```
+
+so a way to test this is by running it by the console on the browser fromt he experience that was added to the global context before
+```js
+experience.world.fox.animation.play("walking")
+```
+
+Now lets add it to the gui
+```javascript
+if(this.debug.active){
+    const debugObject = {
+        playIdle: () => {this.animation.play('idle')},
+        playWalking: () => {this.animation.play('walking')},
+        playRunning: () => {this.animation.play('running')},
+    };
+    this.debug.ui.add(debugObject, 'playIdle');
+    this.debug.ui.add(debugObject, 'playWalking');
+    this.debug.ui.add(debugObject, 'playRunning');
+}
+```

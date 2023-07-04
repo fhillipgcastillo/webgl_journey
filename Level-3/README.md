@@ -1877,3 +1877,21 @@ if(this.debug.active){
     this.debugFolder = this.debug.ui.addFolder('Fox');
 }
 ```
+
+To add the different animations w eneed to restructure the code of the fox class
+```javascript
+setAnimation(){
+    this.animation = {};
+    this.animation.mixer = new THREE.AnimationMixer(this.model);
+
+    this.animation.actions = {};
+    this.animation.actions.idle = this.animation.mixer.clipAction(this.resource.animations[0]);
+    this.animation.actions.walking = this.animation.mixer.clipAction(this.resource.animations[1]);
+    this.animation.actions.running = this.animation.mixer.clipAction(this.resource.animations[2]);
+    this.animation.actions.current = this.animation.actions.idle;
+
+    this.animation.actions.current.play();
+}
+```
+
+now we need to make smooth transitions between animations

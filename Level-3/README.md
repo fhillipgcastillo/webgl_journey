@@ -1584,5 +1584,125 @@ export default class Environment {
 
 ```
 
+### Resources
 Now we're going to need a texture loader for the environment map
+
+* This will handle all the loaders
+* loop through an array of asssets and load them
+* trigger an event hwen all assers are loaded
+
+Assets arrawy 
+* name
+* type
+* path
+
+This array of resources will be save into a file named sources into Experience folder, which will export the full array
+
+
+The Resources class wil lhave theres proeprties
+* items: the loaded resoruces
+* toLoad: the number of sources to load (the length)
+* loaded: the number of sources loaded (start at 0)
+
+Add the loaders as we need them
+```javascript
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import EventEmitter from "./EventEmitter";
+
+export default class Resources extends EventEmitter{
+    constructor(sources) {
+        super();
+        this.sources = sources;
+        
+        this.items = {};
+        this.toLoad = this.sources.length;
+        this.loaded = 0;
+
+        this.setLoaders();
+        this.startLoading();
+    }
+
+    setLoaders(){
+        this.loaders = {};
+        this.loaders.gltfLoader = new GLTFLoader();
+        this.loaders.textureLoader = new THREE.TextureLoader();
+        this.loaders.cubeTextureLoader = new THREE.CubeTextureLoader();
+    }
+
+    startLoading(){
+        // load each source
+        for(const source of this.sources){
+            if(source.type === "gltfModel") {
+                this.loaders.gltfLoader.load(source.path, (file) => {
+                    this.sourceLoaded(source, file);
+                    console.log(source, file);
+                })
+            } else if(source.type === "texture") {
+                this.loaders.textureLoader.load(source.path, (file) => {
+                    this.sourceLoaded(source, file);
+                    console.log(source, file);
+                })
+            } else if(source.type === "cubeTexture") {
+                this.loaders.cubeTextureLoader.load(source.path, (file) => {
+                    this.sourceLoaded(source, file);
+                    console.log(source, file);
+                })
+            }
+        }
+    }
+    sourceLoaded(source, file){
+        this.items[source.name] = file;
+        this.loaded++;
+        
+        if(this.loaded === this.toLoad){
+            this.trigger("ready");
+        }
+    }
+}
+
+```
+
+now on the world constructor add the following
+```javascript
+    this.resources = this.experience.resources;
+    this.resources.on('ready', () => {
+        console.log("resources ready");
+        this.environment = new Environment();
+    })
+```
+### Enviroment map
+To add the environment map to the scene, on the Environment class add a method named `setEnvironmentMap` and call it fromt he constructor. and it will look like so:
+```javascript
+setEnvironmentMap() {
+    this.environmentMap = {};
+    this.environmentMap.intensity = 0.4;
+    this.environmentMap.texture = this.resources.items.environmentMapTexture;
+    this.scene.environment = this.environmentMap.texture;
+}
+```
+
+As result of the envMap beng loadded aftert some object had already been added to the scene that it doesn't get reflected. So we need to call an update for each object
+
+Something like so:
+```javascript
+setEnvironmentMap() {
+    this.environmentMap = {};
+    this.environmentMap.intensity = 0.4;
+    this.environmentMap.texture = this.resources.items.environmentMapTexture;
+    this.scene.environment = this.environmentMap.texture;
+
+    this.environmentMap.update = () => {
+        this.scene.traverse((child) => {
+            if(child instanceof THREE.Mesh&& child.material instanceof THREE.MeshStandardMaterial) {
+                child.material.envMap = this.environmentMap.texture;
+                child.material.envMapIntensity = this.environmentMap.intensity;
+                child.material.needsUpdate = true;
+            }
+        })
+    }
+    this.environmentMap.update();
+}
+```
+
 

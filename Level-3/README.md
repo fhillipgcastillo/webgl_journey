@@ -1206,7 +1206,7 @@ directionalLight.shadow.normalBias = 0.5;
 ```
 Note: increase the bias until it desapear
 
-## 26 - Code Structuring for bigger projects
+## 26 - Code Structuring for bigger projects (#26)
 
 We're going to use classes and modules to reorganize and improve the code.
 

@@ -36,3 +36,5 @@
 [Level 3 - Advanced techniques](./Level-3/README.md#lvl3)
 > [22 - Physics](./Level-3/README.md#22)
 
+[Chapter 4 - Shaders](./Level-4/README.md#lvl4)
+> [28 - Shaders](./Level-4/README.md#28)

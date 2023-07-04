@@ -1930,3 +1930,29 @@ if(this.debug.active){
 ```
 
 ### Debug the environment
+First add a subfolder if the debug is active
+```js
+if(this.debug.active){
+    this.debugFolder = this.debug.ui.addFolder('Environment');
+}
+```
+
+then add uis to the desire part inside that new subfolder
+```js
+//setEnvironmentMap
+if(this.debug.active){
+    this.debugFolder.add(this.environmentMap, 'intensity')
+    .name('envMapIntensity')
+    .min(0).max(4).step(0.001).onChange(this.environmentMap.updateMaterials)
+}
+
+
+//setSunLight
+if (this.debug.active) {
+    this.debugFolder.add(this.sunLight, 'intensity').min(0).max(10).step(0.001).name('lightIntensity')
+    this.debugFolder.add(this.sunLight.position, 'x').min(-5).max(5).step(0.001).name('lightX');
+    this.debugFolder.add(this.sunLight.position, 'y').min(-5).max(5).step(0.001).name('lightY');
+    this.debugFolder.add(this.sunLight.position, 'z').min(-5).max(5).step(0.001).name('lightZ');
+}
+```
+

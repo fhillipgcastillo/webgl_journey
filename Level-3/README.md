@@ -1956,3 +1956,66 @@ if (this.debug.active) {
 }
 ```
 
+### Destroy things
+Also called as dispose
+
+***Stopping time and resize events***
+
+Add a destroy method inside the experience.
+First the EventEmitter class have an off methods that disponse an event for continuing executing.
+
+```javascript
+destroy() {
+    this.sizes.off('resize');
+    this.time.off('tick');
+}
+```
+
+***Dispose of everything in the scene***
+* we need to traverse the scene.
+* If a child is a mesh, we can call the dispose on the geometry property
+* Loop through every key of material property
+* if there's a disponse function available on the key, call it
+
+```js
+// tracverse the whole scene
+this.scene.traverse((child) => {
+    if (child instanceof THREE.Mesh) {
+        child.geometry.dispose();
+
+        for (const key in child.material) {
+            const value = child.material[key];
+            if (value && typeof value.dispose === "function") {
+                value.dispose();
+            }
+        }
+    }
+})
+```
+### dispose the controls
+We also need to dispose the controls
+the orbit controll class have a dispose
+```js
+this.camera.controls.dispose();
+```
+### Dispose the renderer
+```js
+this.renderer.instance.dispose();
+```
+
+### Warning
+When usinmg post-processing, we need to dispose the EffectComposer, its WebGLRenderTarde and any potential passes you are using.
+
+### Dispose the debug
+```js
+if(this.debug.active){
+    this.debug.ui.destroy();
+}
+```
+
+### Finals
+* Note: need to check the code and see what need to be disposed
+* **The Canvas** is optional.
+* Also we could dispose the evenListener that Sizes and Time classes have.
+* We should have a destroy method on each class, so from the experience we can dispose then more easily and mroe organized.
+* 

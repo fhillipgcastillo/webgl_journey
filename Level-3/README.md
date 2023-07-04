@@ -1834,3 +1834,46 @@ update(){
 }
 ```
 
+### Debug UI
+Add the function to debug by adding `#debug` to the end of the url.
+
+```javascript
+import * as dat from 'lil-gui';
+
+export default class Debug {
+    constructor() {
+        this.active = window.location.hash === '#debug';
+        
+        if (this.active) {
+            this.ui = new dat.GUI();
+        }
+    }
+}
+```
+Also we need to add the debug inside the experience
+
+```javascript
+import Debug from './Utils/Debug';
+
+export default class Experience {
+    constructor(canvas) {
+        // setup
+        this.debug = new Debug();
+    }
+}
+```
+
+### Handle the animations with the debug gui
+First we need to access the experience debug fromt he fox class on its constructor
+
+```javascript
+this.debug = this.experience.debug;
+```
+
+Also if it's active we need to add our fox debug, first starting by creating a folder for it
+```javascript
+// debug
+if(this.debug.active){
+    this.debugFolder = this.debug.ui.addFolder('Fox');
+}
+```

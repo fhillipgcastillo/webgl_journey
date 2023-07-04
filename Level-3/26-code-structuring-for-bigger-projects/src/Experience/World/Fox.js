@@ -1,13 +1,19 @@
 import * as THREE from 'three';
 import Experience from "../Experience";
 
+
 export default class Fox {
     constructor() {
         this.experience = new Experience();
         this.scene = this.experience.scene;
         this.resources = this.experience.resources;
         this.time = this.experience.time;
+        this.debug = this.experience.debug;
 
+        // debug
+        if(this.debug.active){
+            this.debugFolder = this.debug.ui.addFolder('Fox');
+        }
         //setup
         this.resource = this.resources.items.foxModel;
         this.setModel();

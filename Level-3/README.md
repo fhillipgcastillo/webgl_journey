@@ -1790,6 +1790,7 @@ export default class Fox {
         this.model.scale.set(0.02, 0.02, 0.02);
         this.scene.add(this.model);
     }
+    
 }
 ```
 
@@ -1807,4 +1808,29 @@ this.model.traverse((child) => {
 }
 ```
 
+
+### Add animations
+* first add a method for this
+* set the animation property as an empty object then apply all thje values to it
+
+```javascript
+setAnimation(){
+    this.animation = {};
+    this.animation.mixer = new THREE.AnimationMixer(this.model);
+    this.animation.action = this.animation.mixer.clipAction(this.resource.animations[0]);
+    this.animation.action.play();
+}
+```
+### Updating the animation
+* Now we need to update the animation within the world
+* Now add an update
+* also add a fox update if the fox is already setup on the world
+* from the Experience call the update of the world 
+
+Here's the Fox update method
+```javascript
+update(){
+    this.animation.mixer.update(this.time.delta / 1000); // delta is in miliseconds
+}
+```
 

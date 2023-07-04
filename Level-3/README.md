@@ -1767,3 +1767,44 @@ this.resources.on('ready', () => {
     this.environment = new Environment();
 })
 ```
+
+### Adding the fox
+First remove the cube
+
+And add te fox sources, create the fox class then set everyting needed
+```javascript
+import Experience from "../Experience";
+
+export default class Fox {
+    constructor() {
+        this.experience = new Experience();
+        this.scene = this.experience.scene;
+        this.resources = this.experience.resources;
+        
+        //setup
+        this.resource = this.resources.items.foxModel;
+        this.setModel();
+    }
+    setModel() {
+        this.model = this.resource.scene;
+        this.model.scale.set(0.02, 0.02, 0.02);
+        this.scene.add(this.model);
+    }
+}
+```
+
+Now we need to apply shadows with traverse
+```javascript
+setModel() {
+this.model = this.resource.scene;
+this.model.scale.set(0.02, 0.02, 0.02);
+this.scene.add(this.model);
+this.model.traverse((child) => {
+    if(child instanceof THREE.Mesh) {
+        child.castShadow = true;
+    }
+})
+}
+```
+
+

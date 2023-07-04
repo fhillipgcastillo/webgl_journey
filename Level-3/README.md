@@ -1923,8 +1923,10 @@ if(this.debug.active){
         playWalking: () => {this.animation.play('walking')},
         playRunning: () => {this.animation.play('running')},
     };
-    this.debug.ui.add(debugObject, 'playIdle');
-    this.debug.ui.add(debugObject, 'playWalking');
-    this.debug.ui.add(debugObject, 'playRunning');
+    this.debugFolder.add(debugObject, 'playIdle');
+    this.debugFolder.add(debugObject, 'playWalking');
+    this.debugFolder.add(debugObject, 'playRunning');
 }
 ```
+
+### Debug the environment

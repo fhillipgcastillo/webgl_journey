@@ -12,7 +12,7 @@ where to find the documentation, examples and tools to use with it
 - [ ] Done
 - [ ] Create a full pending script list to review
 
-## Basic usage
+## 01 - Basic usage
 ### node three package install
 ```
 npm install three

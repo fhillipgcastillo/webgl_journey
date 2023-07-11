@@ -57,4 +57,27 @@ types of shaders
    * The `RawShaderMaterial` will be empty.
 
 **Create custom shader with RawShaderMaterial**
+* First change the meshbasicMaterial to `RawShaderMaterial` then provide the shader with the require informations.
+* for the vertextShader use template littelats `` to write the code.
+```js
+const material = new THREE.RawShaderMaterial({
+    vertexShader: `
+        uniform mat4 projectionMatrix;
+        uniform mat4 viewMatrix;
+        uniform mat4 modelMatrix;
 
+        attribute vec3 position;
+
+        void main() {
+            gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
+        }
+    `,
+    fragmentShader: `
+        precision mediump float;
+
+        void main(){
+            gl_FragColor = vec4(0.7, 0.5, 0.65, 1.0);
+        }
+    `,
+});
+```

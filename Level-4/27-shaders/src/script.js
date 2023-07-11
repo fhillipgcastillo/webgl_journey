@@ -24,10 +24,29 @@ const textureLoader = new THREE.TextureLoader()
  * Test mesh
  */
 // Geometry
-const geometry = new THREE.PlaneGeometry(1, 1, 32, 32)
+const geometry = new THREE.PlaneBufferGeometry(1, 1, 32, 32)
 
 // Material
-const material = new THREE.MeshBasicMaterial()
+const material = new THREE.RawShaderMaterial({
+    vertexShader: `
+        uniform mat4 projectionMatrix;
+        uniform mat4 viewMatrix;
+        uniform mat4 modelMatrix;
+
+        attribute vec3 position;
+
+        void main() {
+            gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
+        }
+    `,
+    fragmentShader: `
+        precision mediump float;
+
+        void main(){
+            gl_FragColor = vec4(0.7, 0.5, 0.65, 1.0);
+        }
+    `,
+});
 
 // Mesh
 const mesh = new THREE.Mesh(geometry, material)
